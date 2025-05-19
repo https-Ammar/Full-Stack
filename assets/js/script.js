@@ -9,19 +9,19 @@ let header_ = `
                 <ul class="navbar-list">
 
                     <li>
-                        <a href="/index.php" class="navbar-link" data-nav-link>Home</a>
+                        <a href="https://eng-ammar.com/" class="navbar-link" data-nav-link>Home</a>
                     </li>
 
                     <li>
-                        <a href="./assets/page/About.php" class="navbar-link" data-nav-link>About</a>
+                        <a href="https://eng-ammar.com/About.php" class="navbar-link" data-nav-link>About</a>
                     </li>
 
                     <li>
-                        <a href="./assets/page/Skills.php" class="navbar-link" data-nav-link>Skills</a>
+                        <a href="https://eng-ammar.com/Skills.php" class="navbar-link" data-nav-link>Skills</a>
                     </li>
 
                     <li>
-                        <a href="./assets/page/Project.php" class="navbar-link" data-nav-link>Project</a>
+                        <a href="https://eng-ammar.com/Project.php" class="navbar-link" data-nav-link>Project</a>
                     </li>
 
                     <li>
@@ -29,11 +29,11 @@ let header_ = `
                     </li>
 
                     <li>
-                        <a href="./assets/page/Servis.php" class="navbar-link" data-nav-link>Services</a>
+                        <a href="https://eng-ammar.com/Servis.php" class="navbar-link" data-nav-link>Services</a>
                     </li>
 
                     <li>
-                        <a href="./assets/page/Contact.php" class="navbar-link" data-nav-link>Contact</a>
+                        <a href="https://eng-ammar.com/Contact.php" class="navbar-link" data-nav-link>Contact</a>
                     </li>
 
                 </ul>
