@@ -2,9 +2,9 @@
     <div class="container">
 
         <p class="copyright">
-            &copy; 2022. All rights reserved by
-            <a href="#" class="copyright-link">codewithsadee.</a>
-        </p>
+                        &copy; 2025. All rights reserved by <a href="https://eng-ammar.com/" class="copyright-link">Ammar Ahmed</a>
+                    </p>
+
 
         <ul class="social-list">
             <li>
