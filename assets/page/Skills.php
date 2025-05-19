@@ -205,23 +205,33 @@
         const container = document.getElementById("cards-container");
 
         Object.keys(skillsData).forEach((category) => {
+            const categoryWrapper = document.createElement("div");
+            categoryWrapper.className = "mb-5";
+
             const header = document.createElement("div");
-            header.className = "col-12 mt-4";
-            header.innerHTML = `<h4 class="fw-bold border-bottom pb-2">${category}</h4>`;
-            container.appendChild(header);
+            header.className = "col-12 mb-3";
+            header.innerHTML = `<h4 class="fw-bold border-bottom pb-2 mb-5 pb-5">${category}</h4>`;
+            categoryWrapper.appendChild(header);
+
+            const gridWrapper = document.createElement("div");
+            gridWrapper.className = "cards-grid d-grid gap-4";
+            gridWrapper.style.gridTemplateColumns = "repeat(auto-fit, minmax(250px, 1fr))";
 
             skillsData[category].forEach((card, index) => {
                 const section = document.createElement("section");
                 const bgClass = index % 3 === 0 ? "one" : index % 3 === 1 ? "two" : "three";
-                section.className = `info ${bgClass} p-4 col-12 col-sm-6 col-md-4 col-lg-3`;
+                section.className = `info ${bgClass} p-4`;
 
                 section.innerHTML = `
-                    <span class="title fw-bold d-block mb-3">${card.title}</span>
-                    <h1 class="fw-bold">${card.value}</h1>
-                    <span class="infos d-block">${card.info}</span>
-                `;
-                container.appendChild(section);
+            <span class="title fw-bold d-block mb-3">${card.title}</span>
+            <h1 class="fw-bold">${card.value}</h1>
+            <span class="infos d-block">${card.info}</span>
+        `;
+                gridWrapper.appendChild(section);
             });
+
+            categoryWrapper.appendChild(gridWrapper);
+            container.appendChild(categoryWrapper);
         });
     </script>
 

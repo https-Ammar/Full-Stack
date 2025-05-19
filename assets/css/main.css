@@ -4574,10 +4574,14 @@ span {
   align-items: center;
   justify-content: space-between;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 150px;
   background: var(--black);
   font-weight: 500;
   transition: all 0.4s ease-in-out;
+  -webkit-border-radius: 150px;
+  -moz-border-radius: 150px;
+  -ms-border-radius: 150px;
+  -o-border-radius: 150px;
 }
 .main-sidebar .single-sidebar-widget .news-widget-categories ul li a {
   color: #cdcdcd;
@@ -4697,11 +4701,17 @@ span {
   font-size: 15px;
   font-weight: 700;
   border-radius: 5px;
-  background: var(--black);
+  background: white;
   margin-right: 5px;
   text-transform: uppercase;
   margin-bottom: 10px;
   transition: all 0.4s ease-in-out;
+  color: black;
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
 }
 .main-sidebar .single-sidebar-widget .tagcloud a:last-child {
   margin-right: 0;
