@@ -54,9 +54,31 @@ if ($result) {
             <div class="row g-4">
 
                 <?php if (empty($cards)): ?>
-                    <div class="col-12 text-center py-5">
-                        <h3><i class="bi bi-exclamation-circle"></i> No projects available at the moment.</h3>
-                    </div>
+
+                    <section class="error-section style-padding fix">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-9">
+                                    <div class="error-items">
+                                        <div class="error-image wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                                            <img src="../img/error.png" alt="img">
+                                        </div>
+                                        <h2 class="wow fadeInUp" data-wow-delay=".3s"
+                                            style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                                            <p class="text-muted mb-0"><i class="bi bi-info-circle"></i> No Projects available.</p>
+                                        </h2>
+
+                                        <a href="https://eng-ammar.com/" class="theme-btn wow fadeInUp" data-wow-delay=".7"
+                                            style="visibility: visible; animation-name: fadeInUp;">
+                                            Go Back Home
+                                            <i class="fa-solid fa-arrow-right-long"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
                 <?php else: ?>
 
                     <div class="col-12 col-lg-8">
@@ -164,7 +186,11 @@ if ($result) {
                                             </div>
                                         </div>
                                     <?php } else { ?>
-                                        <p class="text-muted"><i class="bi bi-info-circle"></i> No products available.</p>
+
+
+                                        <p class="text-muted mb-0"><i class="bi bi-info-circle"></i> No Projects available.</p>
+
+
                                     <?php } ?>
                                 </div>
                             </div>
