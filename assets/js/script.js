@@ -29,7 +29,7 @@ let header_ = `
                     </li>
 
                     <li>
-                        <a href="./assets/page/Servis.html" class="navbar-link" data-nav-link>Services</a>
+                        <a href="./assets/page/Servis.php" class="navbar-link" data-nav-link>Services</a>
                     </li>
 
                     <li>

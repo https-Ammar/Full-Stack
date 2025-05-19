@@ -144,8 +144,6 @@ html {
 }
 
 body {
-  background-color: var(--white);
-  color: var(--sonic-silver);
   font-size: 1.6rem;
   line-height: 1.75;
   letter-spacing: 0.2px;
@@ -1118,4 +1116,99 @@ header.header {
 .wid-title h3 {
   display: flex;
   align-items: center;
+}
+
+/*  */
+
+.wid-title h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+}
+
+.single-sidebar-widget.mb-4 {
+  background: black;
+}
+
+li.audio-player {
+  background: #ffffff !important;
+}
+
+.single-sidebar-widget {
+  background: black !important;
+}
+
+@media screen and (max-width: 992px) {
+  .single-sidebar-widget.mb-4 {
+    position: fixed;
+    z-index: 999999;
+    top: 0;
+    width: 100%;
+    overflow: auto;
+    z-index: 999999999999999999;
+    border-radius: 0;
+    left: 0;
+  }
+}
+
+main .cards .info.one {
+  background: linear-gradient(to bottom right, #fff1f1, #f1ffec);
+  border-radius: 10px;
+}
+
+main .cards .info.two {
+  background: linear-gradient(to bottom right, #fff1fe, #ecfffe);
+  border-radius: 10px;
+}
+
+main .cards .info.three {
+  background: linear-gradient(to bottom right, #f1f7ff, #ffecec);
+  border-radius: 10px;
+}
+
+main .cards .title,
+main .cards .infos {
+  font-size: 0.875rem;
+}
+
+h1.fw-bold {
+  font-size: xx-large;
+  margin-bottom: 5vh;
+}
+
+.card-details {
+  display: none;
+}
+
+.card-details:first-child {
+  display: block;
+}
+
+.news-content h3 a {
+  color: black !important;
+}
+
+.single-sidebar-widget {
+  background: black !important;
+}
+
+.news-widget-categories ul li {
+  color: white !important;
+}
+
+a.page-numbers {
+  color: black !important;
+}
+section#cards-container section h1 {
+  color: black;
+}
+
+@media screen and (max-width: 992px) {
+  .container.p-0 {
+    padding: 20px !important;
+  }
+  div#Customer {
+    display: none;
+  }
 }

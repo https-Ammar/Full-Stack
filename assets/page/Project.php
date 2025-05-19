@@ -43,21 +43,8 @@ if ($result) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Blog</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../css/main.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
-    <link rel="stylesheet" href="../css/style.css">
 
-
-    <style>
-        .card-details {
-            display: none;
-        }
-
-        .card-details:first-child {
-            display: block;
-        }
-    </style>
+    <?php include './head_links.php'; ?>
 
 </head>
 
@@ -237,26 +224,9 @@ if ($result) {
     </script>
     <script src="../js/audio-script.js"></script>
     <script src="../js/script.js"></script>
-    <style>
-        .news-content h3 a {
-            color: black !important;
-        }
 
-        .single-sidebar-widget {
-            background: black !important;
-        }
-
-
-
-        .news-widget-categories ul li {
-            background: #effb52 !important;
-            color: white !important;
-        }
-
-        a.page-numbers {
-            color: black !important;
-        }
-    </style>
+    
+    <?php include 'footer.php'; ?>
 </body>
 
 </html>

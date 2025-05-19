@@ -5,36 +5,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>News Details</title>
-
-    <link rel="stylesheet" href="../css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../css/main.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="./assets/css/main.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-
-    <link rel="stylesheet" href="./assets/css/style.css">
-
-    <!-- 
-    - google font link
-  -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Mulish&family=Poppins:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
+    <?php include './head_links.php'; ?>
 </head>
 
 <body>
-
     <aside id="head"></aside>
-
-
-
     <section class="news-details style-padding fix section-padding">
         <div class="container p-0">
             <div class="row g-4">
+                <!-- Main Content -->
                 <div class="col-12 col-lg-8">
                     <div class="news-details-wrapper">
                         <div class="news-details-items">
@@ -48,7 +27,6 @@
                                     <li><i class="bi bi-folder"></i> Digital Art</li>
                                 </ul>
                                 <h2 class="mb-3">
-
                                     <svg width="61" height="47" viewBox="0 0 61 47" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -88,28 +66,30 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="prev-next-button d-flex justify-content-between mt-4">
-                            <a href="news-details.html" class="prev-button">
+                            <a href="#" class="prev-button">
                                 <i class="bi bi-arrow-left"></i> Prev
                             </a>
-                            <a href="news-details.html" class="next-button">
+                            <a href="#" class="next-button" id="viwe_Customer">
                                 Next <i class="bi bi-arrow-right"></i>
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-4">
+
+                <!-- Sidebar -->
+                <div class="col-12 col-lg-4" id="Customer">
                     <div class="main-sidebar">
                         <div class="single-sidebar-widget mb-4">
-                            <div class="wid-title">
+                            <div class="wid-title" id="close_Customer">
                                 <h3><img src="../img/star-3.png" alt="icon" /> Customer</h3>
                             </div>
                             <div class="news-widget-categories">
-
                                 <ul id="audio-list" class="list-unstyled"></ul>
-
                             </div>
                         </div>
+
                         <div class="single-sidebar-widget">
                             <div class="wid-title">
                                 <h3><img src="../img/star-3.png" alt="icon" /> My Skills</h3>
@@ -130,46 +110,30 @@
             </div>
         </div>
     </section>
-
-
-    <div id="foot"></div>
-
+    <?php include 'footer.php'; ?>
+    <!-- ===================== Project JS Files ===================== -->
     <script src="../js/audio-script.js"></script>
     <script src="../js/script.js"></script>
-    <script src="../js//footer.js"></script>
 
-    <style>
-        .wid-title h3 {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: white;
-        }
+    <script>
+        let Customer = document.getElementById('Customer');
+        let viwe_Customer = document.getElementById('viwe_Customer');
+        let close_Customer = document.getElementById('close_Customer');
 
-        .single-sidebar-widget.mb-4 {
-            background: black;
-        }
-
-        li.audio-player {
-            background: #ffffff !important;
-        }
-
-        .single-sidebar-widget {
-            background: black !important;
-        }
-
-        @media screen and (max-width:992px) {
-            .single-sidebar-widget.mb-4 {
-                position: fixed;
-                z-index: 999999;
-                top: 0;
-                width: 100%;
-                overflow: auto;
-                z-index: 999999999999999999;
-                border-radius: 0;
+        viwe_Customer.addEventListener('click', function() {
+            if (window.innerWidth < 992) {
+                Customer.style.display = 'block';
             }
-        }
-    </style>
+        });
+
+        close_Customer.addEventListener('click', function() {
+            if (window.innerWidth < 992) {
+                Customer.style.display = 'none';
+            }
+        });
+    </script>
+
+
 </body>
 
 </html>

@@ -5,43 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard Stats</title>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="../css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../css/main.css" />
-    <link rel="stylesheet" href="../css/style.css" />
-
-    <style>
-        body {
-            font-family: 'Mulish', sans-serif !important;
-            color: #1c1f2a !important;
-        }
-
-        main .cards .info.one {
-            background: linear-gradient(to bottom right, #fff1f1, #f1ffec);
-            border-radius: 10px;
-        }
-
-        main .cards .info.two {
-            background: linear-gradient(to bottom right, #fff1fe, #ecfffe);
-            border-radius: 10px;
-        }
-
-        main .cards .info.three {
-            background: linear-gradient(to bottom right, #f1f7ff, #ffecec);
-            border-radius: 10px;
-        }
-
-        main .cards .title,
-        main .cards .infos {
-            font-size: 0.875rem;
-        }
-
-        h1.fw-bold {
-            font-size: xx-large;
-            margin-bottom: 5vh;
-        }
-    </style>
+    <?php include './head_links.php'; ?>
 </head>
 
 <body>
@@ -56,7 +20,13 @@
         <section class="cards d-flex gap-4 row mb-5" id="cards-container"></section>
     </main>
 
+
+
+    <?php include 'footer.php'; ?>
+
     <script src="../js/script.js"></script>
+
+
 
     <script>
         const skillsData = {

@@ -5,12 +5,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>Ammar_Ahmed</title>
+    <?php include './seo.php'; ?>
 
-    <link rel="stylesheet" href="../css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../css/main.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
-    <link rel="stylesheet" href="../css/style.css">
-
+    <?php include './head_links.php'; ?>
 </head>
 
 <body>
@@ -180,7 +177,7 @@
     </main>
 
 
-
+    <?php include 'footer.php'; ?>
 
 
     <style>

@@ -44,35 +44,8 @@ if ($result) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3mmar - Creative Designer Based In UK</title>
-
-    <!-- 
-    - favicon
-  -->
-    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
-
-    <!-- 
-    - custom css link
-  -->
-    <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="./assets/css/main.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-
-    <link rel="stylesheet" href="./assets/css/style.css">
-
-    <!-- 
-    - google font link
-  -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Mulish&family=Poppins:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <!-- 
-    - preload images
-  -->
-    <link rel="preload" as="image" href="./assets/images/hero-banner.jpg">
-
+    <title>Ammar Ahmed</title>
+    <?php include './assets/page/head_links.php'; ?>
 </head>
 
 <body>
@@ -99,9 +72,9 @@ if ($result) {
 
                     <div class="hero-content">
 
-                        <p class="section-subtitle">Bernard 3mmar</p>
+                        <p class="section-subtitle">Eng - Ammar</p>
 
-                        <h1 class="h1 hero-title">Creative Designer Based In UK</h1>
+                        <h1 class="h1 hero-title">Creative designer based in Egypt</h1>
 
                         <ul class="hero-list">
 
@@ -134,7 +107,7 @@ if ($result) {
                         <ul class="exp-list">
 
                             <li class="list-item">
-                                <strong class="strong">10+</strong>
+                                <strong class="strong">3+</strong>
 
                                 <span class="span">
                                     Years of<br>
@@ -143,7 +116,7 @@ if ($result) {
                             </li>
 
                             <li class="list-item">
-                                <strong class="strong">3K+</strong>
+                                <strong class="strong">28+</strong>
 
                                 <span class="span">
                                     Happy<br>
@@ -274,131 +247,47 @@ if ($result) {
 
                     <ul class="has-scrollbar">
 
-                        <li class="scrollbar-item">
-                            <div class="card">
 
-                                <figure class="card-banner img-holder" style="--width: 600; --height: 675;">
-                                    <img src="./assets/images/portfolio-1.jpg" width="600" height="675" loading="lazy"
-                                        alt="Magic Art" class="img-cover">
-                                </figure>
+                        <?php foreach ($cards as $card):
+                            $id = (int) $card['id'];
+                            $title = htmlspecialchars($card['title']);
+                            $cover_image = htmlspecialchars($card['cover_image']);
+                            $second_image = htmlspecialchars($card['second_image']);
+                            $description = nl2br(htmlspecialchars($card['description']));
+                            $link = htmlspecialchars($card['link']);
+                            $created_at = htmlspecialchars($card['created_at']);
+                        ?>
 
-                                <a href="#" class="card-content">
 
-                                    <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
+                            <li class="scrollbar-item">
+                                <div class="card">
 
-                                    <h3 class="h3 card-title">Magic Art</h3>
+                                    <figure class="card-banner img-holder" style="--width: 600; --height: 675;">
+                                        <img src="./assets/page/uploads/<?= $cover_image ?>" alt="img" width="600" height="675" loading="lazy"
+                                            alt="Santa Onera" class="img-cover">
+                                    </figure>
 
-                                    <p class="card-text">Vimeo</p>
+                                    <a href="<?= $link ?>" class="card-content">
 
-                                </a>
+                                        <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
 
-                            </div>
-                        </li>
+                                        <h3 class="h3 card-title"><?= $title ?></h3>
 
-                        <li class="scrollbar-item">
-                            <div class="card">
+                                        <p class="card-text"><?= $created_at ?></p>
 
-                                <figure class="card-banner img-holder" style="--width: 600; --height: 675;">
-                                    <img src="./assets/images/portfolio-2.jpg" width="600" height="675" loading="lazy"
-                                        alt="Bona Green" class="img-cover">
-                                </figure>
+                                    </a>
 
-                                <a href="#" class="card-content">
+                                </div>
+                            </li>
 
-                                    <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
 
-                                    <h3 class="h3 card-title">Bona Green</h3>
 
-                                    <p class="card-text">Youtube</p>
 
-                                </a>
 
-                            </div>
-                        </li>
+                        <?php endforeach; ?>
 
-                        <li class="scrollbar-item">
-                            <div class="card">
 
-                                <figure class="card-banner img-holder" style="--width: 600; --height: 675;">
-                                    <img src="./assets/images/portfolio-3.jpg" width="600" height="675" loading="lazy"
-                                        alt="Leo Dandora" class="img-cover">
-                                </figure>
 
-                                <a href="#" class="card-content">
-
-                                    <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
-
-                                    <h3 class="h3 card-title">Leo Dandora</h3>
-
-                                    <p class="card-text">Soundcloud</p>
-
-                                </a>
-
-                            </div>
-                        </li>
-
-                        <li class="scrollbar-item">
-                            <div class="card">
-
-                                <figure class="card-banner img-holder" style="--width: 600; --height: 675;">
-                                    <img src="./assets/images/portfolio-4.jpg" width="600" height="675" loading="lazy"
-                                        alt="Folio Grasia" class="img-cover">
-                                </figure>
-
-                                <a href="#" class="card-content">
-
-                                    <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
-
-                                    <h3 class="h3 card-title">Folio Grasia</h3>
-
-                                    <p class="card-text">Detail</p>
-
-                                </a>
-
-                            </div>
-                        </li>
-
-                        <li class="scrollbar-item">
-                            <div class="card">
-
-                                <figure class="card-banner img-holder" style="--width: 600; --height: 675;">
-                                    <img src="./assets/images/portfolio-5.jpg" width="600" height="675" loading="lazy"
-                                        alt="Viva Mercury" class="img-cover">
-                                </figure>
-
-                                <a href="#" class="card-content">
-
-                                    <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
-
-                                    <h3 class="h3 card-title">Viva Mercury</h3>
-
-                                    <p class="card-text">Image</p>
-
-                                </a>
-
-                            </div>
-                        </li>
-
-                        <li class="scrollbar-item">
-                            <div class="card">
-
-                                <figure class="card-banner img-holder" style="--width: 600; --height: 675;">
-                                    <img src="./assets/images/portfolio-6.jpg" width="600" height="675" loading="lazy"
-                                        alt="Santa Onera" class="img-cover">
-                                </figure>
-
-                                <a href="#" class="card-content">
-
-                                    <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
-
-                                    <h3 class="h3 card-title">Santa Onera</h3>
-
-                                    <p class="card-text">Image</p>
-
-                                </a>
-
-                            </div>
-                        </li>
 
                     </ul>
 
@@ -434,7 +323,7 @@ if ($result) {
 
                             <li class="skills-item">
                                 <div class="wrapper">
-                                    <h3 class="skill-title">HTML & CSS</h3>
+                                    <h3 class="skill-title">Front end Development </h3>
 
                                     <data class="skill-value" value="95%">95%</data>
                                 </div>
@@ -446,7 +335,7 @@ if ($result) {
 
                             <li class="skills-item">
                                 <div class="wrapper">
-                                    <h3 class="skill-title">JavaScript</h3>
+                                    <h3 class="skill-title">back end Development </h3>
 
                                     <data class="skill-value" value="80%">80%</data>
                                 </div>
@@ -458,7 +347,7 @@ if ($result) {
 
                             <li class="skills-item">
                                 <div class="wrapper">
-                                    <h3 class="skill-title">WordPress</h3>
+                                    <h3 class="skill-title">full stack Development </h3>
 
                                     <data class="skill-value" value="90%">90%</data>
                                 </div>
@@ -694,10 +583,7 @@ if ($result) {
                         <h2 class="h2 section-title">Get In Touch</h2>
 
                         <p class="section-text">
-                            Please fill out the form on this section to contact with me. Or call between 9:00 a.m. and
-                            8:00 p.m. ET,
-                            Monday through
-                            Friday
+                            Please print the form in this section to contact me.
                         </p>
 
                         <ul class="contact-list">
@@ -713,19 +599,19 @@ if ($result) {
                             <li class="contact-item">
                                 <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
 
-                                <a href="tel:+07742691291" class="contact-link">+077 4269 1291</a>
+                                <a href="tel:+201065424756" class="contact-link">+201065424756</a>
                             </li>
 
                             <li class="contact-item">
                                 <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
 
-                                <a href="mailto:3mmar@gmail.com" class="contact-link">3mmar@gmail.com</a>
+                                <a href="mailto:ammar132004@gmail.com" class="contact-link">info@gmail.com</a>
                             </li>
 
                             <li class="contact-item">
                                 <ion-icon name="globe-outline" aria-hidden="true"></ion-icon>
 
-                                <a href="www.domain.com" class="contact-link">www.domain.com</a>
+                                <a href="https://eng-ammar.com/" class="contact-link">www.eng-ammar.com</a>
                             </li>
 
                         </ul>
@@ -759,7 +645,7 @@ if ($result) {
                 <div class="container">
 
                     <p class="copyright">
-                        &copy; 2022. All rights reserved by <a href="#" class="copyright-link">codewithsadee.</a>
+                        &copy; 2025. All rights reserved by <a href="https://eng-ammar.com/" class="copyright-link">Ammar Ahmed</a>
                     </p>
 
                     <ul class="social-list">
