@@ -4561,10 +4561,15 @@ span {
   width: 70px;
   font-size: 18px;
   height: 100%;
-  background-color: var(--theme);
+  background-color: white;
+  border-radius: 50%;
   color: var(--header);
   text-align: center;
   transition: all 0.3s ease-in-out;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
 }
 .main-sidebar .single-sidebar-widget .search-widget form button:hover {
   background-color: var(--header);
@@ -4575,7 +4580,7 @@ span {
   justify-content: space-between;
   padding: 20px;
   border-radius: 150px;
-  background: var(--black);
+  background: white;
   font-weight: 500;
   transition: all 0.4s ease-in-out;
   -webkit-border-radius: 150px;
@@ -4598,7 +4603,7 @@ span {
   margin-bottom: 12px;
 }
 .main-sidebar .single-sidebar-widget .news-widget-categories ul li:hover {
-  background-color: var(--theme);
+
   color: var(--header);
 }
 .main-sidebar .single-sidebar-widget .news-widget-categories ul li:hover a {

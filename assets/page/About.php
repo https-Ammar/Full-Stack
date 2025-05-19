@@ -12,7 +12,7 @@
     <aside id="head"></aside>
     <section class="news-details style-padding fix section-padding">
         <div class="container p-0">
-            <div class="row g-4">
+            <div class="row g-5">
                 <!-- Main Content -->
                 <div class="col-12 col-lg-8">
                     <div class="news-details-wrapper">
@@ -22,9 +22,9 @@
                             </div>
                             <div class="news-details-content">
                                 <ul class="post-date list-unstyled d-flex flex-wrap gap-3 mb-3">
-                                    <li><i class="bi bi-calendar-event"></i> 20 Jul 2024</li>
-                                    <li><i class="bi bi-person-circle"></i> by Marcus</li>
-                                    <li><i class="bi bi-folder"></i> Digital Art</li>
+                                    <li><i class="bi bi-calendar-event"></i> 1 mar 2004</li>
+                                    <li><i class="bi bi-person-circle"></i> freelancer</li>
+                                    <li><i class="bi bi-folder"></i> web development</li>
                                 </ul>
                                 <h2 class="mb-3">
                                     <svg width="61" height="47" viewBox="0 0 61 47" fill="none"
@@ -36,19 +36,20 @@
                                     Information about
                                 </h2>
                                 <p class="mt-3">
-                                    Love how easy it is to use this chatbot, whether you're looking for product
-                                    recommendations or need help with a task. It's always there with the perfect
-                                    response. Generated arts are often used to visualize ideas for movies, games, or
-                                    other creative projects.
+                                    My name is Engineer Ammar Ahmed Mostafa from Egypt. I study in the Faculty of Computers and Artificial Intelligence and am currently 21 years old.
+
                                 </p>
                                 <p class="mt-3">
-                                    For product recommendations or task assistance, it’s always ready. Generated arts
-                                    help visualize concepts, often in creative projects like films and games.
+                                    As a passionate website developer and programmer, I bring my expertise to evaluate the best websites globally, using my experience as both a designer and a developer. The subtle animations and transitions are what truly captivate me, allowing me to appreciate every detail with admiration.
                                 </p>
                                 <p class="mb-4">
-                                    Phasellus vehicula dolor habitasse sapien. Curabitur enim eget vivamus odio ornare.
-                                    Habitasse orci cubilia vestibulum, duis accumsan tempus. Urna hendrerit pellentesque
-                                    sociosqu lacinia dolor porta condimentum facilisi.
+                                    I help companies from all over the world with tailor-made solutions. With each project, I push my work to new horizons, always putting quality first. I aim to not only meet but exceed client expectations, consistently delivering creative and functional solutions.
+
+                                </p>
+                                <p class="mb-4">
+                                    Every website I design is a blend of innovation and user experience, built to captivate and engage audiences. Through a combination of technical skill and an eye for aesthetics, I craft web experiences that leave a lasting impression.
+
+
                                 </p>
                             </div>
                         </div>

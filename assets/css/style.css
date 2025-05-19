@@ -1243,9 +1243,15 @@ figure.card-banner.img-holder {
   height: clamp(9em, 12vw, 11em);
   border-radius: 50%;
   border: 0;
-  background: var(--color-dark);
+
+  background: black !important;
+  color: white !important;
 }
 
+input.form-btn {
+  color: white;
+  font-size: medium;
+}
 .btn-round .btn-text {
   padding: 0 1em;
   text-align: center;
@@ -1253,18 +1259,6 @@ figure.card-banner.img-holder {
 
 .btn-round .btn-text-inner {
   color: #fff;
-}
-
-.btn-round .btn-fill {
-  background: var(--color-blue);
-}
-
-.theme-dark .btn-round .btn-click {
-  background: var(--theme-color);
-}
-
-.theme-dark .btn-round .btn-fill {
-  background: var(--color-blue-dark);
 }
 
 .form input,
