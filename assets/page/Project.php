@@ -36,249 +36,358 @@ if ($result) {
     error_log("Failed to fetch cards: " . $conn->error);
 }
 ?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Blog</title>
-    <?php include './head_links.php'; ?>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+            <link href="../css/normalize.css" rel="stylesheet">
+    <link href="../css/locomotive-scroll.css" rel="stylesheet">
+    <link href="../css/styleguide.css" rel="stylesheet">
+    <link href="../css/components.css" rel="stylesheet">
+    <link href="../css/style-new.css" rel="stylesheet">
 </head>
+    <body data-barba="wrapper">
+  
+                  <?php include './loading.php'; ?>
 
-<body>
-    <aside id="head"></aside>
-
-    <section class="news-standard fix section-padding">
-        <div class="container p-0">
-            <div class="row g-4">
-
-                <?php if (empty($cards)): ?>
-
-                    <section class="error-section style-padding fix">
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-9">
-                                    <div class="error-items">
-                                        <div class="error-image wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
-                                            <img src="../img/error.png" alt="img">
-                                        </div>
-                                        <h2 class="wow fadeInUp" data-wow-delay=".3s"
-                                            style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
-                                            <p class="text-muted mb-0"><i class="bi bi-info-circle"></i> No Projects available.</p>
-                                        </h2>
-
-                                        <a href="https://eng-ammar.com/" class="theme-btn wow fadeInUp" data-wow-delay=".7"
-                                            style="visibility: visible; animation-name: fadeInUp;">
-                                            Go Back Home
-                                            <i class="fa-solid fa-arrow-right-long"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                <?php else: ?>
-
-                    <div class="col-12 col-lg-8">
-
-                        <?php foreach ($cards as $card):
-                            $id = (int) $card['id'];
-                            $title = htmlspecialchars($card['title']);
-                            $cover_image = htmlspecialchars($card['cover_image']);
-                            $second_image = htmlspecialchars($card['second_image']);
-                            $description = nl2br(htmlspecialchars($card['description']));
-                            $link = htmlspecialchars($card['link']);
-                            $created_at = htmlspecialchars($card['created_at']);
-                        ?>
-                            <div class="news-standard-wrapper">
-                                <div class="news-standard-items card-details" id="details-<?= $id ?>" style="display: none;">
-                                    <div class="news-thumb">
-                                        <img src="uploads/<?= $cover_image ?>" alt="cover image" />
-                                    </div>
-                                    <div class="news-content">
-                                        <ul>
-                                            <li><i class="bi bi-calendar-check"></i> <?= $created_at ?></li>
-                                            <li><i class="bi bi-tags"></i> Digital Art</li>
-                                        </ul>
-                                        <h3><a href="<?= $link ?>"><?= $title ?></a></h3>
-                                        <p><?= $description ?></p>
-                                        <a href="<?= $link ?>" class="theme-btn mt-4 mb-3">
-                                            Read More
-                                            <i class="bi bi-arrow-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-
-                        <div class="page-nav-wrap pt-5 text-center">
+    
+        <main class="main" id="work" data-barba="container" data-barba-namespace="work" >
+     
+            <div class="mouse-pos-list-btn no-select"></div>
+            <div class="mouse-pos-list-span no-select"><p>View</p></div>
+                                                <div class="btn btn-hamburger">
+                <div class="btn-click magnetic" data-strength="50" data-strength-text="25">
+                    <div class="btn-fill"></div>
+                    <div class="btn-text">
+                        <div class="btn-bars"></div>
+                        <span class="btn-text-inner">Menu</span>
+                    </div>
+                </div>
+            </div>
+            <div class="overlay fixed-nav-back"></div>
+            <div class="fixed-nav theme-dark">
+                <div class="fixed-nav-rounded-div">
+                    <div class="rounded-div-wrap">
+                        <div class="rounded-div"></div>
+                    </div>
+                </div>
+                <div class="fixed-nav-inner">
+                    <div class="row nav-row">
+                        <h5>Navigation</h5>
+                        <div class="stripe"></div>
+                        <ul class="links-wrap">
+                            <li class="btn btn-link">
+                                <a href="https://dennissnellenberg.com" class="btn-click magnetic" data-strength="24" data-strength-text="12">
+                                <span class="btn-text">
+                                    <span class="btn-text-inner">Home</span>
+                                </span>
+                                </a>
+                            </li>
+                            <li class="btn btn-link active">
+                                <a href="https://dennissnellenberg.com/work" class="btn-click magnetic" data-strength="24" data-strength-text="12">
+                                <span class="btn-text">
+                                    <span class="btn-text-inner">Work</span>
+                                </span>
+                                </a>
+                            </li>
+                            <li class="btn btn-link">
+                                <a href="https://dennissnellenberg.com/about" class="btn-click magnetic" data-strength="24" data-strength-text="12">
+                                <span class="btn-text">
+                                    <span class="btn-text-inner">About</span>
+                                </span>
+                                </a>
+                            </li>
+                            <li class="btn btn-link">
+                                <a href="https://dennissnellenberg.com/contact" class="btn-click magnetic" data-strength="24" data-strength-text="12">
+                                <span class="btn-text">
+                                    <span class="btn-text-inner">Contact</span>
+                                </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="row social-row">
+                        <div class="stripe"></div>
+                        <div class="socials">
+                            <h5>Socials</h5>
                             <ul>
-                                <?php foreach ($cards as $index => $card): ?>
-                                    <li>
-                                        <a class="page-numbers" href="#" onclick="toggleDetails(<?= $card['id'] ?>); return false;">
-                                            <?= $index + 1 ?>
-                                        </a>
-                                    </li>
-                                <?php endforeach; ?>
+                                <li class="btn btn-link btn-link-external">
+                                    <a href="https://www.awwwards.com/dennissnellenberg/" target="_blank" class="btn-click magnetic" data-strength="20" data-strength-text="10">
+                                        <span class="btn-text">
+                                            <span class="btn-text-inner">Awwwards</span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="btn btn-link btn-link-external">
+                                    <a href="https://www.instagram.com/codebydennis/" target="_blank" class="btn-click magnetic" data-strength="20" data-strength-text="10">
+                                        <span class="btn-text">
+                                            <span class="btn-text-inner">Instagram</span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="btn btn-link btn-link-external">
+                                    <a href="https://twitter.com/codebydennis" target="_blank" class="btn-click magnetic" data-strength="20" data-strength-text="10">
+                                        <span class="btn-text">
+                                            <span class="btn-text-inner">Twitter</span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="btn btn-link btn-link-external">
+                                    <a href="https://www.linkedin.com/in/dennissnellenberg/" target="_blank" class="btn-click magnetic" data-strength="20" data-strength-text="10">
+                                        <span class="btn-text">
+                                            <span class="btn-text-inner">LinkedIn</span>
+                                        </span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
-
-                    <div class="col-12 col-lg-4">
-                        <div class="main-sidebar">
-
-                            <div class="single-sidebar-widget">
-                                <div class="wid-title">
-                                    <h3><img src="../img/star-3.png" alt="star icon" /> Search</h3>
-                                </div>
-                                <div class="search-widget">
-                                    <form id="searchForm" onsubmit="return false;">
-                                        <input type="text" placeholder="Search here" id="searchInput" />
-                                        <button type="submit" id="searchBtn"><i class="bi bi-search"></i></button>
-                                    </form>
-                                </div>
-                            </div>
-
-                            <div class="single-sidebar-widget">
-                                <div class="wid-title">
-                                    <h3><img src="../img/star-3.png" alt="star icon" /> Categories</h3>
-                                </div>
-                                <div class="news-widget-categories">
-                                    <ul>
-                                        <?php foreach ($cards as $card):
-                                            $id = (int) $card['id'];
-                                            $title = htmlspecialchars($card['title']);
-                                        ?>
-                                            <li><a href="#" onclick="toggleDetails(<?= $id ?>); return false;"><i class="bi bi-folder"></i> <?= $title ?></a>
-                                                <span>(08)</span>
-                                            </li>
-                                        <?php endforeach; ?>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="single-sidebar-widget">
-                                <div class="wid-title">
-                                    <h3><img src="../img/star-3.png" alt="star icon" /> Recent Post</h3>
-                                </div>
-                                <div class="recent-post-area">
-                                    <?php
-                                    if (!empty($cards)) {
-                                        $random_card = $cards[array_rand($cards)];
-
-                                        $random_title = htmlspecialchars($random_card['title']);
-                                        $random_image = htmlspecialchars($random_card['cover_image']);
-                                        $random_link = htmlspecialchars($random_card['link']);
-                                        $random_date = htmlspecialchars($random_card['created_at']);
-                                    ?>
-                                        <div class="recent-items">
-                                            <div class="recent-thumb">
-                                                <img style="width: 140px; height: 140px;" src="uploads/<?= $random_image ?>" alt="recent post image" />
-                                            </div>
-                                            <div class="recent-content">
-                                                <span><i class="bi bi-lightning"></i> Digital</span>
-                                                <h6><a href="<?= $random_link ?>"><?= $random_title ?></a></h6>
-                                                <ul>
-                                                    <li><i class="bi bi-calendar2-week"></i> <?= $random_date ?></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    <?php } else { ?>
-
-
-                                        <p class="text-muted mb-0"><i class="bi bi-info-circle"></i> No Projects available.</p>
-
-
-                                    <?php } ?>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                <?php endif; ?>
+                </div>
             </div>
+            <div class="main-wrap" data-scroll-container><header class="section default-header work-header" data-scroll-section>
+   <div class="nav-bar">
+    <div class="credits-top">
+        <div class="btn btn-link btn-left-top">
+            <a href="https://dennissnellenberg.com" class="btn-click magnetic" data-strength="20" data-strength-text="10">
+            <span class="btn-text">
+                <div class="credit"><span>©</span></div><div class="cbd"><span class="code-by">Code by </span><span class="dennis"><span class="dennis-span">Dennis</span> <span class="snellenberg">Snellenberg</span></span></span></div>
+            </span>
+            </a>
         </div>
-    </section>
+    </div>
+    <ul class="links-wrap">
+        <li class="btn btn-link active">
+            <a href="https://dennissnellenberg.com/work" class="btn-click magnetic" data-strength="20" data-strength-text="10">
+            <span class="btn-text">
+                <span class="btn-text-inner">Work</span>
+            </span>
+            </a>
+        </li>
+        <li class="btn btn-link">
+            <a href="https://dennissnellenberg.com/about" class="btn-click magnetic" data-strength="20" data-strength-text="10">
+            <span class="btn-text">
+                <span class="btn-text-inner">About</span>
+            </span>
+            </a>
+        </li>
+        <li class="btn btn-link">
+            <a href="https://dennissnellenberg.com/contact" class="btn-click magnetic" data-strength="20" data-strength-text="10">
+            <span class="btn-text">
+                <span class="btn-text-inner">Contact</span>
+            </span>
+            </a>
+        </li>
+        <li class="btn btn-link btn-menu">
+            <div class="btn-click magnetic" data-strength="20" data-strength-text="10">
+                <div class="btn-text">
+                    <span class="btn-text-inner">Menu</span>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>   <div class="container medium">
+      <div class="row">
+         <div class="flex-col once-in">
+            <h1><span>Creating next level </span><span>digital products</span></h1>
+         </div>
+      </div>
+   </div>
+</header>
+<section class="section work-filters" data-scroll-section>
+   <div class="container once-in">
+      <div class="filter-row">
+         <div class="toggle-row">
+            <div class="btn btn-normal all-btn active">
+               <div class="btn-click magnetic" data-strength="25" data-strength-text="15">
+                  <div class="btn-fill"></div>
+                  <span class="btn-text">
+                     <span class="btn-text-inner change">All</span>
+                  </span>
+               </div>
+            </div>
+            <div class="btn btn-normal design-btn">
+               <div class="btn-click magnetic" data-strength="25" data-strength-text="15">
+                  <div class="btn-fill"></div>
+                  <span class="btn-text">
+                     <span class="btn-text-inner change">Design<div class="count-nr">7</div></span>
+                  </span>
+               </div>
+            </div>
+            <div class="btn btn-normal development-btn">
+               <div class="btn-click magnetic" data-strength="25" data-strength-text="15">
+                  <div class="btn-fill"></div>
+                  <span class="btn-text">
+                     <span class="btn-text-inner change">Development<div class="count-nr">11</div></span>
+                  </span>
+               </div>
+            </div>
+         </div>
+         <div class="grid-row">
+            <div class="btn btn-normal btn-icon rows-btn active">
+               <div class="btn-click magnetic" data-strength="25" data-strength-text="15">
+                  <div class="btn-fill"></div>
+                  <span class="btn-text">
+                     <span class="btn-text-inner change"><svg style="width: 20px;" width="20" height="19" viewBox="0 0 20 19"><g fill="currentColor" fill-rule="evenodd"><path d="M0 6h20v1H0zM0 0h20v1H0zM0 12h20v1H0zM0 18h20v1H0z"/></g></svg></span>
+                  </span>
+               </div>
+            </div>
+            <div class="btn btn-normal btn-icon columns-btn">
+               <div class="btn-click magnetic" data-strength="25" data-strength-text="15">
+                  <div class="btn-fill"></div>
+                  <span class="btn-text"> 
+                     <span class="btn-text-inner change"><svg style="width: 20px;" width="20" height="20" viewBox="0 0 20 20"><g fill="currentColor" fill-rule="nonzero"><path d="M8 0H0v8h8V0zM7 1v6H1V1h6zM8 12H0v8h8v-8zm-1 1v6H1v-6h6zM20 0h-8v8h8V0zm-1 1v6h-6V1h6zM20 12h-8v8h8v-8zm-1 1v6h-6v-6h6z"/></g></svg></span>
+                  </span>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+<section class="section-wrap section-wrap-work once-in" data-scroll-section>
+   <section class="section work-grid small-work-grid grid-fade grid-rows-part visible">
+      <div class="container">
+         <div class="grid-sub-title">
+            <div class="flex-col">
+               <h5>Client</h5>
+            </div>
+            <div class="flex-col">
+               <h5>Location</h5>
+            </div>
+            <div class="flex-col">
+               <h5>Services</h5>
+            </div>
+            <div class="flex-col">
+               <h5>Year</h5>
+            </div>
+         </div>
+         <ul class="work-items mouse-pos-list-image-wrap all-active">
 
-    <script>
-        function toggleDetails(id) {
-            let allDetails = document.querySelectorAll('.card-details');
-            allDetails.forEach(div => {
-                div.style.display = (div.id === 'details-' + id) ? 'block' : 'none';
-            });
-        }
+    
+         <?php foreach ($cards as $card):
+    $id = (int) $card['id'];
+    $title = htmlspecialchars($card['title']);
+    $cover_image = htmlspecialchars($card['cover_image']);
+    $second_image = htmlspecialchars($card['second_image']);
+    $description = nl2br(htmlspecialchars($card['description']));
+    $link = htmlspecialchars($card['link']);
+    $created_at = htmlspecialchars($card['created_at']);
+?>
 
-        function searchCards() {
-            const input = document.getElementById('searchInput').value.toLowerCase();
-            const categoryLinks = document.querySelectorAll('.news-widget-categories ul li a');
+                 <li class="design development visible">
 
-            if (input.trim() === '') {
-                categoryLinks.forEach(link => {
-                    link.parentElement.style.display = 'list-item';
-                });
-                return;
-            }
 
-            categoryLinks.forEach(link => {
-                const text = link.textContent.toLowerCase();
-                link.parentElement.style.display = text.includes(input) ? 'list-item' : 'none';
-            });
-        }
+               <div class="stripe animate"></div>
+               <a href="./details.php" class="row">
+                  <div class="flex-col">
+                     <h4><span><?= $title ?></span></h4>
+                  </div>
+                  <div class="flex-col animate">
+                     <p>Australia</p>
+                  </div>
+                  <div class="flex-col animate">
+                     <p><?= $description ?></p>
+                  </div>
+                  <div class="flex-col animate">
+                     <p><?= $created_at ?></p>
+                  </div>
+               </a>
+            </li>
 
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('searchBtn').addEventListener('click', searchCards);
-            document.getElementById('searchInput').addEventListener('keyup', (e) => {
-                if (e.key === 'Enter') {
-                    searchCards();
-                }
-            });
-        });
-    </script>
 
-    <script src="../js/audio-script.js"></script>
-    <script src="../js/script.js"></script>
-    <script>
-        function toggleDetails(id) {
-            let allDetails = document.querySelectorAll('.card-details');
-            allDetails.forEach(div => {
-                div.style.display = (div.id === 'details-' + id) ? 'block' : 'none';
-            });
-        }
 
-        function searchCards() {
-            const input = document.getElementById('searchInput').value.toLowerCase();
-            const categoryLinks = document.querySelectorAll('.news-widget-categories ul li a');
 
-            if (input.trim() === '') {
-                categoryLinks.forEach(link => {
-                    link.parentElement.style.display = 'list-item';
-                });
-                return;
-            }
+<?php endforeach; ?>
+                                        
+       
+                        <div class="stripe last animate"></div>
+         </ul>
+      </div>
+   </section>
+   <section class="section work-tiles grid-fade grid-columns-part">
+      <div class="container">
+         <ul>
 
-            categoryLinks.forEach(link => {
-                const text = link.textContent.toLowerCase();
-                link.parentElement.style.display = text.includes(input) ? 'list-item' : 'none';
-            });
-        }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            // Show the first card details by default
-            toggleDetails(<?= $cards[0]['id'] ?>);
 
-            document.getElementById('searchBtn').addEventListener('click', searchCards);
-            document.getElementById('searchInput').addEventListener('keyup', (e) => {
-                if (e.key === 'Enter') {
-                    searchCards();
-                }
-            });
-        });
-    </script>
+<?php foreach ($cards as $card):
+    $id = (int) $card['id'];
+    $title = htmlspecialchars($card['title']);
+    $cover_image = htmlspecialchars($card['cover_image']);
+    $second_image = htmlspecialchars($card['second_image']);
+    $description = nl2br(htmlspecialchars($card['description']));
+    $link = htmlspecialchars($card['link']);
+    $created_at = htmlspecialchars($card['created_at']);
+?>
 
-    <?php include 'footer.php'; ?>
-</body>
 
+                <li class="development interaction visible">
+               <div class="single-tile-wrap">
+                  <a href="./details.php" class="row">
+                     <div class="flex-col">
+                        <div class="tile-image">
+                           <div class="overlay overlay-color" style="background-color: #F1F1F1;"></div>
+                           <div class="overlay overlay-image lazy" style="background-position: center center; background-repeat: no-repeat; background-size: cover;" data-bg="uploads/<?= $cover_image ?>"></div>                        </div>
+                     </div>
+                     <div class="flex-col">
+                        <h4><span><?= $title ?></span></h4>
+                        <div class="stripe"></div>
+                     </div>
+                     <div class="flex-col">
+                        <p><?= $description ?></p>
+                     </div>
+                     <div class="flex-col">
+                        <p><?= $created_at ?></p>
+                     </div>
+                  </a>
+               </div>
+            </li>
+
+<?php endforeach; ?>
+
+
+        
+        
+
+                     </ul>
+      </div>
+   </section>
+</section>
+<section class="section center-grid-btn center-grid-btn-archive" data-scroll-section>
+   <div class="container">    
+      <div class="grid-after-btn">
+         <div class="btn btn-normal btn-dark">
+            <a href="https://dennissnellenberg.com/archive" class="btn-click magnetic" data-strength="25" data-strength-text="15">
+               <div class="btn-fill"></div>
+               <span class="btn-text">
+                  <span class="btn-text-inner change">Archive</span>
+               </span>
+            </a>
+         </div>
+      </div>
+   </div>
+</section>
+
+
+                                <?php include './footer.php'; ?>
+
+                            </div>
+
+        </main>
+       
+           <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.0/js.cookie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@barba/core@2.10.3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.6.1/dist/lazyload.min.js"></script>
+    <script src="../js/locomotive-scroll.min.js"></script>
+    <script defer src="../js/index-new.js"></script> 
+            
+            </body>
 </html>

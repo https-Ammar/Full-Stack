@@ -1,140 +1,308 @@
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>News Details</title>
-    <?php include './head_links.php'; ?>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+            <link href="../css/normalize.css" rel="stylesheet">
+    <link href="../css/locomotive-scroll.css" rel="stylesheet">
+    <link href="../css/styleguide.css" rel="stylesheet">
+    <link href="../css/components.css" rel="stylesheet">
+    <link href="../css/style-new.css" rel="stylesheet">
 </head>
-
-<body>
-    <aside id="head"></aside>
-    <section class="news-details style-padding fix section-padding">
-        <div class="container p-0">
-            <div class="row g-5">
-                <!-- Main Content -->
-                <div class="col-12 col-lg-8">
-                    <div class="news-details-wrapper">
-                        <div class="news-details-items">
-                            <div class="news-details-thumb">
-                                <img src="../img/me.png" alt="News Image" />
-                            </div>
-                            <div class="news-details-content">
-                                <ul class="post-date list-unstyled d-flex flex-wrap gap-3 mb-3">
-                                    <li><i class="bi bi-calendar-event"></i> 1 mar 2004</li>
-                                    <li><i class="bi bi-person-circle"></i> freelancer</li>
-                                    <li><i class="bi bi-folder"></i> web development</li>
-                                </ul>
-                                <h2 class="mb-3">
-                                    <svg width="61" height="47" viewBox="0 0 61 47" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M59.6692 1.25224L59.6707 1.25204C59.6833 1.25038 59.6926 1.24996 59.6988 1.25C59.7018 1.25341 59.7056 1.25833 59.7099 1.2651C59.7207 1.28192 59.7322 1.30599 59.7401 1.3359C59.7576 1.40145 59.7482 1.45104 59.7404 1.47046C59.7375 1.47776 59.7351 1.48072 59.7329 1.48304C59.7313 1.48476 59.7197 1.49712 59.6855 1.51294L59.6844 1.51344C53.2745 4.48629 49.6179 8.44563 49.1368 12.7372L49.1368 12.7373C48.9564 14.3477 49.2819 15.8826 49.9465 17.1051C50.6019 18.3108 51.6503 19.3137 52.9735 19.6457L52.9739 19.6458C54.8448 20.1147 56.534 21.6022 57.7801 23.8327C59.0199 26.0518 59.748 28.8898 59.748 31.7947C59.748 35.5122 58.3308 39.0676 55.8237 41.6811C53.3182 44.2929 49.9314 45.75 46.4115 45.75C42.5639 45.75 39.2685 44.1058 36.9103 41.2152C34.539 38.3085 33.0754 34.084 33.075 28.9159C33.1267 13.9684 43.8585 3.31477 59.6692 1.25224ZM59.7093 1.25072C59.7092 1.25073 59.7088 1.25069 59.708 1.25051L59.7093 1.25072ZM27.8442 1.25224L27.8457 1.25204C27.8583 1.25038 27.8675 1.24996 27.8738 1.25C27.8767 1.25341 27.8805 1.25833 27.8849 1.2651C27.8957 1.28192 27.9071 1.30599 27.9151 1.3359C27.9326 1.40145 27.9232 1.45104 27.9154 1.47046C27.914 1.47396 27.9127 1.47647 27.9115 1.47839C27.9102 1.48045 27.909 1.48183 27.9079 1.48304C27.9062 1.48476 27.8946 1.49712 27.8604 1.51294L27.8594 1.51344C21.4495 4.48629 17.7928 8.44563 17.3118 12.7372L17.3118 12.7373C17.1314 14.3477 17.4569 15.8826 18.1214 17.1051C18.7768 18.3108 19.8252 19.3137 21.1485 19.6457L21.1489 19.6458C23.0198 20.1147 24.709 21.6022 25.9551 23.8327C27.1949 26.0518 27.923 28.8898 27.923 31.7947C27.923 35.5122 26.5058 39.0676 23.9986 41.6811C21.4932 44.2929 18.1064 45.75 14.5865 45.75C10.7388 45.75 7.44347 44.1058 5.08527 41.2152C2.71395 38.3085 1.25037 34.084 1.25 28.9159C1.30163 13.9684 12.0335 3.31477 27.8442 1.25224Z"
-                                            stroke="#EFFB53" stroke-width="2.5"></path>
-                                    </svg>
-                                    Information about
-                                </h2>
-                                <p class="mt-3">
-                                    My name is Engineer Ammar Ahmed Mostafa from Egypt. I study in the Faculty of Computers and Artificial Intelligence and am currently 21 years old.
-
-                                </p>
-                                <p class="mt-3">
-                                    As a passionate website developer and programmer, I bring my expertise to evaluate the best websites globally, using my experience as both a designer and a developer. The subtle animations and transitions are what truly captivate me, allowing me to appreciate every detail with admiration.
-                                </p>
-                                <p class="mb-4">
-                                    I help companies from all over the world with tailor-made solutions. With each project, I push my work to new horizons, always putting quality first. I aim to not only meet but exceed client expectations, consistently delivering creative and functional solutions.
-
-                                </p>
-                                <p class="mb-4">
-                                    Every website I design is a blend of innovation and user experience, built to captivate and engage audiences. Through a combination of technical skill and an eye for aesthetics, I craft web experiences that leave a lasting impression.
-
-
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="row tag-share-wrap mt-5 align-items-center">
-                            <div class="col-lg-8 col-12">
-                                <p>#generate #creative #digitalart</p>
-                            </div>
-                            <div class="col-lg-4 col-12 mt-3 mt-lg-0 text-lg-end">
-                                <div class="social-icon d-flex gap-2 justify-content-lg-end">
-                                    <a href="#"><i class="bi bi-discord"></i></a>
-                                    <a href="#"><i class="bi bi-facebook"></i></a>
-                                    <a href="#"><i class="bi bi-linkedin"></i></a>
-                                    <a href="#"><i class="bi bi-youtube"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="prev-next-button d-flex justify-content-between mt-4">
-                            <a href="#" class="prev-button">
-                                <i class="bi bi-arrow-left"></i> Prev
-                            </a>
-                            <a href="#" class="next-button" id="viwe_Customer">
-                                Next <i class="bi bi-arrow-right"></i>
-                            </a>
+    <body data-barba="wrapper">
+  
+                  <?php include './loading.php'; ?>
+    
+        <main class="main" id="about" data-barba="container" data-barba-namespace="about" >
+                                                        <div class="btn btn-hamburger">
+                <div class="btn-click magnetic" data-strength="50" data-strength-text="25">
+                    <div class="btn-fill"></div>
+                    <div class="btn-text">
+                        <div class="btn-bars"></div>
+                        <span class="btn-text-inner">Menu</span>
+                    </div>
+                </div>
+            </div>
+            <div class="overlay fixed-nav-back"></div>
+            <div class="fixed-nav theme-dark">
+                <div class="fixed-nav-rounded-div">
+                    <div class="rounded-div-wrap">
+                        <div class="rounded-div"></div>
+                    </div>
+                </div>
+                <div class="fixed-nav-inner">
+                    <div class="row nav-row">
+                        <h5>Navigation</h5>
+                        <div class="stripe"></div>
+                        <ul class="links-wrap">
+                            <li class="btn btn-link">
+                                <a href="https://dennissnellenberg.com" class="btn-click magnetic" data-strength="24" data-strength-text="12">
+                                <span class="btn-text">
+                                    <span class="btn-text-inner">Home</span>
+                                </span>
+                                </a>
+                            </li>
+                            <li class="btn btn-link">
+                                <a href="https://dennissnellenberg.com/work" class="btn-click magnetic" data-strength="24" data-strength-text="12">
+                                <span class="btn-text">
+                                    <span class="btn-text-inner">Work</span>
+                                </span>
+                                </a>
+                            </li>
+                            <li class="btn btn-link active">
+                                <a href="https://dennissnellenberg.com/about" class="btn-click magnetic" data-strength="24" data-strength-text="12">
+                                <span class="btn-text">
+                                    <span class="btn-text-inner">About</span>
+                                </span>
+                                </a>
+                            </li>
+                            <li class="btn btn-link">
+                                <a href="https://dennissnellenberg.com/contact" class="btn-click magnetic" data-strength="24" data-strength-text="12">
+                                <span class="btn-text">
+                                    <span class="btn-text-inner">Contact</span>
+                                </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="row social-row">
+                        <div class="stripe"></div>
+                        <div class="socials">
+                            <h5>Socials</h5>
+                            <ul>
+                                <li class="btn btn-link btn-link-external">
+                                    <a href="https://www.awwwards.com/dennissnellenberg/" target="_blank" class="btn-click magnetic" data-strength="20" data-strength-text="10">
+                                        <span class="btn-text">
+                                            <span class="btn-text-inner">Awwwards</span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="btn btn-link btn-link-external">
+                                    <a href="https://www.instagram.com/codebydennis/" target="_blank" class="btn-click magnetic" data-strength="20" data-strength-text="10">
+                                        <span class="btn-text">
+                                            <span class="btn-text-inner">Instagram</span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="btn btn-link btn-link-external">
+                                    <a href="https://twitter.com/codebydennis" target="_blank" class="btn-click magnetic" data-strength="20" data-strength-text="10">
+                                        <span class="btn-text">
+                                            <span class="btn-text-inner">Twitter</span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="btn btn-link btn-link-external">
+                                    <a href="https://www.linkedin.com/in/dennissnellenberg/" target="_blank" class="btn-click magnetic" data-strength="20" data-strength-text="10">
+                                        <span class="btn-text">
+                                            <span class="btn-text-inner">LinkedIn</span>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-
-                <!-- Sidebar -->
-                <div class="col-12 col-lg-4" id="Customer">
-                    <div class="main-sidebar">
-                        <div class="single-sidebar-widget mb-4">
-                            <div class="wid-title" id="close_Customer">
-                                <h3><img src="../img/star-3.png" alt="icon" /> Customer</h3>
-                            </div>
-                            <div class="news-widget-categories">
+            </div>
+            <div class="main-wrap" data-scroll-container><header class="section default-header about-header" data-scroll-section>
+   <div class="nav-bar">
+    <div class="credits-top">
+        <div class="btn btn-link btn-left-top">
+            <a href="https://dennissnellenberg.com" class="btn-click magnetic" data-strength="20" data-strength-text="10">
+            <span class="btn-text">
+                <div class="credit"><span>©</span></div><div class="cbd"><span class="code-by">Code by </span><span class="dennis"><span class="dennis-span">Dennis</span> <span class="snellenberg">Snellenberg</span></span></span></div>
+            </span>
+            </a>
+        </div>
+    </div>
+    <ul class="links-wrap">
+        <li class="btn btn-link">
+            <a href="https://dennissnellenberg.com/work" class="btn-click magnetic" data-strength="20" data-strength-text="10">
+            <span class="btn-text">
+                <span class="btn-text-inner">Work</span>
+            </span>
+            </a>
+        </li>
+        <li class="btn btn-link active">
+            <a href="https://dennissnellenberg.com/about" class="btn-click magnetic" data-strength="20" data-strength-text="10">
+            <span class="btn-text">
+                <span class="btn-text-inner">About</span>
+            </span>
+            </a>
+        </li>
+        <li class="btn btn-link">
+            <a href="https://dennissnellenberg.com/contact" class="btn-click magnetic" data-strength="20" data-strength-text="10">
+            <span class="btn-text">
+                <span class="btn-text-inner">Contact</span>
+            </span>
+            </a>
+        </li>
+        <li class="btn btn-link btn-menu">
+            <div class="btn-click magnetic" data-strength="20" data-strength-text="10">
+                <div class="btn-text">
+                    <span class="btn-text-inner">Menu</span>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>   <div class="container medium once-in">
+      <div class="row">
+         <div class="flex-col">
+            <h1><span>Helping brands thrive </span><span>in the digital world</span></h1>
+         </div>
+      </div>
+   </div>
+</header>
+<section class="section no-padding line-globe once-in" data-scroll-section>
+   <div class="container medium">
+      <div class="row">
+            <div class="flex-col">
+               <div class="stripe"></div>
+               <div class="digital-ball">
+                  <div class="overlay"></div>
+                  <div class="globe">
+                     <div class="globe-wrap">
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle-hor"></div>
+                        <div class="circle-hor-middle"></div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+      </div>
+   </div>
+</section>
+<section class="section about-image once-in" data-scroll-section>
+   <div class="bottom-lightgray"></div>
+   <div class="container">
+      <div class="row">
+         <div class="flex-col">
+            <div class="arrow"><?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>arrow-up-right</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-1019.000000, -279.000000)" stroke="#FFFFFF" stroke-width="1.5">
+            <g id="arrow-up-right" transform="translate(1026.000000, 286.000000) rotate(90.000000) translate(-1026.000000, -286.000000) translate(1020.000000, 280.000000)">
+                <polyline id="Path" points="2.76923077 0 12 0 12 9.23076923"></polyline>
+                <line x1="12" y1="0" x2="0" y2="12" id="Path"></line>
+            </g>
+        </g>
+    </g>
+</svg></div>
+            <p data-scroll data-scroll-speed="-1" data-scroll-position="top" data-scroll-offset="0%, -50%">I help companies from all over the world with tailor-made solutions. With each project, I push my work to new horizons, always putting quality first.</p>
+            <p data-scroll data-scroll-speed="-1" data-scroll-position="top" data-scroll-offset="0%, -50%"><span style="opacity: .5; display: block; padding-top: .5em;">Always exploring<span class="animate-dot">.</span><span class="animate-dot">.</span><span class="animate-dot">.</span></span></p>
+         </div>
+         <div class="flex-col">
+            <div class="single-about-image">
+               <div class="overlay overlay-image" data-scroll data-scroll-speed="-2" data-scroll-position="top"></div>
+               <div class="overlay"></div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+<section class="section about-services" data-scroll-section>
+   <div class="container">
+      <div class="row">
+         <div class="flex-col">
+            <h2>I can help you with <span class="animate-dot">.</span><span class="animate-dot">.</span><span class="animate-dot">.</span></h2>
+         </div>
+      </div>
+      <div class="row">
+         <div class="flex-col">
+            <h5>01</h5>
+            <div class="stripe"></div>
+            <h4>Design</h4>
+            <p>With a solid track record in designing websites, I deliver strong and user-friendly digital designs. (Since 2024 only in combination with development)</p>
+         </div>
+         <div class="flex-col">
+            <h5>02</h5>
+            <div class="stripe"></div>
+            <h4>Development</h4>
+            <p>I build scalable websites from scratch that fit seamlessly with design. My focus is on micro animations, transitions and interaction. Building with Webflow (or Kirby CMS).</p>
+         </div>
+         <div class="flex-col">
+            <h5>03</h5>
+            <div class="stripe"></div>
+            <h4><span><?xml version="1.0" encoding="UTF-8"?>
+<svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Oval + Oval + Oval + Oval Mask</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-468.000000, -671.000000)" fill="#FFFFFF">
+            <g id="Oval-+-Oval-+-Oval-+-Oval-Mask" transform="translate(468.000000, 671.000000)">
+                <path d="M99.1731586,50.0066986 C71.9402858,50.4482381 50,72.6619049 50,100 L50,100 L49.9933014,99.1731586 C49.5517619,71.9402858 27.3380951,50 0,50 L0,50 L0.826841425,49.9933014 C28.0597142,49.5517619 50,27.3380951 50,0 L50,0 L50.0066986,0.826841425 C50.4482381,28.0597142 72.6619049,50 100,50 L100,50 Z" id="Combined-Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg></span>The full package</h4>
+            <p>A complete website from concept to implementation, that's what makes me stand out. My great sense for design and my development skills enable me to create kick-ass projects.</p>
+         </div>
+      </div>
+   </div>
+</section>
+<section class="section about-awwwards" data-scroll-section>
+   <div class="container medium">
+      <div class="row">
+         <div class="flex-col">
+            <div class="single-image">
+               <div class="overlay" data-scroll data-scroll-speed="-1"></div>
+               <div class="overlay"></div>
+            </div>
+         </div>
+         <div class="flex-col">
+            <div class="awwwards-badge">
+               <svg width="102" height="101" viewBox="0 0 102 101"><g fill="#999D9E" fill-rule="evenodd"><path d="M39.767 93.293c.393.425.65.947.771 1.569.122.62.072 1.3-.147 2.035-.22.736-.55 1.33-.993 1.782-.442.453-.944.75-1.506.888a3.16 3.16 0 0 1-1.697-.046 3.155 3.155 0 0 1-1.435-.89c-.392-.424-.65-.947-.77-1.567-.122-.621-.073-1.3.147-2.035.22-.736.551-1.33.993-1.783.442-.453.944-.75 1.505-.888a3.151 3.151 0 0 1 1.687.043 3.17 3.17 0 0 1 1.445.892m-2.91-.117c-.4.105-.762.334-1.084.69-.323.355-.573.83-.75 1.427-.18.596-.23 1.131-.156 1.604.075.474.251.864.528 1.171.276.306.623.523 1.041.648.417.125.826.134 1.225.03.4-.105.761-.334 1.084-.69.322-.353.573-.83.751-1.427.178-.596.23-1.132.155-1.605-.076-.474-.25-.864-.528-1.17a2.232 2.232 0 0 0-1.04-.647 2.237 2.237 0 0 0-1.227-.03M24.549 94.32l-3.606-2.355.46-.704 2.849 1.86 1.22-1.867-2.328-1.52.459-.704 2.329 1.52 1.833-2.805.755.493zM14.076 85.963l-2.865-3.216.628-.558 2.264 2.54 1.666-1.483-1.85-2.077.627-.56 1.851 2.077 2.502-2.23.6.674zM6.269 75.28l-.427-.794 6.398-3.44.428.797zM8.523 62.668c-.159.549-.477 1.036-.953 1.459-.476.424-1.102.727-1.876.908-.775.182-1.47.188-2.085.02-.615-.17-1.115-.464-1.502-.885a3.251 3.251 0 0 1-.778-1.481c-.164-.7-.12-1.332.131-1.896.252-.563.68-1.011 1.284-1.345l.417.777c-.432.25-.738.565-.92.945-.181.38-.212.823-.094 1.328.103.438.302.805.599 1.1.297.298.677.495 1.14.592.464.098.996.076 1.595-.064s1.085-.357 1.457-.65c.372-.293.625-.638.759-1.036.134-.397.15-.814.048-1.253-.118-.504-.343-.887-.674-1.147s-.745-.407-1.243-.44l.028-.88c.69.03 1.272.242 1.748.635.476.394.795.94.959 1.64a3.244 3.244 0 0 1-.04 1.673M0 50.804l7.264.068.008-.902-7.263-.069zM1.517 38.559l.214-.823 7.676-.654-.238.914-2.055.152-.695 2.672 1.722 1.133-.24.924-6.384-4.318zm4.716-.361-3.434.254 2.875 1.896.56-2.15zM5.975 26.94l.454-.78 5.55 3.234 1.656-2.841.727.423-2.111 3.622zM15.682 20.103a.609.609 0 0 1-.457-.165.625.625 0 0 1-.058-.901.628.628 0 0 1 .443-.224.628.628 0 0 1 .465.174.616.616 0 0 1 .215.436.628.628 0 0 1-.172.465.612.612 0 0 1-.436.215M21.572 9.366l.7-.483 6.235 4.525-.778.536-1.654-1.23-2.273 1.567.562 1.984-.787.541-2.005-7.44zm3.804 2.81-2.764-2.053.936 3.314 1.828-1.261zM31.592 3.705l.913-.28 3.161 5.218.001-5.383.754-.231 3.006 4.463-.294-6.096.903-.277.252 7.52-.873.267-2.962-4.39.024 5.29-.882.27zM50.677 7.362l.922.052 1.805-4.972 1.262 5.143.911.051L57.941.491 56.998.44l-1.833 5.822-1.278-5.226-.786-.045-1.862 5.051L50.076.053 49.123 0zM66.865 2.618 67.74 3l-.992 6.02 3.501-4.089.724.315-.62 5.345 3.742-4.822.865.377-4.698 5.876-.838-.365.605-5.26-3.421 4.033-.847-.369zM83.643 12.338l.643.558-2.827 7.165-.714-.619.778-1.909-2.084-1.809-1.78 1.037-.722-.626 6.706-3.797zm-1.773 4.384 1.298-3.188-2.974 1.732 1.676 1.456zM92.114 21.531l1.317 2.052c.363.565.504 1.093.425 1.584-.08.49-.376.9-.888 1.23-.43.276-.85.388-1.257.337-.407-.05-.782-.255-1.125-.61l-1.766 3.723-.544-.847 1.728-3.686-.616-.96-2.9 1.86-.487-.76 6.113-3.923zm-1.206 3.635c.221.343.46.556.717.637.258.081.541.023.85-.176.6-.384.677-.923.232-1.616l-.812-1.266-1.8 1.154.813 1.267zM98.695 34.374l.563 1.944c.172.591.19 1.17.058 1.733a3.07 3.07 0 0 1-.862 1.502c-.442.438-1.03.762-1.76.974-.731.211-1.4.25-2.008.116a3.083 3.083 0 0 1-1.53-.81 3.373 3.373 0 0 1-.877-1.498l-.561-1.944 6.977-2.017zm-5.645 3.598c.126.44.334.814.623 1.127.287.313.665.524 1.133.634.468.11 1.01.075 1.629-.104.617-.178 1.096-.439 1.431-.78.338-.343.544-.723.621-1.142a2.765 2.765 0 0 0-.075-1.285l-.274-.947-5.363 1.55.274.947zM94.306 49.604c.174-.337.412-.613.715-.83.302-.216.633-.356.992-.42l.47.744c-1.068.262-1.6.802-1.595 1.618.003.353.11.639.322.859.212.22.518.329.92.327.261-.002.485-.073.671-.212.185-.14.34-.313.463-.521.123-.21.273-.504.45-.885.225-.472.49-.845.795-1.12.306-.276.697-.414 1.174-.417.338-.003.642.075.913.233.27.157.482.374.636.65.153.275.231.586.234.932.003.478-.097.865-.298 1.164-.203.299-.493.532-.87.7l-.472-.733c.537-.225.804-.6.801-1.126-.002-.283-.09-.511-.263-.683a.852.852 0 0 0-.624-.256.998.998 0 0 0-.62.2 1.726 1.726 0 0 0-.432.497 8.178 8.178 0 0 0-.399.806c-.238.534-.517.948-.836 1.24-.32.293-.745.44-1.277.443a2.176 2.176 0 0 1-1.11-.268 1.929 1.929 0 0 1-.746-.753 2.23 2.23 0 0 1-.27-1.083c-.004-.401.082-.77.256-1.106M96.244 60.796a.614.614 0 0 1 .481-.076.622.622 0 0 1 .485.761.62.62 0 0 1-.771.482.608.608 0 0 1-.399-.277.625.625 0 0 1-.074-.49.613.613 0 0 1 .278-.4M91.014 68.24c.472-.177.969-.178 1.492-.004l-.216.908c-.38-.12-.71-.135-.986-.045-.276.089-.49.29-.64.602-.16.337-.187.656-.078.957.109.302.38.557.819.766l4.594 2.202-.386.805-4.51-2.162c-.7-.334-1.141-.765-1.326-1.291-.185-.526-.142-1.072.13-1.64.266-.555.635-.921 1.107-1.098M84.224 78.813a2.14 2.14 0 0 1 1.253-.117c.437.086.862.312 1.277.68l3.592 3.174-.598.677-3.631-3.21c-.373-.33-.768-.49-1.183-.479-.417.01-.803.218-1.161.622-.357.404-.516.813-.476 1.228.04.414.248.786.62 1.116l3.63 3.21-.597.677-3.592-3.177c-.414-.366-.69-.762-.826-1.188a2.175 2.175 0 0 1-.034-1.262c.114-.416.329-.803.646-1.16.32-.364.68-.627 1.08-.79M79.427 92.7l-2.071 1.286c-.571.355-1.101.488-1.59.401-.489-.087-.895-.388-1.217-.905-.27-.436-.376-.856-.319-1.262.057-.406.266-.778.626-1.116l-3.696-1.821.855-.531 3.66 1.783.97-.602-1.818-2.927.767-.477 3.833 6.171zm-3.617-1.259c-.346.215-.562.45-.648.707-.084.256-.03.54.163.852.376.605.914.69 1.613.256l1.279-.794-1.128-1.816-1.279.795zM62.587 92.627l.886 3.006-.901 4.571.965-.284.617-3.558 2.449 2.653.975-.288-3.24-3.35-.886-3.006zM54.211 97.34a.613.613 0 0 1 .211.438.618.618 0 0 1-.588.685.63.63 0 0 1-.473-.15.628.628 0 0 1-.213-.45.621.621 0 0 1 .6-.674.612.612 0 0 1 .463.151"/></g></svg>
+               <svg width="49" height="30" viewBox="0 0 49 30"><path d="m37.068.118-4.8 26.632-5.577.734-6.588-15.95-2.236 17.112-5.577.734L.76 4.898l6.34-.835 6.873 16.944 2-18.112 5.883-.774 6.62 16.977L30.729.952l6.339-.834zm11.367 20.48c.32 2.434-1.264 4.499-3.698 4.82-2.434.32-4.5-1.265-4.821-3.699-.32-2.434 1.265-4.5 3.699-4.82 2.434-.32 4.5 1.265 4.82 3.699z" fill="#999D9E" fill-rule="evenodd"/></svg>
+            </div>
+            <h2>Awwwards<br>judge '19-25</h2>
+            <p>I am a proud member of the Awwwards International Jury, where I judge the best websites in the world using my expertise as a designer and developer. Micro animations and transitions have my full attention and get me thrilled with every move.</p>
+              <div class="news-widget-categories">
                                 <ul id="audio-list" class="list-unstyled"></ul>
                             </div>
-                        </div>
+         </div>
+      </div>
+   </div>
+</section>
 
-                        <div class="single-sidebar-widget">
-                            <div class="wid-title">
-                                <h3><img src="../img/star-3.png" alt="icon" /> My Skills</h3>
+
+                  <?php include './footer.php'; ?>
+
+
                             </div>
-                            <div class="news-widget-categories">
-                                <div class="tagcloud d-flex flex-wrap gap-2">
-                                    <a href="news-standard.html">Creativity</a>
-                                    <a href="news-details.html">Reality</a>
-                                    <a href="news-details.html">Focus</a>
-                                    <a href="news-details.html">Movies</a>
-                                    <a href="news-details.html">Games</a>
-                                    <a href="news-details.html">Media</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> <!-- End Sidebar -->
-            </div>
-        </div>
-    </section>
-    <?php include 'footer.php'; ?>
-    <!-- ===================== Project JS Files ===================== -->
-    <script src="../js/audio-script.js"></script>
-    <script src="../js/script.js"></script>
 
-    <script>
-        let Customer = document.getElementById('Customer');
-        let viwe_Customer = document.getElementById('viwe_Customer');
-        let close_Customer = document.getElementById('close_Customer');
-
-        viwe_Customer.addEventListener('click', function() {
-            if (window.innerWidth < 992) {
-                Customer.style.display = 'block';
-            }
-        });
-
-        close_Customer.addEventListener('click', function() {
-            if (window.innerWidth < 992) {
-                Customer.style.display = 'none';
-            }
-        });
-    </script>
+                         
+        </main>
 
 
-</body>
 
+   
+
+                            <script src="../js/audio-script.js"></script>
+
+
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.0/js.cookie.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/@barba/core"></script> -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/@barba/core@2.9.7"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/@barba/core@2.10.3"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.6.1/dist/lazyload.min.js"></script>
+        
+        <script src="https://dennissnellenberg.com/assets/js/locomotive-scroll.min.js"></script>     
+           <script defer src="https://dennissnellenberg.com/assets/js/index-new.js"></script>  
+
+
+
+
+          </body>
 </html>
