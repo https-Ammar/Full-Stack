@@ -3,8 +3,18 @@ CREATE TABLE cards (
     title VARCHAR(255),
     description TEXT,
     link VARCHAR(255),
-    cover_image VARCHAR(255),
-    second_image VARCHAR(255),
+    image1 VARCHAR(255),
+    image2 VARCHAR(255),
+    image3 VARCHAR(255),
+    image4 VARCHAR(255),
+    image5 VARCHAR(255),
+    image6 VARCHAR(255),
+    role VARCHAR(255),
+    services TEXT,
+    credits TEXT,
+    location VARCHAR(255),
+    year YEAR,
+    extra_text TEXT,
     created_at DATE
 );
 

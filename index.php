@@ -6,7 +6,7 @@ if ($ip === '127.0.0.1' || $ip === '::1') {
     $ip = '8.8.8.8';
 }
 
-$country = 'غير معروف';
+$country = 'Unknown';
 $response = @file_get_contents("http://ip-api.com/json/{$ip}?fields=country");
 if ($response !== false) {
     $data = json_decode($response, true);
@@ -20,8 +20,6 @@ if ($stmt) {
     $stmt->bind_param("ss", $ip, $country);
     $stmt->execute();
     $stmt->close();
-} else {
-    error_log("Failed to prepare statement: " . $conn->error);
 }
 
 $sql = "SELECT * FROM cards ORDER BY id DESC";
@@ -32,8 +30,26 @@ if ($result) {
     while ($row = $result->fetch_assoc()) {
         $cards[] = $row;
     }
-} else {
-    error_log("Failed to fetch cards: " . $conn->error);
+}
+
+$card = null;
+$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+if ($id > 0) {
+    $stmt = $conn->prepare("SELECT * FROM cards WHERE id = ?");
+    if ($stmt) {
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result && $result->num_rows > 0) {
+            $card = $result->fetch_assoc();
+        } else {
+            exit("Card not found.");
+        }
+        $stmt->close();
+    } else {
+        exit("Database error: " . $conn->error);
+    }
 }
 ?>
 
@@ -137,7 +153,7 @@ if ($result) {
                         </a>
                     </li>
                     <li class="btn btn-link">
-                        <a href="https://dennissnellenberg.com/about" class="btn-click magnetic" data-strength="20"
+                        <a href="./assets/page/About.php" class="btn-click magnetic" data-strength="20"
                             data-strength-text="10">
                             <span class="btn-text">
                                 <span class="btn-text-inner">About</span>
@@ -145,7 +161,7 @@ if ($result) {
                         </a>
                     </li>
                     <li class="btn btn-link">
-                        <a href="https://dennissnellenberg.com/contact" class="btn-click magnetic" data-strength="20"
+                        <a href="./assets/page/Contact.php" class="btn-click magnetic" data-strength="20"
                             data-strength-text="10">
                             <span class="btn-text">
                                 <span class="btn-text-inner">Contact</span>
@@ -241,53 +257,36 @@ if ($result) {
             <h5>Services</h5>
          </div> -->
                 </div>
+
                 <ul class="work-items mouse-pos-list-image-wrap">
 
+<?php foreach ($cards as $card):
+    $id = (int) ($card['id'] ?? 0);
+    $title = htmlspecialchars($card['title'] ?? '');
+    $cover_image = htmlspecialchars($card['cover_image'] ?? '');
+    $second_image = htmlspecialchars($card['second_image'] ?? '');
+    $description = nl2br(htmlspecialchars($card['description'] ?? ''));
+    $link = htmlspecialchars($card['link'] ?? '');
+    $created_at = htmlspecialchars($card['created_at'] ?? '');
+?>
 
+<li class="development interaction visible">
+    <div class="stripe animate"></div>
+    <a href="<?= $link ?>" class="row">
+        <div class="flex-col">
+            <h4><span><?= $title ?> </span></h4>
+        </div>
+        <div class="flex-col animate">
+            <p><?= $description ?></p>
+        </div>
+    </a>
+</li>
 
+<?php endforeach; ?>
 
+<div class="stripe last animate"></div>
+</ul>
 
-                        <?php foreach ($cards as $card):
-                            $id = (int) $card['id'];
-                            $title = htmlspecialchars($card['title']);
-                            $cover_image = htmlspecialchars($card['cover_image']);
-                            $second_image = htmlspecialchars($card['second_image']);
-                            $description = nl2br(htmlspecialchars($card['description']));
-                            $link = htmlspecialchars($card['link']);
-                            $created_at = htmlspecialchars($card['created_at']);
-                        ?>
-
-
-
-       <li class="development interaction visible">
-                        <div class="stripe animate"></div>
-                        <a href="<?= $link ?>" class="row">
-                            <div class="flex-col">
-                                <h4><span><?= $title ?> </span></h4>
-                            </div>
-                            <div class="flex-col animate">
-                                <p><?= $description ?></p>
-                            </div>
-                        </a>
-                    </li>
-               
-
-
-
-                                               <!-- <p class="item-address"><?= $created_at ?></p> -->
-
-
-
-
-
-
-
-
-                        <?php endforeach; ?>
-
-             
-                    <div class="stripe last animate"></div>
-                </ul>
             </div>
 
 

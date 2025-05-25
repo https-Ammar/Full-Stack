@@ -1,3 +1,59 @@
+<?php
+include 'db.php';
+
+$ip = $_SERVER['REMOTE_ADDR'];
+if ($ip === '127.0.0.1' || $ip === '::1') {
+    $ip = '8.8.8.8';
+}
+
+$country = 'Unknown';
+$response = @file_get_contents("http://ip-api.com/json/{$ip}?fields=country");
+if ($response !== false) {
+    $data = json_decode($response, true);
+    if (isset($data['country'])) {
+        $country = $data['country'];
+    }
+}
+
+$stmt = $conn->prepare("INSERT INTO visitors (ip_address, country) VALUES (?, ?)");
+if ($stmt) {
+    $stmt->bind_param("ss", $ip, $country);
+    $stmt->execute();
+    $stmt->close();
+}
+
+$sql = "SELECT * FROM cards ORDER BY id DESC";
+$result = $conn->query($sql);
+
+$cards = [];
+if ($result) {
+    while ($row = $result->fetch_assoc()) {
+        $cards[] = $row;
+    }
+}
+
+$card = null;
+$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+if ($id > 0) {
+    $stmt = $conn->prepare("SELECT * FROM cards WHERE id = ?");
+    if ($stmt) {
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result && $result->num_rows > 0) {
+            $card = $result->fetch_assoc();
+        } else {
+            exit("Card not found.");
+        }
+        $stmt->close();
+    } else {
+        exit("Database error: " . $conn->error);
+    }
+}
+?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +94,7 @@
                                         <h2>AVVR<div class="dot"></div></h2>
                                         <h2>GraphicHunters<div class="dot"></div></h2>
                                         <h2>Future Goals<div class="dot"></div></h2>
-                                        <h2 class="active">Atypikal<div class="dot"></div></h2>
+                                        <h2 class="active"><?php echo htmlspecialchars($card['title']); ?><div class="dot"></div></h2>
                                         <h2>One:Nil<div class="dot"></div></h2>
                                         <h2>Andy Hardy<div class="dot"></div></h2>
                                         <h2>About<div class="dot"></div></h2>
@@ -191,7 +247,7 @@
 </div>   <div class="container medium once-in">
       <div class="row">
          <div class="flex-col">
-            <h1>Atypikal</h1>
+            <h1><?php echo htmlspecialchars($card['title']); ?></h1>
          </div>
       </div>
    </div>
@@ -202,14 +258,14 @@
          <div class="flex-col">
             <h5>Role / Services</h5>
             <div class="stripe"></div>
-            <li><p>Interaction & Development</p></li>
+            <li><p><?php echo htmlspecialchars($card['role']); ?> & Development</p></li>
          </div>
          <div class="flex-col">
             <h5>Credits</h5>            <div class="stripe"></div>
             <li><p>Design: Robyn Cambruzzi</p></li>         </div>
          <div class="flex-col">
             <h5>Location & year</h5>            <div class="stripe"></div>
-            <li><p>United States ©</p></li>            <li><p>2021</p></li>
+            <li><p><?php echo htmlspecialchars($card['location']); ?> ©</p></li>            <li><p><?php echo htmlspecialchars($card['year']); ?></p></li>
          </div>
       </div>
    </div>
@@ -221,7 +277,7 @@
          <div class="flex-col">
             <div class="btn-wrap theme-dark">
                <div class="btn btn-round" data-scroll data-scroll-speed="2"  data-scroll-position="top">
-                  <a href="https://atypikal.co/" target="_blank" class="btn-click magnetic " data-strength="100" data-strength-text="50">
+                  <a href="<?php echo htmlspecialchars($card['link']); ?>" target="_blank" class="btn-click magnetic " data-strength="100" data-strength-text="50">
                      <div class="btn-fill"></div>
                      <span class="btn-text">
                         <span class="btn-text-inner">Live site <div class="arrow"><?xml version="1.0" encoding="UTF-8"?>
@@ -253,8 +309,10 @@
          <div class="flex-col">
             <div class="device">
                <div class="single-image">
-                     
-                  <div class="overlay overlay-image playpauze"><video class="overlay" src="https://dennissnellenberg.com/media/pages/work/atypikal/869f36be3e-1646837282/atypikal-screen-scroll.mp4" loop muted playsinline></video></div>                                     
+               
+               <img src="uploads/<?php echo htmlspecialchars($card['image1']); ?>"  alt="">
+
+                  <div class="overlay overlay-image playpauze"><video muted playsinline></video></div>                                     
                    
                </div>
                   
@@ -403,6 +461,74 @@
 <style>.block-fullwidth {background: #000;}</style>             
                                </div>
         </main>
+
+
+
+
+<div class="card-details">
+
+    <a href="products.php" class="back-link">&larr; العودة إلى المنتجات</a>
+
+ 
+
+    <div class="card-section">
+        <strong>الوصف:</strong> <?php echo nl2br(htmlspecialchars($card['description'])); ?>
+    </div>
+
+
+
+    <div class="card-section">
+        <strong>الدور:</strong> 
+    </div>
+
+    <div class="card-section">
+        <strong>الخدمات:</strong> <?php echo nl2br(htmlspecialchars($card['services'])); ?>
+    </div>
+
+    <div class="card-section">
+        <strong>الاعتمادات:</strong> <?php echo nl2br(htmlspecialchars($card['credits'])); ?>
+    </div>
+
+
+    <div class="card-section">
+        <strong>نص إضافي:</strong> <?php echo nl2br(htmlspecialchars($card['extra_text'])); ?>
+    </div>
+
+    <div class="card-section">
+        <strong>تاريخ الإنشاء:</strong> <?php echo htmlspecialchars($card['created_at']); ?>
+    </div>
+
+    
+    <div class="card-images">
+    <?php if (!empty($card['image1'])): ?>
+        <img src="uploads/<?php echo htmlspecialchars($card['image1']); ?>" alt="صورة 1" style="max-width: 100%; border-radius:8px; margin-bottom: 15px;">
+    <?php endif; ?>
+
+    <?php if (!empty($card['image2'])): ?>
+        <img src="uploads/<?php echo htmlspecialchars($card['image2']); ?>" alt="صورة 2" style="max-width: 100%; border-radius:8px; margin-bottom: 15px;">
+    <?php endif; ?>
+
+    <?php if (!empty($card['image3'])): ?>
+        <img src="uploads/<?php echo htmlspecialchars($card['image3']); ?>" alt="صورة 3" style="max-width: 100%; border-radius:8px; margin-bottom: 15px;">
+    <?php endif; ?>
+
+    <?php if (!empty($card['image4'])): ?>
+        <img src="uploads/<?php echo htmlspecialchars($card['image4']); ?>" alt="صورة 4" style="max-width: 100%; border-radius:8px; margin-bottom: 15px;">
+    <?php endif; ?>
+
+    <?php if (!empty($card['image5'])): ?>
+        <img src="uploads/<?php echo htmlspecialchars($card['image5']); ?>" alt="صورة 5" style="max-width: 100%; border-radius:8px; margin-bottom: 15px;">
+    <?php endif; ?>
+
+    <?php if (!empty($card['image6'])): ?>
+        <img src="uploads/<?php echo htmlspecialchars($card['image6']); ?>" alt="صورة 6" style="max-width: 100%; border-radius:8px; margin-bottom: 15px;">
+    <?php endif; ?>
+</div>
+
+</div>
+
+
+
      
                  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.0/js.cookie.min.js"></script>

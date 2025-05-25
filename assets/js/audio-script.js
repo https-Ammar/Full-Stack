@@ -1,7 +1,7 @@
 const audioList = [
   {
     title: "Ehsan Ali",
-    href: "#",
+    country: "Palestine",
     sources: [
       { src: "../audio/Ihsan.mp3", type: "audio/mpeg" },
       { src: "../audio/Ihsan.mp3", type: "audio/ogg" },
@@ -15,7 +15,7 @@ const audioList = [
   },
   {
     title: "Noor Qnebi",
-    href: "#",
+    country: "Palestine",
     sources: [
       { src: "../audio/Noor.mp3", type: "audio/mpeg" },
       { src: "../audio/Noor.mp3", type: "audio/ogg" },
@@ -29,7 +29,7 @@ const audioList = [
   },
   {
     title: "Mira Abdallah",
-    href: "#",
+    country: "Palestine",
     sources: [
       { src: "../audio/Mera.mp3", type: "audio/mpeg" },
       { src: "../audio/Mera.mp3", type: "audio/ogg" },
@@ -43,7 +43,7 @@ const audioList = [
   },
   {
     title: "Muhammad Naser",
-    href: "#",
+    country: "Palestine",
     sources: [
       { src: "../audio/Naser.mp3", type: "audio/mpeg" },
       { src: "../audio/Naser.mp3", type: "audio/ogg" },
@@ -58,7 +58,7 @@ const audioList = [
 
   {
     title: "Ahmed Othman",
-    href: "#",
+    country: "Palestine",
     sources: [
       { src: "../audio/Othman.mp3", type: "audio/mpeg" },
       { src: "../audio/Othman.mp3", type: "audio/ogg" },
@@ -73,7 +73,7 @@ const audioList = [
 
   {
     title: "Saja Fawaz",
-    href: "#",
+    country: "Palestine",
     sources: [
       { src: "../audio/Saja.mp3", type: "audio/mpeg" },
       { src: "../audio/Saja.mp3", type: "audio/ogg" },
@@ -88,7 +88,7 @@ const audioList = [
 
   {
     title: "Muhamed Samy",
-    href: "#",
+    country: "Palestine",
     sources: [
       { src: "../audio/Sami.mp3", type: "audio/mpeg" },
       { src: "../audio/Sami.mp3", type: "audio/ogg" },
@@ -103,7 +103,7 @@ const audioList = [
 
   {
     title: "Ahmed Al-Hamaida",
-    href: "#",
+    country: "Palestine",
     sources: [
       { src: "../audio/Hamaida.mp3", type: "audio/mpeg" },
       { src: "../audio/Hamaida.mp3", type: "audio/ogg" },
@@ -118,7 +118,7 @@ const audioList = [
 
   {
     title: "Ahmed Essam",
-    href: "#",
+    country: "Palestine",
     sources: [
       { src: "../audio/Essam.mp3", type: "audio/mpeg" },
       { src: "../audio/Essam.mp3", type: "audio/ogg" },
@@ -133,7 +133,7 @@ const audioList = [
 
   {
     title: "Heba Gamal",
-    href: "#",
+    country: "Palestine",
     sources: [
       { src: "../audio/Heba.mp3", type: "audio/mpeg" },
       { src: "../audio/Heba.mp3", type: "audio/ogg" },
@@ -147,8 +147,6 @@ const audioList = [
   },
 ];
 
-const container = document.getElementById("audio-list");
-
 const playIcon = `
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
   <path d="M8 5v14l11-7z"/>
@@ -159,63 +157,84 @@ const pauseIcon = `
   <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
 </svg>`;
 
-let currentAudio = null;
-let currentButton = null;
+let currentTrackIndex = 0;
 
-function resetCurrentAudio() {
-  if (currentButton) {
-    currentButton.innerHTML = playIcon;
-    currentButton.classList.remove("pause");
-  }
-  currentAudio = null;
-  currentButton = null;
+const audio = document.getElementById("hidden-player");
+const playBtn = document.querySelector(".play-button");
+const prevBtn = document.querySelector(".prev");
+const nextBtn = document.querySelector(".next");
+
+const title = document.querySelector(".title");
+const country = document.querySelector(".country");
+const progress = document.querySelector("progress");
+const timeNow = document.querySelector(".time-now");
+const timeFinish = document.querySelector(".time-finish");
+
+function formatTime(seconds) {
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  const s = Math.floor(seconds % 60);
+  return `${h}:${m.toString().padStart(2, "0")}:${s
+    .toString()
+    .padStart(2, "0")}`;
 }
 
-audioList.forEach(({ title, href, sources }) => {
-  const li = document.createElement("li");
-  li.className = "audio-player";
-
-  const audio = document.createElement("audio");
-  audio.preload = "none";
-  audio.controls = false;
-  sources.forEach(({ src, type }) => {
-    const source = document.createElement("source");
-    source.src = src;
-    source.type = type;
-    audio.appendChild(source);
+function loadTrack(index) {
+  const track = audioList[index];
+  audio.innerHTML = "";
+  track.sources.forEach((source) => {
+    const s = document.createElement("source");
+    s.src = source.src;
+    s.type = source.type;
+    audio.appendChild(s);
   });
-
-  const link = document.createElement("a");
-  link.href = href;
-  link.textContent = title;
-
-  const playBtn = document.createElement("span");
-  playBtn.className = "play-btn";
+  audio.load();
+  title.textContent = track.title;
+  country.textContent = track.country;
   playBtn.innerHTML = playIcon;
+}
 
-  playBtn.addEventListener("click", () => {
-    if (audio === currentAudio) {
-      if (audio.paused) {
-        audio.play();
-        playBtn.innerHTML = pauseIcon;
-        playBtn.classList.add("pause");
-      } else {
-        audio.pause();
-        resetCurrentAudio();
-      }
-    } else {
-      if (currentAudio) currentAudio.pause();
-      resetCurrentAudio();
-      audio.play();
-      playBtn.innerHTML = pauseIcon;
-      playBtn.classList.add("pause");
-      currentAudio = audio;
-      currentButton = playBtn;
-    }
-  });
+function playTrack() {
+  audio.play();
+  playBtn.innerHTML = pauseIcon;
+}
 
-  audio.addEventListener("ended", resetCurrentAudio);
+function pauseTrack() {
+  audio.pause();
+  playBtn.innerHTML = playIcon;
+}
 
-  li.append(audio, link, playBtn);
-  container.appendChild(li);
+playBtn.addEventListener("click", () => {
+  if (audio.paused) {
+    playTrack();
+  } else {
+    pauseTrack();
+  }
 });
+
+prevBtn.addEventListener("click", () => {
+  currentTrackIndex =
+    (currentTrackIndex - 1 + audioList.length) % audioList.length;
+  loadTrack(currentTrackIndex);
+  playTrack();
+});
+
+nextBtn.addEventListener("click", () => {
+  currentTrackIndex = (currentTrackIndex + 1) % audioList.length;
+  loadTrack(currentTrackIndex);
+  playTrack();
+});
+
+audio.addEventListener("timeupdate", () => {
+  if (audio.duration) {
+    progress.value = audio.currentTime / audio.duration;
+    timeNow.textContent = formatTime(audio.currentTime);
+    timeFinish.textContent = formatTime(audio.duration);
+  }
+});
+
+audio.addEventListener("ended", () => {
+  nextBtn.click();
+});
+
+loadTrack(currentTrackIndex);

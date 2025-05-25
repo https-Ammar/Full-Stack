@@ -152,7 +152,7 @@
 </div>   <div class="container medium">
       <div class="row once-in">
          <div class="flex-col">
-            <h1><span><div class="profile-picture"></div> Let's start a </span><span>project together</span></h1>
+            <h1><span><div class="profile-picture" ></div> Let's start a </span><span>project together</span></h1>
          </div>
          <div class="flex-col">
             <div class="profile-picture"></div>

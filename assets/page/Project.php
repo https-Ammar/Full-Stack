@@ -20,8 +20,6 @@ if ($stmt) {
     $stmt->bind_param("ss", $ip, $country);
     $stmt->execute();
     $stmt->close();
-} else {
-    error_log("Failed to prepare statement: " . $conn->error);
 }
 
 $sql = "SELECT * FROM cards ORDER BY id DESC";
@@ -32,8 +30,26 @@ if ($result) {
     while ($row = $result->fetch_assoc()) {
         $cards[] = $row;
     }
-} else {
-    error_log("Failed to fetch cards: " . $conn->error);
+}
+
+$card = null;
+$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+if ($id > 0) {
+    $stmt = $conn->prepare("SELECT * FROM cards WHERE id = ?");
+    if ($stmt) {
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result && $result->num_rows > 0) {
+            $card = $result->fetch_assoc();
+        } else {
+            exit("Card not found.");
+        }
+        $stmt->close();
+    } else {
+        exit("Database error: " . $conn->error);
+    }
 }
 ?>
 
@@ -269,42 +285,37 @@ if ($result) {
          <ul class="work-items mouse-pos-list-image-wrap all-active">
 
     
-         <?php foreach ($cards as $card):
-    $id = (int) $card['id'];
-    $title = htmlspecialchars($card['title']);
-    $cover_image = htmlspecialchars($card['cover_image']);
-    $second_image = htmlspecialchars($card['second_image']);
-    $description = nl2br(htmlspecialchars($card['description']));
-    $link = htmlspecialchars($card['link']);
-    $created_at = htmlspecialchars($card['created_at']);
+
+<?php foreach ($cards as $card):
+    $id = (int) ($card['id'] ?? 0);
+    $title = htmlspecialchars($card['title'] ?? '');
+    $cover_image = htmlspecialchars($card['cover_image'] ?? '');
+    $second_image = htmlspecialchars($card['second_image'] ?? '');
+    $description = nl2br(htmlspecialchars($card['description'] ?? ''));
+    $link = htmlspecialchars($card['link'] ?? '');
+    $created_at = htmlspecialchars($card['created_at'] ?? '');
 ?>
 
-                 <li class="design development visible">
-
-
-               <div class="stripe animate"></div>
-               <a href="./details.php" class="row">
-                  <div class="flex-col">
-                     <h4><span><?= $title ?></span></h4>
-                  </div>
-                  <div class="flex-col animate">
-                     <p>Australia</p>
-                  </div>
-                  <div class="flex-col animate">
-                     <p><?= $description ?></p>
-                  </div>
-                  <div class="flex-col animate">
-                     <p><?= $created_at ?></p>
-                  </div>
-               </a>
-            </li>
-
-
-
+<li class="design development visible">
+    <div class="stripe animate"></div>
+    <a href="./details.php?id=<?= $id ?>" class="row">
+        <div class="flex-col">
+            <h4><span><?= $title ?></span></h4>
+        </div>
+        <div class="flex-col animate">
+            <p>Australia</p>
+        </div>
+        <div class="flex-col animate">
+            <p><?= $description ?></p>
+        </div>
+        <div class="flex-col animate">
+            <p><?= $created_at ?></p>
+        </div>
+    </a>
+</li>
 
 <?php endforeach; ?>
-                                        
-       
+
                         <div class="stripe last animate"></div>
          </ul>
       </div>
@@ -315,40 +326,45 @@ if ($result) {
 
 
 
+
 <?php foreach ($cards as $card):
-    $id = (int) $card['id'];
-    $title = htmlspecialchars($card['title']);
-    $cover_image = htmlspecialchars($card['cover_image']);
-    $second_image = htmlspecialchars($card['second_image']);
-    $description = nl2br(htmlspecialchars($card['description']));
-    $link = htmlspecialchars($card['link']);
-    $created_at = htmlspecialchars($card['created_at']);
+    $id = (int) ($card['id'] ?? 0);
+    $title = htmlspecialchars($card['title'] ?? '');
+    $cover_image = htmlspecialchars($card['cover_image'] ?? '');
+    $second_image = htmlspecialchars($card['second_image'] ?? '');
+    $description = nl2br(htmlspecialchars($card['description'] ?? ''));
+    $link = htmlspecialchars($card['link'] ?? '');
+    $created_at = htmlspecialchars($card['created_at'] ?? '');
 ?>
 
-
-                <li class="development interaction visible">
-               <div class="single-tile-wrap">
-                  <a href="./details.php" class="row">
-                     <div class="flex-col">
-                        <div class="tile-image">
-                           <div class="overlay overlay-color" style="background-color: #F1F1F1;"></div>
-                           <div class="overlay overlay-image lazy" style="background-position: center center; background-repeat: no-repeat; background-size: cover;" data-bg="uploads/<?= $cover_image ?>"></div>                        </div>
-                     </div>
-                     <div class="flex-col">
-                        <h4><span><?= $title ?></span></h4>
-                        <div class="stripe"></div>
-                     </div>
-                     <div class="flex-col">
-                        <p><?= $description ?></p>
-                     </div>
-                     <div class="flex-col">
-                        <p><?= $created_at ?></p>
-                     </div>
-                  </a>
-               </div>
-            </li>
+<li class="development interaction visible">
+   <div class="single-tile-wrap">
+      <a href="./details.php?id=<?= $id ?>" class="row">
+         <div class="flex-col">
+            <div class="tile-image">
+               <div class="overlay overlay-color" style="background-color: #F1F1F1;"></div>
+               <div class="overlay overlay-image lazy" 
+                    style="background-position: center center; background-repeat: no-repeat; background-size: cover;" 
+                    data-bg="uploads/<?php echo htmlspecialchars($card['image1']); ?>">
+               </div>                        
+            </div>
+         </div>
+         <div class="flex-col">
+            <h4><span><?= $title ?></span></h4>
+            <div class="stripe"></div>
+         </div>
+         <div class="flex-col">
+            <p><?= $description ?></p>
+         </div>
+         <div class="flex-col">
+            <p><?= $created_at ?></p>
+         </div>
+      </a>
+   </div>
+</li>
 
 <?php endforeach; ?>
+
 
 
         
