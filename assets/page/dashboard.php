@@ -603,22 +603,180 @@ if (isset($_GET['delete_visitor'])) {
 
 
 
-                    <div class="faq">
-                        <p>Most frequently asked questions</p>
-                        <div>
-                            <label>Question</label>
-                            <input type="text" placeholder="Type here">
-                        </div>
-                    </div>
-                    <div class="payment-section-footer">
-                        <button class="save-button">
-                            Save
-                        </button>
-                        <button class="settings-button">
-                            <i class="ph-gear"></i>
-                            <span>More settings</span>
-                        </button>
-                    </div>
+
+                    <style>
+    .file-upload {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+    }
+
+    .file-upload input[type="file"] {
+        position: absolute;
+        font-size: 100px;
+        opacity: 0;
+        right: 0;
+        top: 0;
+    }
+
+    .file-upload-label {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #007bff;
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-bottom: 8px;
+    }
+    .file-upload {
+    background: none !important;
+}
+
+label.file-upload-label {
+    background: none;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+</style>
+
+
+
+<div class="faq">
+    <p>Most Frequently Asked Questions</p>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        <!-- عناصر ظاهرة دائمًا -->
+        <div>
+            <label>Title</label>
+            <input type="text" name="title" placeholder="Title" required>
+        </div>
+
+        <div>
+            <label>Description</label>
+            <input type="text" name="description" placeholder="Description" required>
+        </div>
+
+        <div>
+            <label>Link</label>
+            <input type="text" name="link" placeholder="Link" required>
+        </div>
+
+        <!-- عناصر مخفية وتظهر عند الضغط -->
+        <div id="more-settings" style="display: none;">
+            <div>
+                <label>Location</label>
+                <input type="text" name="location" placeholder="Location" required>
+            </div>
+
+            <div>
+                <label>Year</label>
+                <input type="number" name="year" placeholder="Year" required>
+            </div>
+
+            <div>
+                <label>Services</label>
+                <input type="text" name="services" placeholder="Services" required>
+            </div>
+
+            <!-- ملفات الصور -->
+            <div>
+                <label>Cover</label>
+                <div class="file-upload">
+                    <label class="file-upload-label">Image
+                        <input type="file" name="image1">
+                    </label>
+                </div>
+            </div>
+
+            <div>
+                <label>Image</label>
+                <div class="file-upload">
+                    <label class="file-upload-label">Image
+                        <input type="file" name="image2">
+                    </label>
+                </div>
+            </div>
+
+            <div>
+                <label>Image</label>
+                <div class="file-upload">
+                    <label class="file-upload-label">Image
+                        <input type="file" name="image3">
+                    </label>
+                </div>
+            </div>
+
+            <div>
+                <label>Image</label>
+                <div class="file-upload">
+                    <label class="file-upload-label">Image
+                        <input type="file" name="image4">
+                    </label>
+                </div>
+            </div>
+
+            <div>
+                <label>Image</label>
+                <div class="file-upload">
+                    <label class="file-upload-label">Image
+                        <input type="file" name="image5">
+                    </label>
+                </div>
+            </div>
+
+            <div>
+                <label>Image</label>
+                <div class="file-upload">
+                    <label class="file-upload-label">Image
+                        <input type="file" name="image6">
+                    </label>
+                </div>
+            </div>
+
+            <div>
+                <label>Date</label>
+                <input type="date" name="date" required>
+            </div>
+
+            <div>
+                <label>Extra Text</label>
+                <input type="text" name="extra_text" placeholder="Extra Text">
+            </div>
+        </div>
+
+        <!-- أزرار -->
+        <div class="payment-section-footer">
+            <button class="save-button" type="submit" name="add">Save</button>
+            <button class="settings-button" type="button" onclick="toggleSettings()">
+                <i class="ph-gear"></i>
+                <span>More Settings</span>
+            </button>
+        </div>
+    </form>
+</div>
+
+<!-- JavaScript لإظهار/إخفاء الإعدادات -->
+<script>
+    function toggleSettings() {
+        var moreSettings = document.getElementById("more-settings");
+        if (moreSettings.style.display === "none") {
+            moreSettings.style.display = "block";
+        } else {
+            moreSettings.style.display = "none";
+        }
+    }
+</script>
+
+
+
+                    
+    <!-- <input type="text" name="role" placeholder="الدور"> -->
+    <!-- <textarea name="credits" placeholder="الاعتمادات"></textarea> -->
+
+                   
+                    
                 </section>
             </div>
         </div>
@@ -635,29 +793,6 @@ if (isset($_GET['delete_visitor'])) {
 
 
 
-
-<form method="POST" enctype="multipart/form-data">
-    <input type="text" name="title" placeholder="العنوان" required>
-    <textarea name="description" placeholder="الوصف" required></textarea>
-    <input type="text" name="link" placeholder="الرابط">
-    
-    <label>صورة 1: <input type="file" name="image1"></label><br>
-    <label>صورة 2: <input type="file" name="image2"></label><br>
-    <label>صورة 3: <input type="file" name="image3"></label><br>
-    <label>صورة 4: <input type="file" name="image4"></label><br>
-    <label>صورة 5: <input type="file" name="image5"></label><br>
-    <label>صورة 6: <input type="file" name="image6"></label><br>
-    
-    <input type="text" name="role" placeholder="الدور">
-    <textarea name="services" placeholder="الخدمات"></textarea>
-    <textarea name="credits" placeholder="الاعتمادات"></textarea>
-    <input type="text" name="location" placeholder="الموقع">
-    <input type="number" name="year" placeholder="السنة" min="1901" max="2155" required>
-    <textarea name="extra_text" placeholder="نص إضافي"></textarea>
-    <input type="date" name="date" required>
-    
-    <button type="submit" name="add">إضافة كارت</button>
-</form>
 
 
 
