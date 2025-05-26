@@ -188,48 +188,80 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     </section>
 
+           <div class="resend-text">
+        
+            <form method="post">
+                <button type="submit" name="resend_otp" id="resend-btn" disabled class="resend-link">Resend Code</button>
+            </form>
+            <span id="countdown">( <?= $time_left ?> )</span>
+        </div>
 
 
-    <script>
-        function moveNext(el) {
-            if (el.value.length === 1) {
-                const next = el.nextElementSibling;
-                if (next && next.tagName === "INPUT") {
-                    next.focus();
-                }
+<script>
+    function moveNext(el) {
+        if (el.value.length === 1) {
+            const next = el.nextElementSibling;
+            if (next && next.tagName === "INPUT") {
+                next.focus();
             }
         }
+    }
 
-        function collectOTP() {
+    function collectOTP() {
+        const inputs = document.querySelectorAll('.otp-input input');
+        let otp = '';
+        for (const input of inputs) {
+            if (input.value === '') {
+                alert('Please enter all digits');
+                return false;
+            }
+            otp += input.value;
+        }
+        document.getElementById('otp').value = otp;
+        return true;
+    }
+
+    function clearAllInputs() {
+        const inputs = document.querySelectorAll('.otp-input input');
+        inputs.forEach(input => input.value = '');
+        inputs[0].focus();
+    }
+
+    document.querySelectorAll('.otp-input input').forEach(input => {
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Backspace' || e.key === 'Delete') {
+                e.preventDefault();
+                clearAllInputs();
+            }
+        });
+
+        input.addEventListener('input', () => {
             const inputs = document.querySelectorAll('.otp-input input');
-            let otp = '';
-            for (const input of inputs) {
-                if (input.value === '') {
-                    alert('Please enter all digits');
-                    return false;
-                }
-                otp += input.value;
+            const otp = Array.from(inputs).map(i => i.value).join('');
+            if (otp.length === inputs.length && !otp.includes('')) {
+                collectOTP();
+                console.log("OTP complete:", otp);
             }
-            document.getElementById('otp').value = otp;
-            return true;
+        });
+    });
+
+    let timeLeft = <?= $time_left ?>;
+    const countdownEl = document.getElementById('countdown');
+    const resendBtn = document.getElementById('resend-btn');
+    const RESEND_INTERVAL = <?= RESEND_INTERVAL ?>;
+
+    let timer = setInterval(() => {
+        if (timeLeft > 0) {
+            timeLeft--;
+            countdownEl.textContent = timeLeft;
+        } else {
+            countdownEl.textContent = "Time expired, you can resend the code now.";
+            resendBtn.disabled = false;
+            clearInterval(timer);
         }
+    }, 1000);
+</script>
 
-        let timeLeft = <?= $time_left ?>;
-        const countdownEl = document.getElementById('countdown');
-        const resendBtn = document.getElementById('resend-btn');
-        const RESEND_INTERVAL = <?= RESEND_INTERVAL ?>;
-
-        let timer = setInterval(() => {
-            if (timeLeft > 0) {
-                timeLeft--;
-                countdownEl.textContent = timeLeft;
-            } else {
-                countdownEl.textContent = "Time expired, you can resend the code now.";
-                resendBtn.disabled = false;
-                clearInterval(timer);
-            }
-        }, 1000);
-    </script>
 
 
 </body>
@@ -239,13 +271,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-        <div class="resend-text">
-        
-            <form method="post">
-                <button type="submit" name="resend_otp" id="resend-btn" disabled class="resend-link">Resend Code</button>
-            </form>
-            <span id="countdown">( <?= $time_left ?> )</span>
-        </div>
+ 
 
 
 
