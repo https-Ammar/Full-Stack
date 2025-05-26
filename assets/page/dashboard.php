@@ -1,3 +1,4 @@
+
 <?php
 include 'db.php';
 
@@ -12,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])) {
     $location    = $_POST['location'];
     $year        = intval($_POST['year']);
     $extra_text  = $_POST['extra_text'];
-    $date        = $_POST['date'];
+    $date        = date('Y-m-d'); // توليد التاريخ تلقائيًا
 
     // تحقق من صحة السنة
     if ($year < 1901 || $year > 2155) {
@@ -90,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
     $location    = $_POST['location'];
     $year        = intval($_POST['year']);
     $extra_text  = $_POST['extra_text'];
-    $date        = $_POST['date'];
+    $date        = date('Y-m-d'); // تحديث التاريخ تلقائيًا عند التعديل
 
     if ($year < 1901 || $year > 2155) {
         die("قيمة السنة غير صالحة. يجب أن تكون بين 1901 و 2155.");
@@ -145,465 +146,496 @@ $cards = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
 
 
 
-
-
-
-
-
+<!--  -->
+<!--  -->
+<!--  -->
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>dashboard</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <title>Bank dashboard concept</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="../css/dashboard.css" />
 
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/dashboard.css">
+
 </head>
 
-<body class="section-bg">
+<body>
+    <div class="app">
+        <header class="app-header">
+            <div class="app-header-logo">
+                <div class="logo">
+                    <span class="logo-icon">
+                        <img src="https://assets.codepen.io/285131/almeria-logo.svg" />
+                    </span>
+                    <h1 class="logo-title">
+                        <span>Almeria</span>
+                        <span>NeoBank</span>
+                    </h1>
+                </div>
+            </div>
+            <div class="app-header-navigation">
+                <div class="tabs">
+                    <a href="#">
+                        Overview
+                    </a>
+                    <a href="#" class="active">
+                        Payments
+                    </a>
+                    <a href="#">
+                        Cards
+                    </a>
+                    <a href="#">
+                        Account
+                    </a>
+                    <a href="#">
+                        System
+                    </a>
+                    <a href="#">
+                        Business
+                    </a>
+                </div>
+            </div>
+            <div class="app-header-actions">
+                <button class="user-profile">
+                    <span>Matheo Peterson</span>
+                    <span>
+                        <img src="https://assets.codepen.io/285131/almeria-avatar.jpeg" />
+                    </span>
+                </button>
+                <div class="app-header-actions-buttons">
+                    <button class="icon-button large">
+                        <i class="ph-magnifying-glass"></i>
+                    </button>
+                    <button class="icon-button large">
+                        <i class="ph-bell"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="app-header-mobile">
+                <button class="icon-button large">
+                    <i class="ph-list"></i>
+                </button>
+            </div>
+
+        </header>
+        <div class="app-body">
+            <div class="app-body-navigation">
+                <nav class="navigation">
+                    <a href="#">
+                        <i class="ph-browsers"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="#">
+                        <i class="ph-check-square"></i>
+                        <span>Scheduled</span>
+                    </a>
+                    <a href="#">
+                        <i class="ph-swap"></i>
+                        <span>Transfers</span>
+                    </a>
+                    <a href="#">
+                        <i class="ph-file-text"></i>
+                        <span>Templates</span>
+                    </a>
+                    <a href="#">
+                        <i class="ph-globe"></i>
+                        <span>SWIFT</span>
+                    </a>
+                    <a href="#">
+                        <i class="ph-clipboard-text"></i>
+                        <span>Exchange</span>
+                    </a>
+                </nav>
+                <footer class="footer">
+                    <h1>Almeria<small>©</small></h1>
+                    <div>
+                        Almeria ©<br />
+                        All Rights Reserved 2021
+                    </div>
+                </footer>
+            </div>
+            <div class="app-body-main-content">
+                <section class="service-section">
+                    <h2>Service</h2>
+                    <div class="service-section-header">
+                        <div class="search-field">
+                            <i class="ph-magnifying-glass"></i>
+                            <input type="text" placeholder="Account number">
+                        </div>
+                     
+                    </div>
+                    <div class="mobile-only">
+                        <button class="flat-button">
+                            Toggle search
+                        </button>
+                    </div>
 
 
 
 
+                    <!--  -->
+<!--  -->
+
+     <div class="tab-content">
+
+         <?php
+// عداد عدد الكروت
+$card_count = $conn->query("SELECT COUNT(*) as total FROM cards")->fetch_assoc()['total'];
+
+// حساب عدد الزوار
+$count_result = $conn->query("SELECT COUNT(*) as total FROM visitors");
+$count_row = $count_result->fetch_assoc();
+$total_visitors = $count_row['total'];
+
+// حذف جميع الزوار
+if (isset($_POST['delete_all'])) {
+    $conn->query("DELETE FROM visitors");
+    echo "<script>window.location.href='dashboard.php';</script>";
+}
+
+// حذف زائر واحد
+if (isset($_GET['delete_visitor'])) {
+    $delete_id = intval($_GET['delete_visitor']);
+    $conn->query("DELETE FROM visitors WHERE id = $delete_id");
+    echo "<script>window.location.href='dashboard.php';</script>";
+}
+?>
 
 
-    <div class="breadcrumb-wrapper bg-cover" style="background-image: url('../img/breadcrumb-bg.jpg');">
-        <div class="container">
-            <div class="page-heading">
-                <h6 class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
-                    <img src="../img/star.png" alt="img"> user creation
-                </h6>
-                <h1 class="wow fadeInUp" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">Web <span>dashboard</span></h1>
+
+                    <div class="tiles">
+                        <article class="tile">
+                            <div class="tile-header">
+                                <i class="ph-lightning-light"></i>
+                                <h3>
+                                    <span>Electricity</span>
+                                    <span>UrkEnergo -- <?= $card_count ?></span>
+                                </h3>
+                            </div>
+                            <a href="#">
+                                <span>Go to service</span>
+                                <span class="icon-button">
+                                    <i class="ph-caret-right-bold"></i>
+                                </span>
+                            </a>
+                        </article>
+                        <article class="tile">
+                            <div class="tile-header">
+                                <i class="ph-fire-simple-light"></i>
+                                <h3>
+                                    <span>Heating Gas</span>
+                                    <span>Gazprom UA -- <?= $total_visitors ?></span>
+                                </h3>
+                            </div>
+                            <a href="#">
+                                <span>Go to service</span>
+
+                 
+                                <span class="icon-button">
+                                               <form method="post" onsubmit="return confirm('هل أنت متأكد من حذف جميع الزوار؟');">
+                    <button  class="icon-button" type="submit" name="delete_all" class="btn btn-sm btn-danger mt-2">
+                       <i class="ph-caret-right-bold"></i>
+                    </button>
+                </form>
+                                </span>
+                            </a>
+                        </article>
+                        <article class="tile">
+                            <div class="tile-header">
+                                <i class="ph-file-light"></i>
+                                <h3>
+                                    <span>Tax online</span>
+                                    <span>Kharkov 62 str.</span>
+                                </h3>
+                            </div>
+                            <a href="#">
+                                <span>Go to service</span>
+                                <span class="icon-button">
+                                    <i class="ph-caret-right-bold"></i>
+                                </span>
+                            </a>
+                        </article>
+                    </div>
+
+
+
+
+<div class="row">
+
+
+                <h5 class="card-title text-uppercase text-muted mb-0">Session Time</h5>
+                        <span id="session-timer" class="h2 font-weight-bold mb-0">00:00:00 AM</span>
+
+
+
+       <h5 class="card-title text-uppercase text-muted mb-0">Today</h5>
+                        <span id="current-date" class="h2 font-weight-bold mb-0">--</span>
+    
+</div>
+
+<!-- JavaScript للمؤقت والتاريخ -->
+<script>
+    // المؤقت
+    function formatTime(hours24, minutes, seconds) {
+        const ampm = hours24 >= 12 ? 'PM' : 'AM';
+        let hours12 = hours24 % 12;
+        const displayHours = hours12 === 0 ? '00' : (hours12 < 10 ? '0' + hours12 : hours12);
+        const m = minutes < 10 ? '0' + minutes : minutes;
+        const s = seconds < 10 ? '0' + seconds : seconds;
+        return `${displayHours}:${m}:${s} ${ampm}`;
+    }
+
+    let elapsedSeconds = parseInt(localStorage.getItem('elapsedSeconds')) || 0;
+    function updateSessionTimer() {
+        elapsedSeconds++;
+        const hours24 = Math.floor(elapsedSeconds / 3600);
+        const minutes = Math.floor((elapsedSeconds % 3600) / 60);
+        const seconds = elapsedSeconds % 60;
+        document.getElementById('session-timer').textContent = formatTime(hours24, minutes, seconds);
+        localStorage.setItem('elapsedSeconds', elapsedSeconds);
+    }
+    setInterval(updateSessionTimer, 1000);
+    updateSessionTimer();
+
+    // التاريخ
+    document.addEventListener('DOMContentLoaded', () => {
+        const dateSpan = document.getElementById('current-date');
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+        dateSpan.textContent = `${year}-${month}-${day}`;
+    });
+</script>
+
+            </div>
+
+
+            
+
+                    <!--  -->
+
+                
+                </section>
+                <section class="transfer-section">
+                    <div class="transfer-section-header">
+                        <h2>Latest transfers</h2>
+                        <div class="filter-options">
+                            <p>Filter selected: more than 100 $</p>
+                            <button class="icon-button">
+                                <i class="ph-funnel"></i>
+                            </button>
+                            <button class="icon-button">
+                                <i class="ph-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+
+
+
+                    <?php
+    $res = $conn->query("SELECT * FROM visitors ORDER BY id DESC");
+    if ($res && $res->num_rows > 0) {
+        while ($row = $res->fetch_assoc()) {
+?>
+
+<div class="transfers">
+    <div class="transfer">
+        <div class="transfer-logo">
+            <img src="https://assets.codepen.io/285131/apple.svg" />
+            <?= htmlspecialchars($row['id']) ?>
+        </div>
+        <dl class="transfer-details">
+            <div>
+                <dd>ID</dd>
+                <?= htmlspecialchars($row['ip_address']) ?>
+            </div>
+            <div>
+                <dd>City</dd>
+                <?= htmlspecialchars($row['country']) ?>
+            </div>
+            <div>
+                <?php
+                    $datetime = strtotime($row['visit_time']);
+                    $date = date('Y-m-d', $datetime);
+                    $time = date('H:i:s', $datetime);
+                ?>
+                <dd>Date</dd>
+                <?= htmlspecialchars($date) ?>
+            </div>
+            <div>
+                <dd>Time</dd>
+                <?= htmlspecialchars($time) ?>
+            </div>
+        </dl>
+        <div class="transfer-number">
+            <a href="?delete_visitor=<?= urlencode($row['id']) ?>"
+                onclick="return confirm('هل أنت متأكد من حذف هذا الزائر؟')"
+                style="color:red; text-decoration:none; font-size:18px;">
+                <button class="icon-button">
+                    <i class="ph-plus"></i>
+                </button>
+            </a>
+        </div>
+    </div>
+</div>
+
+<?php
+        }
+    } else {
+?>
+    <li class="mt-5 mb-5">No visitors yet</li>
+<?php
+    }
+?>
+
+
+
+           
+                </section>
+            </div>
+            <div class="app-body-sidebar">
+                <section class="payment-section">
+                    <h2>New Payment</h2>
+                    <div class="payment-section-header">
+                        <p>Choose a card to transfer money</p>
+                        <div>
+                            <button class="card-button mastercard">
+                                <svg width="2001" height="1237" viewBox="0 0 2001 1237" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g id="a624784f2834e21c94a1c0c9a58bbbaa">
+                                        <path id="7869b07bea546aa59a5ee138adbcfd5a"
+                                            d="M1270.57 1104.15H729.71V132.15H1270.58L1270.57 1104.15Z"
+                                            fill="currentColor"></path>
+                                        <path id="b54e3ab4d7044a9f288082bc6b864ae6"
+                                            d="M764 618.17C764 421 856.32 245.36 1000.08 132.17C891.261 46.3647 756.669 -0.204758 618.09 9.6031e-07C276.72 9.6031e-07 0 276.76 0 618.17C0 959.58 276.72 1236.34 618.09 1236.34C756.672 1236.55 891.268 1189.98 1000.09 1104.17C856.34 991 764 815.35 764 618.17Z"
+                                            fill="currentColor"></path>
+                                        <path id="67f94b4d1b83252a6619ed6e0cc0a3a1"
+                                            d="M2000.25 618.17C2000.25 959.58 1723.53 1236.34 1382.16 1236.34C1243.56 1236.54 1108.95 1189.97 1000.11 1104.17C1143.91 990.98 1236.23 815.35 1236.23 618.17C1236.23 420.99 1143.91 245.36 1000.11 132.17C1108.95 46.3673 1243.56 -0.201169 1382.15 -2.24915e-05C1723.52 -2.24915e-05 2000.24 276.76 2000.24 618.17"
+                                            fill="currentColor"></path>
+                                    </g>
+                                </svg>
+                            </button>
+                            <button class="card-button visa active">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="2500" height="2500"
+                                    viewBox="0 0 141.732 141.732">
+                                    <g fill="currentColor">
+                                        <path
+                                            d="M62.935 89.571h-9.733l6.083-37.384h9.734zM45.014 52.187L35.735 77.9l-1.098-5.537.001.002-3.275-16.812s-.396-3.366-4.617-3.366h-15.34l-.18.633s4.691.976 10.181 4.273l8.456 32.479h10.141l15.485-37.385H45.014zM121.569 89.571h8.937l-7.792-37.385h-7.824c-3.613 0-4.493 2.786-4.493 2.786L95.881 89.571h10.146l2.029-5.553h12.373l1.14 5.553zm-10.71-13.224l5.114-13.99 2.877 13.99h-7.991zM96.642 61.177l1.389-8.028s-4.286-1.63-8.754-1.63c-4.83 0-16.3 2.111-16.3 12.376 0 9.658 13.462 9.778 13.462 14.851s-12.075 4.164-16.06.965l-1.447 8.394s4.346 2.111 10.986 2.111c6.642 0 16.662-3.439 16.662-12.799 0-9.72-13.583-10.625-13.583-14.851.001-4.227 9.48-3.684 13.645-1.389z" />
+                                    </g>
+                                    <path
+                                        d="M34.638 72.364l-3.275-16.812s-.396-3.366-4.617-3.366h-15.34l-.18.633s7.373 1.528 14.445 7.253c6.762 5.472 8.967 12.292 8.967 12.292z"
+                                        fill="currentColor" />
+                                    <path fill="none" d="M0 0h141.732v141.732H0z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+
+
+                    <div class="payments">
+                        
+
+                    <?php foreach ($cards as $card): ?>
+
+
+
+                              <div class="payment">
+                            <div class="card green" style="background-image: url(uploads/<?php echo htmlspecialchars($card['image1']); ?>);">
+                                <span><?= htmlspecialchars($card['created_at']) ?></span>
+                                <span>
+                                    •••• <?= htmlspecialchars($card['year']) ?>
+                                </span>
+                            </div>
+                            <div class="payment-details">
+                                <h3><?= htmlspecialchars($card['title']) ?></h3>
+                                <div>
+                                    <span>$ 2,110</span>
+                                    <button class="icon-button">
+                                                    <a href="?delete=<?= $card['id'] ?>" onclick="return confirm('هل أنت متأكد من حذف هذا الكارت؟')"> <i class="ph-caret-right-bold"></i></a>
+
+
+                                       
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+               
+
+
+
+    <!-- <tr>
+    
+        <td><?= nl2br(htmlspecialchars($card['description'])) ?></td>
+    
+        <td>
+    <img src="uploads/<?php echo htmlspecialchars($card['image2']); ?>" alt="Image 2" width="60">
+    <img src="uploads/<?php echo htmlspecialchars($card['image3']); ?>" alt="Image 3" width="60">
+    <img src="uploads/<?php echo htmlspecialchars($card['image4']); ?>" alt="Image 4" width="60">
+    <img src="uploads/<?php echo htmlspecialchars($card['image5']); ?>" alt="Image 5" width="60">
+    <img src="uploads/<?php echo htmlspecialchars($card['image6']); ?>" alt="Image 6" width="60">
+</td>
+
+        
+        <td><?= htmlspecialchars($card['role']) ?></td>
+        <td><?= nl2br(htmlspecialchars($card['services'])) ?></td>
+        <td><?= nl2br(htmlspecialchars($card['credits'])) ?></td>
+        <td><?= htmlspecialchars($card['location']) ?></td>
+
+        <td > <?= nl2br(htmlspecialchars($card['extra_text'])) ?>  </td> -->
+
+        <!-- <td>
+            <a href="edit.php?id=<?= $card['id'] ?>">تعديل</a>
+        </td> -->
+ 
+    </tr>
+<?php endforeach; ?>
+
+
+                  
+                        
+                    </div>
+
+
+
+                    <div class="faq">
+                        <p>Most frequently asked questions</p>
+                        <div>
+                            <label>Question</label>
+                            <input type="text" placeholder="Type here">
+                        </div>
+                    </div>
+                    <div class="payment-section-footer">
+                        <button class="save-button">
+                            Save
+                        </button>
+                        <button class="settings-button">
+                            <i class="ph-gear"></i>
+                            <span>More settings</span>
+                        </button>
+                    </div>
+                </section>
             </div>
         </div>
     </div>
+    <script src="https://unpkg.com/phosphor-icons"></script>
+</body>
 
+</html>
 
 
 
-    <section class="portfolio-section section-padding section-bg">
-        <div class="container">
 
-            <ul class="nav" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a href="#show" class="nav-link active" role="tab">show All</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a href="#creative" class="nav-link" role="tab">creative</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a href="#anime" class="nav-link" role="tab">anime</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a href="#animal" class="nav-link" role="tab">animal</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a href="#graphic" class="nav-link" role="tab">graphic</a>
-                </li>
-                <li><a class="page-numbers" href="#" id="close_input">+</a></li>
-            </ul>
 
 
 
 
 
-
-
-            <div class="tab-content">
-
-                <div id="show" class="tab-pane fade active show" role="tabpanel">
-
-                    <?php
-                    // عداد عدد الكروت
-                    $card_count = $conn->query("SELECT COUNT(*) as total FROM cards")->fetch_assoc()['total'];
-                    ?>
-
-
-
-                    <div class="item creative">
-                        <div class="row ">
-
-                            <?php
-                            $cards = $conn->query("SELECT * FROM cards ORDER BY id DESC");
-                            while ($row = $cards->fetch_assoc()):
-                            ?>
-
-                                <?php if (isset($_GET['edit']) && $_GET['edit'] == $row['id']): ?>
-                                    <!-- نموذج تعديل الكارت -->
-                                    <form method="POST" enctype="multipart/form-data">
-                                        <input type="hidden" name="edit_id" value="<?= $row['id'] ?>">
-
-                                        <input type="text" name="title" value="<?= htmlspecialchars($row['title']) ?>" required>
-
-                                        <textarea name="description" required><?= htmlspecialchars($row['description']) ?></textarea>
-
-                                        <input type="text" name="link" value="<?= htmlspecialchars($row['link']) ?>" required>
-
-                                        <input type="date" name="date" value="<?= $row['created_at'] ?>" required>
-
-                                        <input type="file" name="cover_image">
-
-                                        <input type="file" name="second_image">
-
-                                        <button type="submit">حفظ التعديلات</button>
-                                    </form>
-                                <?php else: ?>
-                                    <div class="col-xl-4 col-lg-6 col-md-6">
-                                        <div class="portfolio-card-items">
-                                            <div class="portfolio-image" style="background-image: url(uploads/<?= htmlspecialchars($row['cover_image']) ?>);">
-
-                                                <a href="contact.html" class="lets-circle">
-                                                    <i class="fa-sharp fa-regular fa-arrow-up-right"></i> <br>
-                                                    Project
-                                                    details
-                                                </a>
-                                            </div>
-                                            <div class="portfolio-content">
-                                                <h6><span>//</span> <?= htmlspecialchars($row['title']) ?> - <?= htmlspecialchars($row['created_at']) ?></h6>
-                                                <h3><a href="<?= htmlspecialchars($row['link']) ?>" target="_blank"><?= htmlspecialchars($row['title']) ?></a></h3>
-                                            </div>
-                                        </div>
-                                        <div class="card-actions">
-                                            <a href="?edit=<?= $row['id'] ?>">تعديل</a>
-                                            <a href="?delete=<?= $row['id'] ?>" class="delete-btn" onclick="return confirm('هل أنت متأكد؟')">حذف</a>
-                                        </div>
-                                    </div>
-                                <?php endif; ?>
-
-                            <?php endwhile; ?>
-
-                            <style>
-                                .portfolio-image {
-                                    height: 45vh;
-                                }
-                            </style>
-                            <!-- <img src="uploads/<?= htmlspecialchars($row['second_image']) ?>" alt="الصورة الثانية"> -->
-
-                        </div>
-                    </div>
-
-
-
-
-                    <?php
-                    // حساب عدد الزوار
-                    $count_result = $conn->query("SELECT COUNT(*) as total FROM visitors");
-                    $count_row = $count_result->fetch_assoc();
-                    $total_visitors = $count_row['total'];
-
-                    // حذف جميع الزوار
-                    if (isset($_POST['delete_all'])) {
-                        $conn->query("DELETE FROM visitors");
-                        echo "<script>window.location.href='dashboard.php';</script>";
-                    }
-
-                    // حذف زائر واحد
-                    if (isset($_GET['delete_visitor'])) {
-                        $delete_id = intval($_GET['delete_visitor']);
-                        $conn->query("DELETE FROM visitors WHERE id = $delete_id");
-                        echo "<script>window.location.href='dashboard.php';</script>";
-                    }
-                    ?>
-
-
-
-
-
-
-                    <div class="item anime">
-
-                        <div class="main-content mb-5 p-0">
-                            <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
-                                <div class="container-fluid">
-                                    <h2 class="mb-5 text-white">Stats Card</h2>
-                                    <div class="header-body">
-                                        <div class="row">
-                                            <div class="col-xl-3 col-lg-6">
-                                                <div class="card card-stats mb-4 mb-xl-0">
-                                                    <div class="card-body">
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <h5 class="card-title text-uppercase text-muted mb-0">Traffic</h5>
-                                                                <span class="h2 font-weight-bold mb-0"><?= $card_count ?></span>
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
-                                                                    <i class="fas fa-chart-bar"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <p class="mt-3 mb-0 text-muted text-sm">
-                                                            <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                                                            <span class="text-nowrap">Since last month</span>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-3 col-lg-6">
-                                                <div class="card card-stats mb-4 mb-xl-0">
-                                                    <div class="card-body">
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <h5 class="card-title text-uppercase text-muted mb-0">New users</h5>
-                                                                <span class="h2 font-weight-bold mb-0"><?php echo $total_visitors; ?> </span>
-
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
-                                                                    <i class="fas fa-chart-pie"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <p class="mt-3 mb-0 text-muted text-sm">
-                                                        <form method="post" onsubmit="return confirm('هل أنت متأكد من حذف جميع الزوار؟');">
-                                                            <button type="submit" name="delete_all">
-                                                                <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 3.48%</span>
-                                                                <span class="text-nowrap">Since last week</span>
-
-                                                            </button>
-                                                        </form>
-
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-3 col-lg-6">
-                                                <div class="card card-stats mb-4 mb-xl-0">
-                                                    <div class="card-body">
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <h5 class="card-title text-uppercase text-muted mb-0">Sales</h5>
-
-
-                                                                <span id="session-timer" class="h2 font-weight-bold mb-0">00:00:00 AM</span>
-
-                                                                <script>
-                                                                    function formatTime(hours24, minutes, seconds) {
-                                                                        const ampm = hours24 >= 12 ? 'PM' : 'AM';
-
-                                                                        let hours12 = hours24 % 12;
-                                                                        const displayHours = hours12 === 0 ? '00' : (hours12 < 10 ? '0' + hours12 : hours12);
-
-                                                                        const m = minutes < 10 ? '0' + minutes : minutes;
-                                                                        const s = seconds < 10 ? '0' + seconds : seconds;
-
-                                                                        return `${displayHours}:${m}:${s} ${ampm}`;
-                                                                    }
-
-                                                                    // جلب القيمة المخزنة أو بدء من صفر
-                                                                    let elapsedSeconds = parseInt(localStorage.getItem('elapsedSeconds')) || 0;
-
-                                                                    function updateSessionTimer() {
-                                                                        elapsedSeconds++;
-
-                                                                        const hours24 = Math.floor(elapsedSeconds / 3600);
-                                                                        const minutes = Math.floor((elapsedSeconds % 3600) / 60);
-                                                                        const seconds = elapsedSeconds % 60;
-
-                                                                        const formatted = formatTime(hours24, minutes, seconds);
-
-                                                                        document.getElementById('session-timer').textContent = formatted;
-
-                                                                        // تخزين القيمة الجديدة
-                                                                        localStorage.setItem('elapsedSeconds', elapsedSeconds);
-                                                                    }
-
-                                                                    // تحديث كل ثانية
-                                                                    setInterval(updateSessionTimer, 1000);
-
-                                                                    // عرض أول مرة بدون تأخير
-                                                                    updateSessionTimer();
-                                                                </script>
-
-
-
-
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
-                                                                    <i class="fas fa-users"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <p class="mt-3 mb-0 text-muted text-sm">
-                                                            <span class="text-warning mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
-                                                            <span class="text-nowrap">Since yesterday</span>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-3 col-lg-6">
-                                                <div class="card card-stats mb-4 mb-xl-0">
-                                                    <div class="card-body">
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <h5 class="card-title text-uppercase text-muted mb-0">Performance</h5>
-                                                                <span id="current-date" class="h2 font-weight-bold mb-0">--</span>
-
-                                                                <script>
-                                                                    function formatDate(date) {
-                                                                        const year = date.getFullYear();
-                                                                        const month = date.getMonth() + 1; // الشهور تبدأ من 0
-                                                                        const day = date.getDate();
-
-                                                                        // إضافة صفر للشفرة الأقل من 10
-                                                                        const mm = month < 10 ? '0' + month : month;
-                                                                        const dd = day < 10 ? '0' + day : day;
-
-                                                                        return `${year}-${mm}-${dd}`;
-                                                                    }
-
-                                                                    document.addEventListener('DOMContentLoaded', () => {
-                                                                        const dateSpan = document.getElementById('current-date');
-                                                                        const today = new Date();
-                                                                        dateSpan.textContent = formatDate(today);
-                                                                    });
-                                                                </script>
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <div class="icon icon-shape bg-info text-white rounded-circle shadow">
-                                                                    <i class="fas fa-percent"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <p class="mt-3 mb-0 text-muted text-sm">
-                                                            <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
-                                                            <span class="text-nowrap">Since last month</span>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Page content -->
-                        </div>
-
-
-
-                        <div class="row p-3">
-                            <ul class="visitor-list" style="list-style:none; padding:0;">
-                                <li class="visitor-header" style="font-weight:bold; display:flex; gap:20px; padding:10px 0;">
-                                    <span>ID</span>
-                                    <span>IP</span>
-                                    <span>Country</span>
-                                    <span>Date & Time</span>
-                                    <span>Delete</span>
-                                </li>
-                                <?php
-                                $res = $conn->query("SELECT * FROM visitors ORDER BY id DESC");
-                                if ($res && $res->num_rows > 0) {
-                                    while ($row = $res->fetch_assoc()) {
-                                ?>
-                                        <li class="visitor-item" style="display:flex; gap:20px; padding:8px 0; border-bottom:1px solid #ccc; align-items:center;">
-                                            <span><?= htmlspecialchars($row['id']) ?></span>
-                                            <span><?= htmlspecialchars($row['ip_address']) ?></span>
-                                            <span><?= htmlspecialchars($row['country']) ?></span>
-                                            <span><?= htmlspecialchars($row['visit_time']) ?></span>
-                                            <span>
-                                                <a href="?delete_visitor=<?= urlencode($row['id']) ?>"
-                                                    onclick="return confirm('هل أنت متأكد من حذف هذا الزائر؟')"
-                                                    style="color:red; text-decoration:none; font-size:18px;">x</a>
-                                            </span>
-                                        </li>
-                                    <?php
-                                    }
-                                } else {
-                                    ?>
-                                    <li class="mt-5 mb-5">No visitors yet</li>
-                                <?php
-                                }
-                                ?>
-                            </ul>
-                        </div>
-
-                    </div>
-
-
-
-                </div>
-
-
-            </div>
-
-        </div>
-    </section>
-
-<!-- 
-
-    <div class="hover_section" id="hover_section">
-        <section class="container position_input">
-            <header class="header_exit">
-
-                <p>
-                    Registration Form
-
-                </p>
-
-                <button id="exit">x</button>
-
-            </header>
-            <form class="form" method="POST" enctype="multipart/form-data">
-                <div class="input-box">
-                    <label>title</label>
-                    <input required="" placeholder="Enter full title" type="text" name="title">
-                </div>
-                <div class="column">
-                    <div class="input-box">
-                        <label>link </label>
-                        <input required="" placeholder="Enter phone link" name="link" type="text">
-                    </div>
-                    <div class="input-box">
-                        <label> Date</label>
-                        <input required="" placeholder="Enter birth date" name="date" type="date">
-                    </div>
-                </div>
-                <div class="gender-box">
-                    <label>Img</label>
-                    <div class="gender-option">
-
-                        <div class="gender">
-              
-                            <input type="radio" name="gender" id="check-male" checked>
-
-
-                            <input type="file" id="cover_image" name="cover_image" required style="display: none;">
-                            <label for="cover_image" style="cursor: pointer;">Upload Cover Image</label>
-
-                        </div>
-
-
-                        <div class="gender">
-                            <input type="radio" name="gender" id="check-male" checked>
-
-                            <input type="file" id="second_image" name="second_image" required style="display: none;">
-                            <label for="second_image" style="cursor: pointer;">Upload Second Image</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="input-box address">
-                    <label>description</label>
-                    <input required="" name="description" placeholder="Enter street description" type="text">
-
-                </div>
-                <button type="submit" name="add">Add Card</button>
-            </form>
-        </section>
-    </div> -->
-
-
-
-
-
-
-
-
-<h1>إضافة كارت جديد</h1>
 <form method="POST" enctype="multipart/form-data">
     <input type="text" name="title" placeholder="العنوان" required>
     <textarea name="description" placeholder="الوصف" required></textarea>
@@ -627,129 +659,12 @@ $cards = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     <button type="submit" name="add">إضافة كارت</button>
 </form>
 
-<hr>
-
-<h2>قائمة الكروت</h2>
-<table>
-    <thead>
-        <tr>
-            <th>العنوان</th>
-            <th>الوصف</th>
-            <th>الصور</th>
-            <th>الدور</th>
-            <th>الخدمات</th>
-            <th>الاعتمادات</th>
-            <th>الموقع</th>
-            <th>السنة</th>
-            <th>نص إضافي</th>
-            <th>تاريخ الإنشاء</th>
-            <th>تعديل</th>
-            <th>حذف</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($cards as $card): ?>
-            <tr>
-                <td><?= htmlspecialchars($card['title']) ?></td>
-                <td><?= nl2br(htmlspecialchars($card['description'])) ?></td>
-                <td>
-                    <?php
-                    for ($i = 1; $i <= 6; $i++) {
-                        $img = $card["image$i"];
-                        if ($img) {
-                            echo "<img src='uploads/".htmlspecialchars($img)."' alt='Image $i'> ";
-                        }
-                    }
-                    ?>
-                </td>
-                <td><?= htmlspecialchars($card['role']) ?></td>
-                <td><?= nl2br(htmlspecialchars($card['services'])) ?></td>
-                <td><?= nl2br(htmlspecialchars($card['credits'])) ?></td>
-                <td><?= htmlspecialchars($card['location']) ?></td>
-                <td><?= htmlspecialchars($card['year']) ?></td>
-                <td><?= nl2br(htmlspecialchars($card['extra_text'])) ?></td>
-                <td><?= htmlspecialchars($card['created_at']) ?></td>
-                <td>
-                    <form method="POST" enctype="multipart/form-data" style="max-width: 300px;">
-                        <input type="hidden" name="edit_id" value="<?= $card['id'] ?>">
-                        <input type="text" name="title" value="<?= htmlspecialchars($card['title']) ?>" required>
-                        <textarea name="description" required><?= htmlspecialchars($card['description']) ?></textarea>
-                        <input type="text" name="link" value="<?= htmlspecialchars($card['link']) ?>">
-                        
-                        <label>صورة 1: <input type="file" name="image1"></label><br>
-                        <label>صورة 2: <input type="file" name="image2"></label><br>
-                        <label>صورة 3: <input type="file" name="image3"></label><br>
-                        <label>صورة 4: <input type="file" name="image4"></label><br>
-                        <label>صورة 5: <input type="file" name="image5"></label><br>
-                        <label>صورة 6: <input type="file" name="image6"></label><br>
-                        
-                        <input type="text" name="role" value="<?= htmlspecialchars($card['role']) ?>">
-                        <textarea name="services"><?= htmlspecialchars($card['services']) ?></textarea>
-                        <textarea name="credits"><?= htmlspecialchars($card['credits']) ?></textarea>
-                        <input type="text" name="location" value="<?= htmlspecialchars($card['location']) ?>">
-                        <input type="number" name="year" value="<?= htmlspecialchars($card['year']) ?>" min="1901" max="2155" required>
-                        <textarea name="extra_text"><?= htmlspecialchars($card['extra_text']) ?></textarea>
-                        <input type="date" name="date" value="<?= htmlspecialchars($card['created_at']) ?>" required>
-                        <button type="submit">تعديل</button>
-                    </form>
-                </td>
-                <td>
-                    <a href="?delete=<?= $card['id'] ?>" onclick="return confirm('هل أنت متأكد من حذف هذا الكارت؟')">حذف</a>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
-
-    <script>
-        let hover_section = document.getElementById('hover_section');
-        let exit = document.getElementById('exit');
-        let close_input = document.getElementById('close_input');
 
 
-        close_input.addEventListener('click', function() {
-            hover_section.style.display = 'flex'
-        })
-
-        exit.addEventListener('click', function() {
-            hover_section.style.display = 'none'
-        })
-    </script>
 
 
-    <script>
-        window.onload = () => {
-            const links = document.querySelectorAll('.nav-link');
-            const items = document.querySelectorAll('.item');
 
-            let savedCategory = localStorage.getItem('selectedCategory');
-            let cat = savedCategory ? savedCategory : links[0].getAttribute('href').substring(1);
 
-            for (let i = 0; i < items.length; i++)
-                items[i].style.display = items[i].classList.contains(cat) ? 'block' : 'none';
-
-            for (let i = 0; i < links.length; i++) {
-                links[i].onclick = e => {
-                    e.preventDefault();
-                    let c = links[i].getAttribute('href').substring(1);
-                    localStorage.setItem('selectedCategory', c);
-                    for (let j = 0; j < items.length; j++)
-                        items[j].style.display = items[j].classList.contains(c) ? 'block' : 'none';
-                };
-            }
-        };
-    </script>
-
-    <style>
-        li.visitor-header {
-            justify-content: space-between;
-        }
-
-        li.visitor-item {
-            justify-content: space-between;
-            padding: 20px 0 !important;
-        }
-    </style>
 </body>
 
 </html>

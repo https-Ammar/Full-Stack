@@ -1,61 +1,97 @@
 <?php
-include 'db.php';
+// تضمين ملف الاتصال بقاعدة البيانات
+require __DIR__ . '/db.php'; // تأكد أن المسار صحيح بالنسبة لموقع ملف edit.php
 
-$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-$result = $conn->query("SELECT * FROM cards WHERE id = $id");
-if ($result->num_rows == 0) {
-    die("الكارد غير موجود");
+// التحقق من وجود معرف الكارت وصحته
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+    die("معرّف الكارت غير موجود أو غير صالح.");
 }
-$row = $result->fetch_assoc();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $title = $_POST['title'];
-    $desc = $_POST['description'];
-    $link = $_POST['link'];
-    $date = $_POST['date'];
+$id = (int)$_GET['id'];
 
-    $cover = $row['cover_image'];
-    $second = $row['second_image'];
+// جلب بيانات الكارت من قاعدة البيانات
+$stmt = $pdo->prepare("SELECT * FROM cards WHERE id = ?");
+$stmt->execute([$id]);
+$card = $stmt->fetch();
 
-    if (!empty($_FILES['cover_image']['name'])) {
-        @unlink("uploads/" . $cover);
-        $cover = $_FILES['cover_image']['name'];
-        move_uploaded_file($_FILES['cover_image']['tmp_name'], "uploads/$cover");
-    }
-
-    if (!empty($_FILES['second_image']['name'])) {
-        @unlink("uploads/" . $second);
-        $second = $_FILES['second_image']['name'];
-        move_uploaded_file($_FILES['second_image']['tmp_name'], "uploads/$second");
-    }
-
-    $conn->query("UPDATE cards SET
-        title = '$title',
-        description = '$desc',
-        link = '$link',
-        created_at = '$date',
-        cover_image = '$cover',
-        second_image = '$second'
-        WHERE id = $id");
-
-    header("Location: dashboard.php");
-    exit();
+if (!$card) {
+    die("الكارت غير موجود.");
 }
 ?>
 
-<form method="POST" enctype="multipart/form-data">
-    <input type="text" name="title" value="<?= htmlspecialchars($row['title']) ?>" required><br>
-    <textarea name="description"><?= htmlspecialchars($row['description']) ?></textarea><br>
-    <input type="text" name="link" value="<?= htmlspecialchars($row['link']) ?>"><br>
-    <input type="date" name="date" value="<?= htmlspecialchars($row['created_at']) ?>" required><br>
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>تعديل الكارت</title>
+    <style>
+        label { display: block; margin: 10px 0 5px; }
+        input[type="text"], input[type="number"], input[type="date"], textarea {
+            width: 100%;
+            max-width: 500px;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        img {
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
 
-    <p>الصورة الحالية للكافر:</p>
-    <img src="uploads/<?= htmlspecialchars($row['cover_image']) ?>" width="100"><br>
-    <input type="file" name="cover_image"><br>
+<h2>تعديل الكارت</h2>
 
-    <p>الصورة الثانية الحالية:</p>
-    <img src="uploads/<?= htmlspecialchars($row['second_image']) ?>" width="100"><br>
-    <input type="file" name="second_image"><br>
+<form method="POST" action="update_card.php" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="<?= htmlspecialchars($card['id']) ?>">
 
-    <button type="submit">تحديث</button>
+    <label>العنوان:</label>
+    <input type="text" name="title" value="<?= htmlspecialchars($card['title']) ?>" required>
+
+    <label>الوصف:</label>
+    <textarea name="description" required><?= htmlspecialchars($card['description']) ?></textarea>
+
+    <label>الرابط:</label>
+    <input type="text" name="link" value="<?= htmlspecialchars($card['link']) ?>">
+
+    <?php for ($i = 1; $i <= 6; $i++): ?>
+        <label>صورة <?= $i ?>:</label>
+        <input type="file" name="image<?= $i ?>">
+        <?php if (!empty($card["image$i"])): ?>
+            <br><img src="../../uploads/<?= htmlspecialchars($card["image$i"]) ?>" alt="Image<?= $i ?>" width="80">
+        <?php endif; ?>
+        <br>
+    <?php endfor; ?>
+
+    <label>الدور:</label>
+    <input type="text" name="role" value="<?= htmlspecialchars($card['role']) ?>">
+
+    <label>الخدمات:</label>
+    <textarea name="services"><?= htmlspecialchars($card['services']) ?></textarea>
+
+    <label>الاعتمادات:</label>
+    <textarea name="credits"><?= htmlspecialchars($card['credits']) ?></textarea>
+
+    <label>الموقع:</label>
+    <input type="text" name="location" value="<?= htmlspecialchars($card['location']) ?>">
+
+    <label>السنة:</label>
+    <input type="number" name="year" value="<?= htmlspecialchars($card['year']) ?>" min="1901" max="2155">
+
+    <label>نص إضافي:</label>
+    <textarea name="extra_text"><?= htmlspecialchars($card['extra_text']) ?></textarea>
+
+    <label>تاريخ الإنشاء:</label>
+    <input type="date" name="created_at" value="<?= htmlspecialchars($card['created_at']) ?>">
+
+    <button type="submit">حفظ التعديلات</button>
 </form>
+
+</body>
+</html>
