@@ -347,6 +347,13 @@ label {
   width: 24px;
   margin: 8px 0px 0px 1px;
 }
+.otp-input {
+  margin-bottom: 3vh;
+}
+
+.otp-input input {
+  text-align: center;
+}
 
 @media (max-width: 768px) {
   .inline-block,

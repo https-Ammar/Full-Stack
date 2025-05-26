@@ -111,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <section class='signup-container'>
         <div class='wrapper'>
             <div class='signup-title'>OTP Verification</div>
-            <div class='login-page'>Enter the OTP sent to your email  <span id="email"></span> <a href="signup.php">Get started</a></div>
+            <div class='login-page'>Enter the OTP sent to your email  <span id="email"></span> <a href="login.php">Get started</a></div>
 
 
 
@@ -197,13 +197,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
 
-<script>
+        
+        <script>
     function moveNext(el) {
         if (el.value.length === 1) {
             const next = el.nextElementSibling;
             if (next && next.tagName === "INPUT") {
                 next.focus();
             }
+        }
+    }
+
+    function movePrev(el) {
+        const prev = el.previousElementSibling;
+        if (prev && prev.tagName === "INPUT") {
+            prev.focus();
         }
     }
 
@@ -221,26 +229,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         return true;
     }
 
-    function clearAllInputs() {
-        const inputs = document.querySelectorAll('.otp-input input');
-        inputs.forEach(input => input.value = '');
-        inputs[0].focus();
-    }
-
     document.querySelectorAll('.otp-input input').forEach(input => {
-        input.addEventListener('keydown', (e) => {
-            if (e.key === 'Backspace' || e.key === 'Delete') {
-                e.preventDefault();
-                clearAllInputs();
+        input.addEventListener('input', (e) => {
+            if (input.value.length > 1) {
+                input.value = input.value.charAt(0);
             }
-        });
-
-        input.addEventListener('input', () => {
+            if (input.value.length === 1) {
+                moveNext(input);
+            }
             const inputs = document.querySelectorAll('.otp-input input');
             const otp = Array.from(inputs).map(i => i.value).join('');
             if (otp.length === inputs.length && !otp.includes('')) {
                 collectOTP();
                 console.log("OTP complete:", otp);
+                // هنا تقدر تنفذ ارسال الفورم تلقائيًا مثلاً:
+                // document.getElementById('otp-form').submit();
+            }
+        });
+
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Backspace') {
+                if (input.value === '') {
+                    movePrev(input);
+                } else {
+                    input.value = '';
+                }
+                e.preventDefault();
             }
         });
     });
