@@ -1,5 +1,10 @@
-
 <?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
 include 'db.php';
 
 // --- إضافة كارت جديد ---
@@ -15,7 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])) {
     $extra_text  = $_POST['extra_text'];
     $date        = date('Y-m-d'); // توليد التاريخ تلقائيًا
 
-    // تحقق من صحة السنة
     if ($year < 1901 || $year > 2155) {
         die("قيمة السنة غير صالحة. يجب أن تكون بين 1901 و 2155.");
     }
@@ -54,7 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])) {
 if (isset($_GET['delete'])) {
     $id = intval($_GET['delete']);
     
-    // حذف الصور من المجلد
     $res = $conn->prepare("SELECT image1, image2, image3, image4, image5, image6 FROM cards WHERE id = ?");
     $res->bind_param("i", $id);
     $res->execute();
@@ -69,7 +72,6 @@ if (isset($_GET['delete'])) {
     }
     $res->close();
 
-    // حذف السجل
     $del = $conn->prepare("DELETE FROM cards WHERE id = ?");
     $del->bind_param("i", $id);
     $del->execute();
@@ -91,13 +93,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
     $location    = $_POST['location'];
     $year        = intval($_POST['year']);
     $extra_text  = $_POST['extra_text'];
-    $date        = date('Y-m-d'); // تحديث التاريخ تلقائيًا عند التعديل
+    $date        = date('Y-m-d');
 
     if ($year < 1901 || $year > 2155) {
         die("قيمة السنة غير صالحة. يجب أن تكون بين 1901 و 2155.");
     }
 
-    // الحصول على الصور القديمة
     $res = $conn->prepare("SELECT image1, image2, image3, image4, image5, image6 FROM cards WHERE id = ?");
     $res->bind_param("i", $id);
     $res->execute();
@@ -140,8 +141,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
 // --- جلب الكروت للعرض ---
 $result = $conn->query("SELECT * FROM cards ORDER BY id DESC");
 $cards = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
-?>
 
+?>
+<!-- هنا تكتب كود HTML لعرض الكروت -->
+
+<a href="logout.php">تسجيل الخروج</a>
 
 
 
