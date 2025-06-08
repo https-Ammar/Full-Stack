@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <section class='signup-container'>
         <div class='wrapper'>
             <div class='signup-title'>Sign in to your account</div>
-            <div class='login-page'>Don't have an account? <a href="signup.php">Get started</a></div>
+            <div class='login-page'>Don't have an account? <a href="./register.php">Get started</a></div>
 
 
 
