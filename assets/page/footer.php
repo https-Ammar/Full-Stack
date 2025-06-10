@@ -53,20 +53,20 @@
                         <div class="row">
                             <div class="flex-col">
                                 <div class="btn btn-normal">
-                                    <a href="mailto:info@dennissnellenberg.com" class="btn-click magnetic"
+                                    <a href="mailto:info@ammarx3@gmail.com" class="btn-click magnetic"
                                         data-strength="25" data-strength-text="15">
                                         <div class="btn-fill"></div>
                                         <span class="btn-text">
-                                            <span class="btn-text-inner change">info@dennissnellenberg.com</span>
+                                            <span class="btn-text-inner change">ammarx3@gmail.com</span>
                                         </span>
                                     </a>
                                 </div>
                                 <div class="btn btn-normal">
-                                    <a href="tel:+31627847430" class="btn-click magnetic" data-strength="25"
+                                    <a href="tel:+201070479599" class="btn-click magnetic" data-strength="25"
                                         data-strength-text="15">
                                         <div class="btn-fill"></div>
                                         <span class="btn-text">
-                                            <span class="btn-text-inner change">+31 6 27 84 74 30</span>
+                                            <span class="btn-text-inner change">+201070479599</span>
                                         </span>
                                     </a>
                                 </div>
@@ -75,14 +75,33 @@
                         <div class=" no-padding">
                             <div class="row bottom-footer">
                                 <div class="flex-col">
-                                    <div class="credits">
-                                        <h5>Version</h5>
-                                        <p>2022 © Edition</p>
-                                    </div>
-                                    <div class="time">
-                                        <h5>Local time</h5>
-                                        <p><span id="timeSpan">09:41 PM CET</span></p>
-                                    </div>
+<div class="credits">
+    <h5>Version</h5>
+    <p>2022 © Edition</p>
+</div>
+<div class="time">
+    <h5>Local time (Cairo)</h5>
+    <p><span id="timeSpan"></span></p>
+</div>
+
+<script>
+function displayFixedTimeCairo() {
+    const now = new Date();
+    const options = {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true,
+        timeZone: 'Africa/Cairo',  // بتأكد إن التوقيت بتاع القاهرة صح مع التوقيت الصيفي لو موجود
+    };
+    const cairoTime = now.toLocaleTimeString('en-US', options);
+    document.getElementById('timeSpan').textContent = cairoTime;
+}
+
+displayFixedTimeCairo();
+</script>
+
+
                                 </div>
                                 <div class="flex-col">
                                     <div class="socials">
@@ -137,3 +156,5 @@
             </div>
             </div>
         </footer>
+
+        

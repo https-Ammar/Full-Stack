@@ -60,12 +60,8 @@ if ($id > 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-        <link href="./assets/css/normalize.css" rel="stylesheet">
-    <link href="./assets/css/locomotive-scroll.css" rel="stylesheet">
-    <link href="./assets/css/styleguide.css" rel="stylesheet">
-    <link href="./assets/css/components.css" rel="stylesheet">
-    <link href="./assets/css/style-new.css" rel="stylesheet">
+    <title>Ammar Ahmed</title>
+    <link rel="stylesheet" href="./assets/css/css.css ">
 </head>
 <body data-barba="wrapper">
 
@@ -86,7 +82,9 @@ if ($id > 0) {
           <?php include './assets/page/header.php'; ?>
 
         
-        <div class="main-wrap" data-scroll-container>
+        <div class="main-wrap" data-scroll-container >
+
+
             <header class="section home-header theme-dark" data-scroll-section>
                 <div class="overlay personal-image no-select once-in" data-scroll data-scroll-speed="-3"
                     data-scroll-position="top">
@@ -127,6 +125,7 @@ if ($id > 0) {
                         </div>
                     </div>
                 </div>
+                
                 <div class="nav-bar">
                     <div class="credits-top">
                         <div class="btn btn-link btn-left-top">
@@ -144,6 +143,30 @@ if ($id > 0) {
                     </div>
                 </div>
                 <ul class="links-wrap">
+
+
+                    
+                    <li class="btn btn-link">
+                        <a href="./assets/page/Project.php" class="btn-click magnetic" data-strength="20"
+                            data-strength-text="10">
+                            <span class="btn-text">
+                                <span class="btn-text-inner">Home</span>
+                            </span>
+                        </a>
+                    </li>
+
+
+                                 <li class="btn btn-link">
+                        <a href="./assets/page/About.php" class="btn-click magnetic" data-strength="20"
+                            data-strength-text="10">
+                            <span class="btn-text">
+                                <span class="btn-text-inner">About</span>
+                            </span>
+                        </a>
+                    </li>
+
+
+
                     <li class="btn btn-link">
                         <a href="./assets/page/Project.php" class="btn-click magnetic" data-strength="20"
                             data-strength-text="10">
@@ -152,14 +175,19 @@ if ($id > 0) {
                             </span>
                         </a>
                     </li>
-                    <li class="btn btn-link">
-                        <a href="./assets/page/About.php" class="btn-click magnetic" data-strength="20"
+       
+
+                         <li class="btn btn-link">
+                        <a href="./assets/page/Skills.php" class="btn-click magnetic" data-strength="20"
                             data-strength-text="10">
                             <span class="btn-text">
-                                <span class="btn-text-inner">About</span>
+                                <span class="btn-text-inner">Skils</span>
                             </span>
                         </a>
                     </li>
+
+                    
+
                     <li class="btn btn-link">
                         <a href="./assets/page/Contact.php" class="btn-click magnetic" data-strength="20"
                             data-strength-text="10">

@@ -4,148 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-            <link href="../css/normalize.css" rel="stylesheet">
-    <link href="../css/locomotive-scroll.css" rel="stylesheet">
-    <link href="../css/styleguide.css" rel="stylesheet">
-    <link href="../css/components.css" rel="stylesheet">
-    <link href="../css/style-new.css" rel="stylesheet">
+   
+        <link rel="stylesheet" href="../css/css.css">
+
+    
 </head>
     <body data-barba="wrapper">
   
                   <?php include './loading.php'; ?>
     
         <main class="main" id="about" data-barba="container" data-barba-namespace="about" >
-                                                        <div class="btn btn-hamburger">
-                <div class="btn-click magnetic" data-strength="50" data-strength-text="25">
-                    <div class="btn-fill"></div>
-                    <div class="btn-text">
-                        <div class="btn-bars"></div>
-                        <span class="btn-text-inner">Menu</span>
-                    </div>
-                </div>
-            </div>
-            <div class="overlay fixed-nav-back"></div>
-            <div class="fixed-nav theme-dark">
-                <div class="fixed-nav-rounded-div">
-                    <div class="rounded-div-wrap">
-                        <div class="rounded-div"></div>
-                    </div>
-                </div>
-                <div class="fixed-nav-inner">
-                    <div class="row nav-row">
-                        <h5>Navigation</h5>
-                        <div class="stripe"></div>
-                        <ul class="links-wrap">
-                            <li class="btn btn-link">
-                                <a href="https://dennissnellenberg.com" class="btn-click magnetic" data-strength="24" data-strength-text="12">
-                                <span class="btn-text">
-                                    <span class="btn-text-inner">Home</span>
-                                </span>
-                                </a>
-                            </li>
-                            <li class="btn btn-link">
-                                <a href="https://dennissnellenberg.com/work" class="btn-click magnetic" data-strength="24" data-strength-text="12">
-                                <span class="btn-text">
-                                    <span class="btn-text-inner">Work</span>
-                                </span>
-                                </a>
-                            </li>
-                            <li class="btn btn-link active">
-                                <a href="https://dennissnellenberg.com/about" class="btn-click magnetic" data-strength="24" data-strength-text="12">
-                                <span class="btn-text">
-                                    <span class="btn-text-inner">About</span>
-                                </span>
-                                </a>
-                            </li>
-                            <li class="btn btn-link">
-                                <a href="https://dennissnellenberg.com/contact" class="btn-click magnetic" data-strength="24" data-strength-text="12">
-                                <span class="btn-text">
-                                    <span class="btn-text-inner">Contact</span>
-                                </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="row social-row">
-                        <div class="stripe"></div>
-                        <div class="socials">
-                            <h5>Socials</h5>
-                            <ul>
-                                <li class="btn btn-link btn-link-external">
-                                    <a href="https://www.awwwards.com/dennissnellenberg/" target="_blank" class="btn-click magnetic" data-strength="20" data-strength-text="10">
-                                        <span class="btn-text">
-                                            <span class="btn-text-inner">Awwwards</span>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li class="btn btn-link btn-link-external">
-                                    <a href="https://www.instagram.com/codebydennis/" target="_blank" class="btn-click magnetic" data-strength="20" data-strength-text="10">
-                                        <span class="btn-text">
-                                            <span class="btn-text-inner">Instagram</span>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li class="btn btn-link btn-link-external">
-                                    <a href="https://twitter.com/codebydennis" target="_blank" class="btn-click magnetic" data-strength="20" data-strength-text="10">
-                                        <span class="btn-text">
-                                            <span class="btn-text-inner">Twitter</span>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li class="btn btn-link btn-link-external">
-                                    <a href="https://www.linkedin.com/in/dennissnellenberg/" target="_blank" class="btn-click magnetic" data-strength="20" data-strength-text="10">
-                                        <span class="btn-text">
-                                            <span class="btn-text-inner">LinkedIn</span>
-                                        </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="main-wrap" data-scroll-container><header class="section default-header about-header" data-scroll-section>
-   <div class="nav-bar">
-    <div class="credits-top">
-        <div class="btn btn-link btn-left-top">
-            <a href="https://dennissnellenberg.com" class="btn-click magnetic" data-strength="20" data-strength-text="10">
-            <span class="btn-text">
-                <div class="credit"><span>©</span></div><div class="cbd"><span class="code-by">Code by </span><span class="dennis"><span class="dennis-span">Dennis</span> <span class="snellenberg">Snellenberg</span></span></span></div>
-            </span>
-            </a>
-        </div>
-    </div>
-    <ul class="links-wrap">
-        <li class="btn btn-link">
-            <a href="https://dennissnellenberg.com/work" class="btn-click magnetic" data-strength="20" data-strength-text="10">
-            <span class="btn-text">
-                <span class="btn-text-inner">Work</span>
-            </span>
-            </a>
-        </li>
-        <li class="btn btn-link active">
-            <a href="https://dennissnellenberg.com/about" class="btn-click magnetic" data-strength="20" data-strength-text="10">
-            <span class="btn-text">
-                <span class="btn-text-inner">About</span>
-            </span>
-            </a>
-        </li>
-        <li class="btn btn-link">
-            <a href="https://dennissnellenberg.com/contact" class="btn-click magnetic" data-strength="20" data-strength-text="10">
-            <span class="btn-text">
-                <span class="btn-text-inner">Contact</span>
-            </span>
-            </a>
-        </li>
-        <li class="btn btn-link btn-menu">
-            <div class="btn-click magnetic" data-strength="20" data-strength-text="10">
-                <div class="btn-text">
-                    <span class="btn-text-inner">Menu</span>
-                </div>
-            </div>
-        </li>
-    </ul>
-</div>   <div class="container medium once-in">
+            
+   
+            <div class="main-wrap" data-scroll-container>
+
+
+
+
+                        <!-- Header Section -->
+
+                                  
+                                     
+<header class="section default-header about-header" data-scroll-section>
+
+<div class="container medium once-in">
       <div class="row">
          <div class="flex-col">
             <h1><span>Helping brands thrive </span><span>in the digital world</span></h1>
@@ -153,6 +35,21 @@
       </div>
    </div>
 </header>
+
+
+
+
+
+
+
+
+            
+
+
+
+
+
+
 <section class="section no-padding line-globe once-in" data-scroll-section>
    <div class="container medium">
       <div class="row">
@@ -210,6 +107,8 @@
             <h2>I can help you with <span class="animate-dot">.</span><span class="animate-dot">.</span><span class="animate-dot">.</span></h2>
          </div>
       </div>
+
+
       <div class="row">
          <div class="flex-col">
             <h5>01</h5>
@@ -240,10 +139,22 @@
             <p>A complete website from concept to implementation, that's what makes me stand out. My great sense for design and my development skills enable me to create kick-ass projects.</p>
          </div>
       </div>
+
+
+      <!--  -->
+
    </div>
+
+
 </section>
+
+
+
+
+
+
 <section class="section about-awwwards" data-scroll-section>
-   <div class="container medium">
+   <div class="container ">
       <div class="row">
          <div class="flex-col">
             <div class="single-image">
@@ -265,6 +176,8 @@
       </div>
    </div>
 </section>
+
+
 
 
                   <?php include './footer.php'; ?>

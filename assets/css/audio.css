@@ -1,0 +1,124 @@
+/* Layout */
+.d-flex {
+  display: grid;
+  grid-template-columns: 1fr 11fr;
+  gap: 25px;
+}
+
+.block_ .sidebar {
+  flex-direction: row;
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding-top: 60px;
+}
+
+/* Icon Button */
+.icon-button {
+  width: clamp(3em, 5.5vw, 5em);
+  height: clamp(3em, 5.5vw, 5em);
+  background-color: #1c1d20;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+/* Menu Button */
+.menu-button {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background-color: #1c1c1e;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Main Content */
+.main-content {
+  margin: 20px 0;
+}
+
+/* Audio Card */
+.audio-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem;
+  background-color: #1c1d20;
+  color: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  margin-bottom: 20px;
+  position: relative;
+  gap: 0rem;
+}
+
+/* Play Button */
+.play-button {
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  margin-right: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-button svg {
+  width: 30px;
+  height: 30px;
+  fill: #333;
+}
+
+/* Info Section */
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.info .name {
+  margin: 0;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.info .players {
+  margin: 0;
+  font-size: 12px;
+  color: #ccc;
+}
+
+/* SVG Styles */
+svg._svg {
+  fill: hsla(247, 57%, 91%, 0.5) !important;
+  height: 1lh !important;
+  width: 1lh !important;
+}
+
+svg._svg.primary-fill {
+  fill: #f72585 !important;
+}

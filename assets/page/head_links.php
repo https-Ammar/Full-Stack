@@ -117,7 +117,7 @@ if (!isset($pageTitle)) {
 
 <!-- ===================== Project CSS Files ===================== -->
 <link rel="stylesheet" href="../css/bootstrap.min.css" />
-<link rel="stylesheet" href="../css/main.css" />
+<link rel="stylesheet" href="../css/css.css " />
 <link rel="stylesheet" href="../css/style.css" />
 
 <!-- ===================== Google Fonts ===================== -->
@@ -134,7 +134,7 @@ if (!isset($pageTitle)) {
 
 <!-- ===================== Home Page Local CSS ===================== -->
 <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
-<link rel="stylesheet" href="./assets/css/main.css" />
+<link rel="stylesheet" href="./assets/css/css.css " />
 <link rel="stylesheet" href="./assets/css/style.css" />
 
 <!-- ===================== Preload Hero Banner ===================== -->

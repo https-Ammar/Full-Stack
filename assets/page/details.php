@@ -1,3 +1,4 @@
+
 <?php
 include 'db.php';
 
@@ -7,7 +8,9 @@ if ($ip === '127.0.0.1' || $ip === '::1') {
 }
 
 $country = 'Unknown';
-$response = @file_get_contents("http://ip-api.com/json/{$ip}?fields=country");
+$api_url = "http://ip-api.com/json/{$ip}?fields=country";
+$response = @file_get_contents($api_url);
+
 if ($response !== false) {
     $data = json_decode($response, true);
     if (isset($data['country'])) {
@@ -20,20 +23,24 @@ if ($stmt) {
     $stmt->bind_param("ss", $ip, $country);
     $stmt->execute();
     $stmt->close();
+} else {
+    error_log("Prepare statement error: " . $conn->error);
 }
 
+$cards = [];
 $sql = "SELECT * FROM cards ORDER BY id DESC";
 $result = $conn->query($sql);
-
-$cards = [];
 if ($result) {
     while ($row = $result->fetch_assoc()) {
         $cards[] = $row;
     }
+} else {
+    error_log("Query failed: " . $conn->error);
 }
 
 $card = null;
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
 if ($id > 0) {
     $stmt = $conn->prepare("SELECT * FROM cards WHERE id = ?");
     if ($stmt) {
@@ -61,54 +68,18 @@ if ($id > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-            <link href="../css/normalize.css" rel="stylesheet">
-    <link href="../css/locomotive-scroll.css" rel="stylesheet">
-    <link href="../css/styleguide.css" rel="stylesheet">
-    <link href="../css/components.css" rel="stylesheet">
-    <link href="../css/style-new.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/css.css ">
+
 </head>
     <body data-barba="wrapper">
-        <div class="no-scroll-overlay"></div>
-        <div class="loading-container">
-            <div class="loading-screen">
-                <div class="rounded-div-wrap top">
-                    <div class="rounded-div"></div>
-                </div>
-                <div class="loading-words">
-                    <h2 class="home-active home-active-first">Hello<div class="dot"></div></h2>
-                    <h2 class="home-active">Bonjour<div class="dot"></div></h2>
-                    <h2 class="home-active">स्वागत हे<div class="dot"></div></h2>
-                    <h2 class="home-active">Ciao<div class="dot"></div></h2>
-                    <h2 class="home-active">Olá<div class="dot"></div></h2>
-                    <h2 class="home-active jap">おい<div class="dot"></div></h2>
-                    <h2 class="home-active">Hallå<div class="dot"></div></h2>
-                    <h2 class="home-active">Guten tag<div class="dot"></div></h2>
-                    <h2 class="home-active-last">Hallo<div class="dot"></div></h2>
-                                        <h2>Home<div class="dot"></div></h2>
-                                        <h2>Work<div class="dot"></div></h2>
-                                        <h2>TWICE<div class="dot"></div></h2>
-                                        <h2>The Damai<div class="dot"></div></h2>
-                                        <h2>FABRIC&trade;<div class="dot"></div></h2>
-                                        <h2>Aanstekelijk<div class="dot"></div></h2>
-                                        <h2>Base Create<div class="dot"></div></h2>
-                                        <h2>AVVR<div class="dot"></div></h2>
-                                        <h2>GraphicHunters<div class="dot"></div></h2>
-                                        <h2>Future Goals<div class="dot"></div></h2>
-                                        <h2 class="active"><?php echo htmlspecialchars($card['title']); ?><div class="dot"></div></h2>
-                                        <h2>One:Nil<div class="dot"></div></h2>
-                                        <h2>Andy Hardy<div class="dot"></div></h2>
-                                        <h2>About<div class="dot"></div></h2>
-                                        <h2>Contact<div class="dot"></div></h2>
-                                        <h2>Success<div class="dot"></div></h2>
-                                        <h2>Archive<div class="dot"></div></h2>
-                                        <h2>Error<div class="dot"></div></h2>
-                                        <h2>Styleguide<div class="dot"></div></h2>
-                                    </div>
-                <div class="rounded-div-wrap bottom">
-                    <div class="rounded-div"></div>
-                </div>
-            </div>
-        </div>
+ 
+
+
+        <!-- Loading Screen -->
+    <?php include './loading.php'; ?>
+
+
+
         <main class="main" id="work-single" data-barba="container" data-barba-namespace="work-single" >
                                                         <div class="mouse-pos-list-image no-select"></div>
             <div class="mouse-pos-list-btn no-select"></div>
@@ -258,7 +229,7 @@ if ($id > 0) {
          <div class="flex-col">
             <h5>Role / Services</h5>
             <div class="stripe"></div>
-            <li><p><?php echo htmlspecialchars($card['role']); ?> & Development</p></li>
+<li><p><?php echo htmlspecialchars($card['role'] ?? '') . ' & Development'; ?></p></li>
          </div>
          <div class="flex-col">
             <h5>Credits</h5>            <div class="stripe"></div>
@@ -268,8 +239,15 @@ if ($id > 0) {
             <li><p><?php echo htmlspecialchars($card['location']); ?> ©</p></li>            <li><p><?php echo htmlspecialchars($card['year']); ?></p></li>
          </div>
       </div>
+      
    </div>
 </section>
+
+<!--  -->
+
+
+
+<!--  -->
 
 <section class="section case-intro-image once-in block-padding-bottom "  data-scroll-section>
    <div class="container">
@@ -296,8 +274,37 @@ if ($id > 0) {
                   </a>
                </div>
             </div>
-            <div class="single-image">
-               <img class="overlay lazy" data-scroll data-scroll-speed="-1" src="https://dennissnellenberg.com/media/pages/work/atypikal/e0f19f8847-1646837280/atypikal-case-header-540x.jpg" data-src="https://dennissnellenberg.com/media/pages/work/atypikal/e0f19f8847-1646837280/atypikal-case-header.jpg" />               <img class="overlay overlay-image-top lazy" data-src="https://dennissnellenberg.com/media/pages/work/atypikal/fd65568bd5-1646837277/atypikal-case-header-overlay.svg" />            </div>
+            <div class="single-image overlay overlay-image-top lazy" style="background-image: url(../img/bgd.jpg);">
+        
+
+        <?php echo htmlspecialchars($card['title']); ?>
+        </div>
+
+
+           <style>
+            img.overlay.overlay-image-top.lazy.entered.loaded {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.single-image.overlay.overlay-image-top.lazy.entered {
+    background-size: contain;
+}
+.single-image.overlay.overlay-image-top.lazy.entered {
+    background-size: contain;
+    display: flex
+;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: xxx-large;
+    font-family: revert-layer;
+}
+
+           </style>
          </div>
       </div>
    </div>
@@ -310,13 +317,13 @@ if ($id > 0) {
             <div class="device">
                <div class="single-image">
                
-               <img src="uploads/<?php echo htmlspecialchars($card['image1']); ?>"  alt="">
+
 
                   <div class="overlay overlay-image playpauze"><video muted playsinline></video></div>                                     
                    
                </div>
                   
-               <div class="overlay-device-image"><div class="overlay overlay-device" style="background: url('https://dennissnellenberg.com/assets/img/device-macpro-higher.png') center center no-repeat; background-size: cover;"></div></div>
+               <div class="overlay-device-image"><div class="overlay overlay-device" style="background: url('../img/device-macpro-higher.png') center center no-repeat; background-size: cover;"></div></div>
                            </div>
          </div>
       </div>
@@ -329,7 +336,7 @@ if ($id > 0) {
                <div class="single-image">
                      
                   <div class="overlay overlay-image playpauze"><video class="overlay" src="https://dennissnellenberg.com/media/pages/work/atypikal/52f224ca12-1646837279/atypikal-screen-mobile-load.mp4" loop muted playsinline></video></div>                                 </div>  
-                              <div class="overlay-device-image"><div class="overlay overlay-device" style="background: url('https://dennissnellenberg.com/assets/img/device-iphone13-nonotch.png') center center no-repeat; background-size: cover;"></div></div>
+                              <div class="overlay-device-image"><div class="overlay overlay-device" style="background: url('../img/device-iphone13-nonotch.png') center center no-repeat; background-size: cover;"></div></div>
                            </div>
          </div>
                   <div class="flex-col block-padding-bottom" >
@@ -338,7 +345,7 @@ if ($id > 0) {
                      
                   <img class="overlay overlay-image lazy" src="https://dennissnellenberg.com/media/pages/work/atypikal/6d95789446-1646837279/atypikal-mobile-2-540x.jpg" data-src="https://dennissnellenberg.com/media/pages/work/atypikal/6d95789446-1646837279/atypikal-mobile-2.jpg" width="540" height="1170" /> 
                                  </div>  
-                              <div class="overlay-device-image"><div class="overlay overlay-device" style="background: url('https://dennissnellenberg.com/assets/img/device-iphone13-nonotch.png') center center no-repeat; background-size: cover;"></div></div>
+                              <div class="overlay-device-image"><div class="overlay overlay-device" style="background: url('../img/device-iphone13-nonotch.png') center center no-repeat; background-size: cover;"></div></div>
                            </div>
          </div>
                            <div class="flex-col block-padding-bottom" >
@@ -346,7 +353,7 @@ if ($id > 0) {
                <div class="single-image">
                      
                   <div class="overlay overlay-image playpauze"><video class="overlay" src="https://dennissnellenberg.com/media/pages/work/atypikal/71c55005ad-1646837277/atypikal-mobile-footer.mp4" loop muted playsinline></video></div>                                 </div>  
-                              <div class="overlay-device-image"><div class="overlay overlay-device" style="background: url('https://dennissnellenberg.com/assets/img/device-iphone13-nonotch.png') center center no-repeat; background-size: cover;"></div></div>
+                              <div class="overlay-device-image"><div class="overlay overlay-device" style="background: url('../img/device-iphone13-nonotch.png') center center no-repeat; background-size: cover;"></div></div>
                            </div>
          </div>
                </div>
@@ -360,106 +367,39 @@ if ($id > 0) {
             <div class="device">
                <div class="single-image">
                      
-                  <div class="overlay overlay-image playpauze"><video class="overlay" src="https://dennissnellenberg.com/media/pages/work/atypikal/06caeb881e-1646837280/atypikal-screen-footer.mp4" loop muted playsinline></video></div>                                     
+                  <div class="overlay overlay-image playpauze">
+                    
+                  <video class="overlay" loop muted playsinline>
+                    <style>
+                        video.overlay {
+    background: url(../dashboard/uploads/<?php echo htmlspecialchars($card['image1']); ?>);
+        background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+                    </style>
+
+
+                  </video>
+                
+                
+                
+                </div>                                     
                    
                </div>
                   
-               <div class="overlay-device-image"><div class="overlay overlay-device" style="background: url('https://dennissnellenberg.com/assets/img/device-ipad-pro-lower.png') center center no-repeat; background-size: cover;"></div><img class="overlay overlay-pencil lazy"  data-scroll data-scroll-speed="1.5" data-src="https://dennissnellenberg.com/assets/img/device-apple-pencil.png" /></div>
+               <div class="overlay-device-image"><div class="overlay overlay-device" style="background: url('../img/device-ipad-pro-lower.png') center center no-repeat; background-size: cover;"></div><img class="overlay overlay-pencil lazy"  data-scroll data-scroll-speed="1.5" data-src="../img/device-apple-pencil.png" /></div>
                            </div>
          </div>
       </div>
    </div>
-</section><div class="footer-rounded-div" data-scroll-section>
-   <div class="rounded-div-wrap">
-      <div class="rounded-div" style="background-color: #d8d5cc;"></div>
-   </div>
-</div>
-<div class="footer-wrap footer-case-wrap theme-dark" data-scroll-section>
-   <section class="section footer" data-scroll data-scroll-speed="-4" data-scroll-position="bottom" data-scroll-offset="-25%, 0%">
-      <div class="container medium">
-         <a href="https://dennissnellenberg.com/work/one-nil" class="row next-case-btn">
-            <div class="flex-col">
-               <p>Next case</p>
-               <h2>One:Nil</h2>
-            </div>
-            <div class="tile-image-wrap">
-               <div class="tile-image">
-                                    <div class="overlay overlay-image lazy" data-scroll data-scroll-speed="2.5" data-scroll-position="bottom" style="background-color:var(--color-lightgray); background-position: center center; background-repeat: no-repeat; background-size: cover;" data-bg="https://dennissnellenberg.com/media/pages/work/one-nil/288460827e-1646837272/thumbnail-onenil-v3.jpg"></div>                                 </div>
-            </div>
-         </a>
-         <div class="row">
-            <div class="flex-col">
-               <div class="stripe"></div>
-            </div>
-         </div>
-         <div class="row">
-            <div class="flex-col">
-               <div class="btn btn-normal">
-                  <a href="https://dennissnellenberg.com/work" class="btn-click magnetic" data-strength="25" data-strength-text="15">
-                     <div class="btn-fill"></div>
-                     <span class="btn-text">
-                        <span class="btn-text-inner change">All work<div class="count-nr">11</div></span>
-                     </span>
-                  </a>
-               </div>
-            </div>
-         </div>
-      </div>
-      <div class="container no-padding">
-         <div class="row bottom-footer">
-            <div class="flex-col">
-               <div class="credits">
-                     <h5>Version</h5>
-                     <p>2022 © Edition</p>
-               </div>
-               <div class="time">
-                     <h5>Local time</h5>
-                     <p><span id="timeSpan">09:41 PM CET</span></p>
-               </div>
-            </div>
-            <div class="flex-col">
-               <div class="socials">
-                     <h5>Socials</h5>
-                     <ul>
-                        <li class="btn btn-link btn-link-external">
-                           <a href="https://www.awwwards.com/dennissnellenberg/" target="_blank" class="btn-click magnetic" data-strength="20" data-strength-text="10">
-                                 <span class="btn-text">
-                                    <span class="btn-text-inner">Awwwards</span>
-                                 </span>
-                           </a>
-                        </li>
-                        <li class="btn btn-link btn-link-external">
-                           <a href="https://www.instagram.com/codebydennis/" target="_blank" class="btn-click magnetic" data-strength="20" data-strength-text="10">
-                                 <span class="btn-text">
-                                    <span class="btn-text-inner">Instagram</span>
-                                 </span>
-                           </a>
-                        </li>
-                        <li class="btn btn-link btn-link-external">
-                           <a href="https://dribbble.com/dennissnellenberg" target="_blank" class="btn-click magnetic" data-strength="20" data-strength-text="10">
-                                 <span class="btn-text">
-                                    <span class="btn-text-inner">Dribbble</span>
-                                 </span>
-                           </a>
-                        </li>
-                        <li class="btn btn-link btn-link-external">
-                           <a href="https://www.linkedin.com/in/dennissnellenberg/" target="_blank" class="btn-click magnetic" data-strength="20" data-strength-text="10">
-                                 <span class="btn-text">
-                                    <span class="btn-text-inner">LinkedIn</span>
-                                 </span>
-                           </a>
-                        </li>
-                     </ul>
-                     <div class="stripe"></div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </section>
-   <div class="overlay overlay-gradient"></div>
-</div>
-<style>.block-fullwidth {background: #000;}</style>             
-                               </div>
+</section>
+
+           <?php include './footer.php'; ?>
+
+
+
+
         </main>
 
 
@@ -467,7 +407,6 @@ if ($id > 0) {
 
 <div class="card-details">
 
-    <a href="products.php" class="back-link">&larr; العودة إلى المنتجات</a>
 
  
 
@@ -501,27 +440,27 @@ if ($id > 0) {
     
     <div class="card-images">
     <?php if (!empty($card['image1'])): ?>
-        <img src="uploads/<?php echo htmlspecialchars($card['image1']); ?>" alt="صورة 1" style="max-width: 100%; border-radius:8px; margin-bottom: 15px;">
+        <img src="../dashboard/uploads/<?php echo htmlspecialchars($card['image1']); ?>" alt="صورة 1" style="max-width: 100%; border-radius:8px; margin-bottom: 15px;">
     <?php endif; ?>
 
     <?php if (!empty($card['image2'])): ?>
-        <img src="uploads/<?php echo htmlspecialchars($card['image2']); ?>" alt="صورة 2" style="max-width: 100%; border-radius:8px; margin-bottom: 15px;">
+        <img src="../dashboard/uploads/<?php echo htmlspecialchars($card['image2']); ?>" alt="صورة 2" style="max-width: 100%; border-radius:8px; margin-bottom: 15px;">
     <?php endif; ?>
 
     <?php if (!empty($card['image3'])): ?>
-        <img src="uploads/<?php echo htmlspecialchars($card['image3']); ?>" alt="صورة 3" style="max-width: 100%; border-radius:8px; margin-bottom: 15px;">
+        <img src="../dashboard/uploads/<?php echo htmlspecialchars($card['image3']); ?>" alt="صورة 3" style="max-width: 100%; border-radius:8px; margin-bottom: 15px;">
     <?php endif; ?>
 
     <?php if (!empty($card['image4'])): ?>
-        <img src="uploads/<?php echo htmlspecialchars($card['image4']); ?>" alt="صورة 4" style="max-width: 100%; border-radius:8px; margin-bottom: 15px;">
+        <img src="../dashboard/uploads/<?php echo htmlspecialchars($card['image4']); ?>" alt="صورة 4" style="max-width: 100%; border-radius:8px; margin-bottom: 15px;">
     <?php endif; ?>
 
     <?php if (!empty($card['image5'])): ?>
-        <img src="uploads/<?php echo htmlspecialchars($card['image5']); ?>" alt="صورة 5" style="max-width: 100%; border-radius:8px; margin-bottom: 15px;">
+        <img src="../dashboard/uploads/<?php echo htmlspecialchars($card['image5']); ?>" alt="صورة 5" style="max-width: 100%; border-radius:8px; margin-bottom: 15px;">
     <?php endif; ?>
 
     <?php if (!empty($card['image6'])): ?>
-        <img src="uploads/<?php echo htmlspecialchars($card['image6']); ?>" alt="صورة 6" style="max-width: 100%; border-radius:8px; margin-bottom: 15px;">
+        <img src="../dashboard/uploads/<?php echo htmlspecialchars($card['image6']); ?>" alt="صورة 6" style="max-width: 100%; border-radius:8px; margin-bottom: 15px;">
     <?php endif; ?>
 </div>
 

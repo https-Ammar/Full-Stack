@@ -5,11 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-            <link href="../css/normalize.css" rel="stylesheet">
-    <link href="../css/locomotive-scroll.css" rel="stylesheet">
-    <link href="../css/styleguide.css" rel="stylesheet">
-    <link href="../css/components.css" rel="stylesheet">
-    <link href="../css/style-new.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/css.css ">
 </head>
 
     <body data-barba="wrapper">
