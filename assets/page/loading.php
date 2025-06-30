@@ -1,4 +1,5 @@
 <?php
+// العناصر اللي تظهر تلقائيًا
 $loading_labels = [
     'Home',
     'Work',
@@ -21,9 +22,6 @@ $loading_labels = [
     'Styleguide',
     'Skills'
 ];
-
-// تأكد من تعريف $card قبل هذا السطر
-$current_page = isset($card['title']) ? htmlspecialchars($card['title']) : 'Work';
 ?>
 
 <div class="no-scroll-overlay"></div>
