@@ -252,7 +252,7 @@ if ($id > 0) {
                     </div>
                 </section>
             </section>
-            <section class="section center-grid-btn center-grid-btn-archive" data-scroll-section>
+            <!-- <section class="section center-grid-btn center-grid-btn-archive" data-scroll-section>
                 <div class="container">
                     <div class="grid-after-btn">
                         <div class="btn btn-normal btn-dark">
@@ -267,7 +267,7 @@ if ($id > 0) {
                     </div>
                 </div>
             </section>
-
+ -->
 
             <?php include './footer.php'; ?>
 
