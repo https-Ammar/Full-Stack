@@ -5181,6 +5181,9 @@ main.touch .case-intro-image .btn-wrap {
 .block-device .device-macprohigher .single-image {
   width: 98.8%;
   top: 37%;
+
+  background-size: cover !important;
+  background-position: center center !important;
 }
 
 @media screen and (max-width: 540px) {

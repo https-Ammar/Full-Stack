@@ -207,7 +207,7 @@ if ($id > 0) {
                                         <h4><span><?= htmlspecialchars($card['title']) ?></span></h4>
                                     </div>
                                     <div class="flex-col animate">
-                                        <p><?= nl2br(htmlspecialchars($card['description'])) ?></p>
+                                        <p><?= nl2br(htmlspecialchars($card['services'])) ?></p>
                                     </div>
                                 </a>
                             </li>

@@ -88,7 +88,8 @@ if ($id > 0) {
                                 <div class="btn-click magnetic" data-strength="25" data-strength-text="15">
                                     <div class="btn-fill"></div>
                                     <span class="btn-text">
-                                        <span class="btn-text-inner change">Design<div class="count-nr">7</div>
+                                        <span class="btn-text-inner change">Design
+
                                         </span>
                                     </span>
                                 </div>
@@ -97,8 +98,9 @@ if ($id > 0) {
                                 <div class="btn-click magnetic" data-strength="25" data-strength-text="15">
                                     <div class="btn-fill"></div>
                                     <span class="btn-text">
-                                        <span class="btn-text-inner change">Development<div class="count-nr">11
-                                            </div>
+                                        <span class="btn-text-inner change">Development
+
+
                                         </span>
                                     </span>
                                 </div>
@@ -161,10 +163,10 @@ if ($id > 0) {
                                 $id = (int) ($card['id'] ?? 0);
                                 $title = htmlspecialchars($card['title'] ?? '');
                                 $cover_image = htmlspecialchars($card['cover_image'] ?? '');
-                                $second_image = htmlspecialchars($card['second_image'] ?? '');
-                                $description = nl2br(htmlspecialchars($card['description'] ?? ''));
+                                $location = htmlspecialchars($card['location'] ?? '');
+                                $services = htmlspecialchars($card['services'] ?? '');
                                 $link = htmlspecialchars($card['link'] ?? '');
-                                $created_at = htmlspecialchars($card['created_at'] ?? '');
+                                $year = htmlspecialchars($card['year'] ?? '');
                                 ?>
 
                                 <li class="design development visible">
@@ -174,13 +176,13 @@ if ($id > 0) {
                                             <h4><span><?= $title ?></span></h4>
                                         </div>
                                         <div class="flex-col animate">
-                                            <p>Australia</p>
+                                            <p> <?= $location ?></p>
                                         </div>
                                         <div class="flex-col animate">
-                                            <p><?= $description ?></p>
+                                            <p><?= $services ?></p>
                                         </div>
                                         <div class="flex-col animate">
-                                            <p><?= $created_at ?></p>
+                                            <p><?= $year ?></p>
                                         </div>
                                     </a>
                                 </li>
@@ -202,14 +204,12 @@ if ($id > 0) {
                                 $id = (int) ($card['id'] ?? 0);
                                 $title = htmlspecialchars($card['title'] ?? '');
                                 $cover_image = htmlspecialchars($card['cover_image'] ?? '');
-                                $second_image = htmlspecialchars($card['second_image'] ?? '');
-                                $description = nl2br(htmlspecialchars($card['description'] ?? ''));
+                                $description = nl2br(htmlspecialchars($card['services'] ?? ''));
                                 $link = htmlspecialchars($card['link'] ?? '');
-                                $created_at = htmlspecialchars($card['created_at'] ?? '');
+                                $year = htmlspecialchars($card['year'] ?? '');
                                 ?>
 
 
-                                <!-- <img src="../dashboard/../dashboard/uploads/" alt=""> -->
 
 
                                 <li class="development interaction visible">
@@ -232,10 +232,10 @@ if ($id > 0) {
                                                 <div class="stripe"></div>
                                             </div>
                                             <div class="flex-col">
-                                                <p><?= $description ?></p>
+                                                <p><?= $services ?></p>
                                             </div>
                                             <div class="flex-col">
-                                                <p><?= $created_at ?></p>
+                                                <p><?= $year ?></p>
                                             </div>
                                         </a>
                                     </div>

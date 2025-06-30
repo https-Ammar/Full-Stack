@@ -1,5 +1,4 @@
 <?php
-// العناصر اللي تظهر تلقائيًا
 $loading_labels = [
     'Home',
     'Work',
