@@ -71,6 +71,7 @@ $totalSkills = array_sum(array_map('count', $skillsData));
 </head>
 
 <body data-barba="wrapper">
+    <?php $current_page = 'Skills'; ?>
 
     <?php include './loading.php'; ?>
 

@@ -78,7 +78,6 @@ if ($id > 0) {
 </head>
 
 <body data-barba="wrapper">
-
     <?php include './assets/page/loading.php'; ?>
 
 

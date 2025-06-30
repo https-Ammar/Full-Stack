@@ -32,6 +32,8 @@ if ($id > 0) {
         exit("Database error: " . $conn->error);
     }
 }
+
+$current_page = isset($card['title']) ? htmlspecialchars($card['title']) : 'Work';
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +47,6 @@ if ($id > 0) {
 </head>
 
 <body data-barba="wrapper">
-
     <?php include './loading.php'; ?>
 
     <main class="main" id="work-single" data-barba="container" data-barba-namespace="work-single">
@@ -239,7 +240,6 @@ if ($id > 0) {
         </div>
         <div class="card-section"><strong>تاريخ الإنشاء:</strong> <?php echo htmlspecialchars($card['created_at']); ?>
         </div>
-
         <div class="card-images">
             <?php
             for ($i = 1; $i <= 6; $i++) {
@@ -259,7 +259,6 @@ if ($id > 0) {
     <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.6.1/dist/lazyload.min.js"></script>
     <script src="../js/locomotive-scroll.min.js"></script>
     <script defer src="../js/index-new.js"></script>
-
 </body>
 
 </html>

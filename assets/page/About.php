@@ -9,10 +9,14 @@
 </head>
 
 <body data-barba="wrapper">
+   <?php $current_page = 'About'; ?>
    <?php include './loading.php'; ?>
    <main class="main" id="about" data-barba="container" data-barba-namespace="about">
       <div class="main-wrap" data-scroll-container>
+
          <?php include './header.php'; ?>
+
+
 
          <header class="section default-header about-header" data-scroll-section>
             <?php include './nav.php'; ?>

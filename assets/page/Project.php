@@ -45,7 +45,7 @@ if ($id > 0) {
 </head>
 
 <body data-barba="wrapper">
-
+    <?php $current_page = 'Work'; ?>
     <?php include './loading.php'; ?>
 
 

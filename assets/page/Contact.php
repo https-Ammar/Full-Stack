@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/css.css">
 </head>
 <body data-barba="wrapper">
-
+   <?php $current_page = 'Contact'; ?>
     <?php include './loading.php'; ?>
 
     <main class="main" id="contact" data-barba="container" data-barba-namespace="contact">
@@ -60,19 +60,19 @@
                                 <div class="form-col">
                                     <h5>01</h5>
                                     <label class="label" for="name">What's your name?</label>
-                                    <input class="field" type="text" id="form-name" name="name" required placeholder="John Doe *">
+                                    <input class="field" type="text" id="form-name" name="name" required placeholder="Eng - Ammar *">
                                 </div>
 
                                 <div class="form-col">
                                     <h5>02</h5>
                                     <label class="label" for="email">What's your email?</label>
-                                    <input class="field" type="email" id="form-email" name="email" required placeholder="john@doe.com *">
+                                    <input class="field" type="email" id="form-email" name="email" required placeholder="Ammar@gmail.com *">
                                 </div>
 
                                 <div class="form-col">
                                     <h5>03</h5>
                                     <label class="label" for="email">What's the name of your organization?</label>
-                                    <input class="field" type="text" id="form-company" name="company" required placeholder="John & Doe ®">
+                                    <input class="field" type="text" id="form-company" name="company" required placeholder="Ammar & Ahmed ®">
                                 </div>
 
                                 <div class="form-col">
