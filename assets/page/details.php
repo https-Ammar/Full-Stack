@@ -1,31 +1,5 @@
-
 <?php
 include 'db.php';
-
-$ip = $_SERVER['REMOTE_ADDR'];
-if ($ip === '127.0.0.1' || $ip === '::1') {
-    $ip = '8.8.8.8';
-}
-
-$country = 'Unknown';
-$api_url = "http://ip-api.com/json/{$ip}?fields=country";
-$response = @file_get_contents($api_url);
-
-if ($response !== false) {
-    $data = json_decode($response, true);
-    if (isset($data['country'])) {
-        $country = $data['country'];
-    }
-}
-
-$stmt = $conn->prepare("INSERT INTO visitors (ip_address, country) VALUES (?, ?)");
-if ($stmt) {
-    $stmt->bind_param("ss", $ip, $country);
-    $stmt->execute();
-    $stmt->close();
-} else {
-    error_log("Prepare statement error: " . $conn->error);
-}
 
 $cards = [];
 $sql = "SELECT * FROM cards ORDER BY id DESC";
@@ -34,8 +8,6 @@ if ($result) {
     while ($row = $result->fetch_assoc()) {
         $cards[] = $row;
     }
-} else {
-    error_log("Query failed: " . $conn->error);
 }
 
 $card = null;
@@ -59,7 +31,6 @@ if ($id > 0) {
     }
 }
 ?>
-
 
 
 <!DOCTYPE html>

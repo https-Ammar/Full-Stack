@@ -5469,3 +5469,13 @@ main.touch .case-intro-image .btn-wrap {
   margin-right: 0;
 }
 
+.row.bottom-footer {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.overlay.overlay-image.lazy.entered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

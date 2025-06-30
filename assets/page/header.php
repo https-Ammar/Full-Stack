@@ -21,32 +21,35 @@
             <div class="stripe"></div>
             <ul class="links-wrap">
                 <li class="btn btn-link active">
-                    <a href="https://dennissnellenberg.com" class="btn-click magnetic" data-strength="24"
-                        data-strength-text="12">
+                    <a href="/index.php" class="btn-click magnetic" data-strength="24" data-strength-text="12">
                         <span class="btn-text">
                             <span class="btn-text-inner">Home</span>
                         </span>
                     </a>
                 </li>
                 <li class="btn btn-link">
-                    <a href="https://dennissnellenberg.com/work" class="btn-click magnetic" data-strength="24"
-                        data-strength-text="12">
-                        <span class="btn-text">
-                            <span class="btn-text-inner">Work</span>
-                        </span>
-                    </a>
-                </li>
-                <li class="btn btn-link">
-                    <a href="https://dennissnellenberg.com/about" class="btn-click magnetic" data-strength="24"
-                        data-strength-text="12">
+                    <a href="./About.php" class="btn-click magnetic" data-strength="24" data-strength-text="12">
                         <span class="btn-text">
                             <span class="btn-text-inner">About</span>
                         </span>
                     </a>
                 </li>
                 <li class="btn btn-link">
-                    <a href="https://dennissnellenberg.com/contact" class="btn-click magnetic"
-                        data-strength="24" data-strength-text="12">
+                    <a href="./Project.php" class="btn-click magnetic" data-strength="24" data-strength-text="12">
+                        <span class="btn-text">
+                            <span class="btn-text-inner">work</span>
+                        </span>
+                    </a>
+                </li>
+                <li class="btn btn-link">
+                    <a href="./Skills.php" class="btn-click magnetic" data-strength="24" data-strength-text="12">
+                        <span class="btn-text">
+                            <span class="btn-text-inner">Skills</span>
+                        </span>
+                    </a>
+                </li>
+                <li class="btn btn-link">
+                    <a href="./Contact.php" class="btn-click magnetic" data-strength="24" data-strength-text="12">
                         <span class="btn-text">
                             <span class="btn-text-inner">Contact</span>
                         </span>
@@ -60,16 +63,16 @@
                 <h5>Socials</h5>
                 <ul>
                     <li class="btn btn-link btn-link-external">
-                        <a href="https://www.awwwards.com/dennissnellenberg/" target="_blank"
-                            class="btn-click magnetic" data-strength="20" data-strength-text="10">
+                        <a href="https://www.awwwards.com/dennissnellenberg/" target="_blank" class="btn-click magnetic"
+                            data-strength="20" data-strength-text="10">
                             <span class="btn-text">
                                 <span class="btn-text-inner">Awwwards</span>
                             </span>
                         </a>
                     </li>
                     <li class="btn btn-link btn-link-external">
-                        <a href="https://www.instagram.com/codebydennis/" target="_blank"
-                            class="btn-click magnetic" data-strength="20" data-strength-text="10">
+                        <a href="https://www.instagram.com/codebydennis/" target="_blank" class="btn-click magnetic"
+                            data-strength="20" data-strength-text="10">
                             <span class="btn-text">
                                 <span class="btn-text-inner">Instagram</span>
                             </span>

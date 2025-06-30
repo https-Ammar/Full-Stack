@@ -58,7 +58,6 @@ $totalSkills = array_sum(array_map('count', $skillsData));
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Skills Page</title>
 
-    <!-- CSS Files -->
     <link rel="stylesheet" href="../css/css.css ">
 
     <style>
@@ -73,17 +72,22 @@ $totalSkills = array_sum(array_map('count', $skillsData));
 
 <body data-barba="wrapper">
 
-    <!-- Loading Screen -->
     <?php include './loading.php'; ?>
 
     <main class="main" id="archive" data-barba="container" data-barba-namespace="archive">
         <div class="main-wrap" data-scroll-container>
 
-            <!-- Navigation -->
 
-            <!-- Header Section -->
+            <?php include './header.php'; ?>
+
             <header class="section default-header work-header archive-header" data-scroll-section>
+
+
+
+
+                <?php include './nav.php'; ?>
                 <div class="container medium">
+
                     <div class="row">
                         <div class="flex-col once-in" style="transform: translate(0px, 0vh);">
                             <h1>
@@ -97,20 +101,17 @@ $totalSkills = array_sum(array_map('count', $skillsData));
                 </div>
             </header>
 
-            <!-- Skills Section -->
             <section class="section-wrap section-wrap-work once-in archive-work-grid" data-scroll-section>
                 <section class="section work-grid tiny-work-grid">
                     <div class="container" id="skills-container">
 
                         <?php foreach ($skillsData as $category => $skills): ?>
-                            <!-- Category Title -->
                             <div class="grid-sub-title mb-4">
                                 <div class="flex-col">
                                     <h4><?= htmlspecialchars($category) ?></h4>
                                 </div>
                             </div>
 
-                            <!-- Table Headers -->
                             <div class="grid-sub-title">
                                 <div class="flex-col">
                                     <h5>Type</h5>
@@ -126,7 +127,6 @@ $totalSkills = array_sum(array_map('count', $skillsData));
                                 </div>
                             </div>
 
-                            <!-- Skills List -->
                             <ul class="work-items mouse-pos-list-archive mb-5">
                                 <?php foreach ($skills as $skill): ?>
                                     <li>
@@ -154,13 +154,11 @@ $totalSkills = array_sum(array_map('count', $skillsData));
                 </section>
             </section>
 
-            <!-- Footer -->
             <?php include './footer.php'; ?>
 
         </div>
     </main>
 
-    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.0/js.cookie.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>

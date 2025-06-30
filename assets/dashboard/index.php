@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 session_start();
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
@@ -7,24 +11,22 @@ if (!isset($_SESSION['user_id'])) {
 
 include 'db.php';
 
-// --- إضافة كارت جديد ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])) {
-    $title       = $_POST['title'];
+    $title = $_POST['title'];
     $description = $_POST['description'];
-    $link        = $_POST['link'];
-    $role        = $_POST['role'];
-    $services    = $_POST['services'];
-    $credits     = $_POST['credits'];
-    $location    = $_POST['location'];
-    $year        = intval($_POST['year']);
-    $extra_text  = $_POST['extra_text'];
-    $date        = date('Y-m-d'); // توليد التاريخ تلقائيًا
+    $link = $_POST['link'];
+    $role = $_POST['role'];
+    $services = $_POST['services'];
+    $credits = $_POST['credits'];
+    $location = $_POST['location'];
+    $year = intval($_POST['year']);
+    $extra_text = $_POST['extra_text'];
+    $date = date('Y-m-d');
 
     if ($year < 1901 || $year > 2155) {
         die("قيمة السنة غير صالحة. يجب أن تكون بين 1901 و 2155.");
     }
 
-    // رفع الصور
     $images = [];
     for ($i = 1; $i <= 6; $i++) {
         $field = "image$i";
@@ -54,10 +56,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])) {
     exit();
 }
 
-// --- حذف كارت ---
 if (isset($_GET['delete'])) {
     $id = intval($_GET['delete']);
-    
+
     $res = $conn->prepare("SELECT image1, image2, image3, image4, image5, image6 FROM cards WHERE id = ?");
     $res->bind_param("i", $id);
     $res->execute();
@@ -81,19 +82,18 @@ if (isset($_GET['delete'])) {
     exit();
 }
 
-// --- تعديل كارت ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
-    $id          = intval($_POST['edit_id']);
-    $title       = $_POST['title'];
+    $id = intval($_POST['edit_id']);
+    $title = $_POST['title'];
     $description = $_POST['description'];
-    $link        = $_POST['link'];
-    $role        = $_POST['role'];
-    $services    = $_POST['services'];
-    $credits     = $_POST['credits'];
-    $location    = $_POST['location'];
-    $year        = intval($_POST['year']);
-    $extra_text  = $_POST['extra_text'];
-    $date        = date('Y-m-d');
+    $link = $_POST['link'];
+    $role = $_POST['role'];
+    $services = $_POST['services'];
+    $credits = $_POST['credits'];
+    $location = $_POST['location'];
+    $year = intval($_POST['year']);
+    $extra_text = $_POST['extra_text'];
+    $date = date('Y-m-d');
 
     if ($year < 1901 || $year > 2155) {
         die("قيمة السنة غير صالحة. يجب أن تكون بين 1901 و 2155.");
@@ -126,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
         role = ?, services = ?, credits = ?, location = ?, year = ?, extra_text = ?, created_at = ?
         WHERE id = ?");
 
-    $stmt->bind_param("sssssssssssssssii",
+    $stmt->bind_param("ssssssssssssssssi",
         $title, $description, $link,
         $images[1], $images[2], $images[3], $images[4], $images[5], $images[6],
         $role, $services, $credits, $location, $year, $extra_text, $date, $id);
@@ -138,11 +138,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
     exit();
 }
 
-// --- جلب الكروت للعرض ---
 $result = $conn->query("SELECT * FROM cards ORDER BY id DESC");
 $cards = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
-
 ?>
+
+
 <!-- هنا تكتب كود HTML لعرض الكروت -->
 
 <a href="logout.php">تسجيل الخروج</a>
@@ -440,13 +440,20 @@ if (isset($_GET['delete_visitor'])) {
                     </div>
 
 
-
-                    <?php
-    $res = $conn->query("SELECT * FROM visitors ORDER BY id DESC");
-    if ($res && $res->num_rows > 0) {
-        while ($row = $res->fetch_assoc()) {
+<?php
+$res = $conn->query("SELECT * FROM visitors ORDER BY id DESC");
+if ($res && $res->num_rows > 0) {
+    while ($row = $res->fetch_assoc()) {
+        $datetime_str = $row['visit_time'] ?? '';
+        if ($datetime_str) {
+            $datetime = strtotime($datetime_str);
+            $date = date('Y-m-d', $datetime);
+            $time = date('H:i:s', $datetime);
+        } else {
+            $date = 'غير معروف';
+            $time = 'غير معروف';
+        }
 ?>
-
 <div class="transfers">
     <div class="transfer">
         <div class="transfer-logo">
@@ -456,18 +463,13 @@ if (isset($_GET['delete_visitor'])) {
         <dl class="transfer-details">
             <div>
                 <dd>ID</dd>
-                <?= htmlspecialchars($row['ip_address']) ?>
+                <?= htmlspecialchars($row['ip_address'] ?? 'غير معروف') ?>
             </div>
             <div>
                 <dd>City</dd>
-                <?= htmlspecialchars($row['country']) ?>
+                <?= htmlspecialchars($row['country'] ?? 'غير معروف') ?>
             </div>
             <div>
-                <?php
-                    $datetime = strtotime($row['visit_time']);
-                    $date = date('Y-m-d', $datetime);
-                    $time = date('H:i:s', $datetime);
-                ?>
                 <dd>Date</dd>
                 <?= htmlspecialchars($date) ?>
             </div>
@@ -478,8 +480,8 @@ if (isset($_GET['delete_visitor'])) {
         </dl>
         <div class="transfer-number">
             <a href="?delete_visitor=<?= urlencode($row['id']) ?>"
-                onclick="return confirm('هل أنت متأكد من حذف هذا الزائر؟')"
-                style="color:red; text-decoration:none; font-size:18px;">
+               onclick="return confirm('هل أنت متأكد من حذف هذا الزائر؟')"
+               style="color:red; text-decoration:none; font-size:18px;">
                 <button class="icon-button">
                     <i class="ph-plus"></i>
                 </button>
@@ -487,15 +489,15 @@ if (isset($_GET['delete_visitor'])) {
         </div>
     </div>
 </div>
-
 <?php
-        }
-    } else {
+    }
+} else {
 ?>
     <li class="mt-5 mb-5">No visitors yet</li>
 <?php
-    }
+}
 ?>
+
 
 
 
