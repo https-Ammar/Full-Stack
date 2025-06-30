@@ -10,8 +10,10 @@ if (!isset($pageTitle)) {
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <!-- SEO Meta Tags -->
-<meta name="description" content="Eng Ammar - مهندس برمجيات متخصص في تطوير الويب، مع خبرة في HTML, CSS, JavaScript, PHP، والعديد من التقنيات الحديثة. شاهد مشاريعي ومهاراتي." />
-<meta name="keywords" content="Eng Ammar, مهندس برمجيات, مطور ويب, HTML, CSS, JavaScript, PHP, Vue.js, AI, Git, Portfolio, برمجة, تطوير مواقع" />
+<meta name="description"
+    content="Eng Ammar - مهندس برمجيات متخصص في تطوير الويب، مع خبرة في HTML, CSS, JavaScript, PHP، والعديد من التقنيات الحديثة. شاهد مشاريعي ومهاراتي." />
+<meta name="keywords"
+    content="Eng Ammar, مهندس برمجيات, مطور ويب, HTML, CSS, JavaScript, PHP, Vue.js, AI, Git, Portfolio, برمجة, تطوير مواقع" />
 <meta name="author" content="Eng Ammar" />
 <meta name="robots" content="index, follow" />
 <link rel="canonical" href="https://eng-ammar.com/" />
@@ -19,7 +21,8 @@ if (!isset($pageTitle)) {
 <!-- Open Graph -->
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Eng Ammar - مهندس برمجيات ومطور ويب" />
-<meta property="og:description" content="اكتشف مهارات Eng Ammar وخبراته في تطوير المواقع والبرمجة بلغات وتقنيات متعددة." />
+<meta property="og:description"
+    content="اكتشف مهارات Eng Ammar وخبراته في تطوير المواقع والبرمجة بلغات وتقنيات متعددة." />
 <meta property="og:url" content="https://eng-ammar.com/" />
 <meta property="og:image" content="https://eng-ammar.com/images/og-image.jpg" />
 <meta property="og:image:width" content="1200" />
@@ -31,7 +34,8 @@ if (!isset($pageTitle)) {
 <!-- Twitter Cards -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Eng Ammar - مهندس برمجيات ومطور ويب" />
-<meta name="twitter:description" content="اكتشف مهارات Eng Ammar وخبراته في تطوير المواقع والبرمجة بلغات وتقنيات متعددة." />
+<meta name="twitter:description"
+    content="اكتشف مهارات Eng Ammar وخبراته في تطوير المواقع والبرمجة بلغات وتقنيات متعددة." />
 <meta name="twitter:image" content="https://eng-ammar.com/images/twitter-card.jpg" />
 <meta name="twitter:site" content="@EngAmmar" />
 
@@ -117,13 +121,14 @@ if (!isset($pageTitle)) {
 
 <!-- ===================== Project CSS Files ===================== -->
 <link rel="stylesheet" href="../css/bootstrap.min.css" />
-<link rel="stylesheet" href="../css/css.css " />
+<link rel="stylesheet" href="../css/main.css " />
 <link rel="stylesheet" href="../css/style.css" />
 
 <!-- ===================== Google Fonts ===================== -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Mulish&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Mulish&family=Poppins:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
 
 <!-- ===================== Icon Library (Ionicons) ===================== -->
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -134,7 +139,7 @@ if (!isset($pageTitle)) {
 
 <!-- ===================== Home Page Local CSS ===================== -->
 <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
-<link rel="stylesheet" href="./assets/css/css.css " />
+<link rel="stylesheet" href="./assets/css/main.css " />
 <link rel="stylesheet" href="./assets/css/style.css" />
 
 <!-- ===================== Preload Hero Banner ===================== -->

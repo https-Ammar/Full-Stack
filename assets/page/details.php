@@ -41,7 +41,7 @@ $current_page = isset($card['title']) ? htmlspecialchars($card['title']) : 'Work
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $current_page; ?></title>
-    <link rel="stylesheet" href="../css/css.css">
+    <link rel="stylesheet" href="../css/main.css">
 </head>
 
 <body data-barba="wrapper">
@@ -57,42 +57,20 @@ $current_page = isset($card['title']) ? htmlspecialchars($card['title']) : 'Work
                     <div class="container medium once-in">
                         <div class="row">
                             <div class="flex-col">
-                                <h1><?php echo htmlspecialchars($card['title']); ?></h1>
+
+                                <a href="<?php echo htmlspecialchars($card['link']); ?>">
+
+                                    <h1><?php echo htmlspecialchars($card['title']); ?></h1>
+                                </a>
+                                <hr>
+                                <br>
+                                <p>Lorem ipsum dolor sit.</p>
+
                             </div>
                         </div>
                     </div>
                 </header>
 
-                <section class="section case-intro once-in" data-scroll-section>
-                    <div class="container medium">
-                        <div class="row">
-                            <div class="flex-col">
-                                <h5>Role / Services</h5>
-                                <div class="stripe"></div>
-                                <li>
-                                    <p><?php echo nl2br(htmlspecialchars($card['services'] ?? '')); ?></p>
-                                </li>
-                            </div>
-                            <div class="flex-col">
-                                <h5>Credits</h5>
-                                <div class="stripe"></div>
-                                <li>
-                                    <p><?php echo nl2br(htmlspecialchars($card['extra_text'] ?? '')); ?></p>
-                                </li>
-                            </div>
-                            <div class="flex-col">
-                                <h5>Location & year</h5>
-                                <div class="stripe"></div>
-                                <li>
-                                    <p><?php echo htmlspecialchars($card['location']); ?> ©</p>
-                                </li>
-                                <li>
-                                    <p><?php echo htmlspecialchars($card['year']); ?></p>
-                                </li>
-                            </div>
-                        </div>
-                    </div>
-                </section>
 
                 <section class="section case-intro-image once-in block-padding-bottom" data-scroll-section>
                     <div class="container">
@@ -117,12 +95,16 @@ $current_page = isset($card['title']) ? htmlspecialchars($card['title']) : 'Work
                 </section>
             </section>
 
+
+
             <section class="section single-block block-device block_0 block-padding-bottom"
                 style="background-color: #d8d5cc;" data-scroll-section>
                 <div class="container">
                     <div class="row device-macprohigher">
                         <div class="flex-col">
                             <div class="device">
+
+
                                 <div class="single-image"
                                     style="background: url(../dashboard/uploads/<?php echo htmlspecialchars($card['image2'] ?? ''); ?>);">
                                     <div class="overlay overlay-image playpauze">
@@ -193,6 +175,38 @@ $current_page = isset($card['title']) ? htmlspecialchars($card['title']) : 'Work
                                         data-src="../img/device-apple-pencil.png" />
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+            <section class="section case-intro once-in" data-scroll-section>
+                <div class="container medium">
+                    <div class="row">
+                        <div class="flex-col">
+                            <h5>Role / Services</h5>
+                            <div class="stripe"></div>
+                            <li>
+                                <p><?php echo nl2br(htmlspecialchars($card['services'] ?? '')); ?></p>
+                            </li>
+                        </div>
+                        <div class="flex-col">
+                            <h5>Credits</h5>
+                            <div class="stripe"></div>
+                            <li>
+                                <p><?php echo nl2br(htmlspecialchars($card['extra_text'] ?? '')); ?></p>
+                            </li>
+                        </div>
+                        <div class="flex-col">
+                            <h5>Location & year</h5>
+                            <div class="stripe"></div>
+                            <li>
+                                <p><?php echo htmlspecialchars($card['location']); ?> ©</p>
+                            </li>
+                            <li>
+                                <p><?php echo htmlspecialchars($card['year']); ?></p>
+                            </li>
                         </div>
                     </div>
                 </div>
