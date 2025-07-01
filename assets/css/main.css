@@ -1641,10 +1641,14 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-  -webkit-text-fill-color: #000;
-  -webkit-box-shadow: 0 0 0px 1000px #fff inset;
-  box-shadow: 0 0 0px 1000px #fff inset;
-  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  transition: none;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  -o-transition: none;
 }
 
 input[type="radio"] {

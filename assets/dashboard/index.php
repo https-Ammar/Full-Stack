@@ -44,10 +44,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])) {
          role, services, credits, location, year, extra_text, created_at)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-    $stmt->bind_param("ssssssssssssssss",
-        $title, $description, $link,
-        $images[1], $images[2], $images[3], $images[4], $images[5], $images[6],
-        $role, $services, $credits, $location, $year, $extra_text, $date);
+    $stmt->bind_param(
+        "ssssssssssssssss",
+        $title,
+        $description,
+        $link,
+        $images[1],
+        $images[2],
+        $images[3],
+        $images[4],
+        $images[5],
+        $images[6],
+        $role,
+        $services,
+        $credits,
+        $location,
+        $year,
+        $extra_text,
+        $date
+    );
 
     $stmt->execute();
     $stmt->close();
@@ -126,10 +141,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
         role = ?, services = ?, credits = ?, location = ?, year = ?, extra_text = ?, created_at = ?
         WHERE id = ?");
 
-    $stmt->bind_param("ssssssssssssssssi",
-        $title, $description, $link,
-        $images[1], $images[2], $images[3], $images[4], $images[5], $images[6],
-        $role, $services, $credits, $location, $year, $extra_text, $date, $id);
+    $stmt->bind_param(
+        "ssssssssssssssssi",
+        $title,
+        $description,
+        $link,
+        $images[1],
+        $images[2],
+        $images[3],
+        $images[4],
+        $images[5],
+        $images[6],
+        $role,
+        $services,
+        $credits,
+        $location,
+        $year,
+        $extra_text,
+        $date,
+        $id
+    );
 
     $stmt->execute();
     $stmt->close();
@@ -143,9 +174,588 @@ $cards = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
 ?>
 
 
-<!-- هنا تكتب كود HTML لعرض الكروت -->
 
-<a href="logout.php">تسجيل الخروج</a>
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate Admin Dashboard</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        :root {
+            --sidebar-width: 280px;
+            --primary-orange: #f97316;
+            --primary-orange-hover: #ea580c;
+            --dark-bg: #1a1d23;
+            --darker-bg: #151821;
+            --card-bg: #242830;
+            --text-muted: #6c757d;
+            --border-color: #2d3748;
+        }
+
+        body {
+            background-color: #22282e;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: var(--sidebar-width);
+            background-color: #282f36;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sidebar-header h4 {
+            color: var(--primary-orange);
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .nav-section-title {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 1rem 1.5rem 0.5rem;
+            margin: 0;
+        }
+
+        .sidebar .nav-link {
+            color: #a0aec0;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link.active {
+            background-color: rgba(249, 115, 22, 0.1);
+            color: var(--primary-orange);
+            border-left-color: var(--primary-orange);
+        }
+
+        .sidebar .nav-link i {
+            width: 20px;
+            margin-right: 0.75rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            min-height: 100vh;
+            transition: all 0.3s ease;
+        }
+
+        .top-navbar {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+        }
+
+        .content-area {
+            padding: 2rem;
+        }
+
+        /* Stats Cards */
+        .stats-card {
+            background-color: #282f36;
+            /* border: 1px solid var(--border-color); */
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            height: 100%;
+            border-radius: 20px;
+        }
+
+        .stats-value {
+            text-align: right;
+        }
+
+        .stats-icon {
+            width: 48px;
+            height: 48px;
+            background-color: var(--primary-orange);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .stats-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin: 0.5rem 0;
+        }
+
+        .stats-change {
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .stats-change.positive {
+            color: #10b981;
+        }
+
+        .stats-change.negative {
+            color: #ef4444;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            height: 400px;
+        }
+
+        /* Alert */
+        .custom-alert {
+            background-color: rgba(217, 119, 6, 0.1);
+            border: 1px solid #d97706;
+            color: #fbbf24;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Table */
+        .product-table {
+            background-color: #282f36;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .product-table .table {
+            margin: 0;
+        }
+
+        .product-table .table th {
+            background-color: var(--darker-bg);
+            border-color: var(--border-color);
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+            padding: 1rem;
+        }
+
+        .product-table .table td {
+            border-color: var(--border-color);
+            padding: 1rem;
+            vertical-align: middle;
+        }
+
+        .product-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .btn-primary-custom {
+            background-color: var(--primary-orange);
+            border-color: var(--primary-orange);
+            color: white;
+            font-weight: 600;
+            padding: 0.5rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary-custom:hover {
+            background-color: var(--primary-orange-hover);
+            border-color: var(--primary-orange-hover);
+            transform: translateY(-1px);
+        }
+
+        .search-input {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: white;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            width: 250px;
+        }
+
+        .search-input:focus {
+            background-color: var(--card-bg);
+            border-color: var(--primary-orange);
+            color: white;
+            box-shadow: 0 0 0 0.2rem rgba(249, 115, 22, 0.25);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.show {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            margin-top: auto;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker-bg);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h4><i class="bi bi-building"></i> RealEstate</h4>
+        </div>
+
+        <div class="nav-section-title">GENERAL</div>
+        <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" href="#"><i class="bi bi-grid"></i> Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-house"></i> Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-list-ul"></i> All Product List</a>
+            </li>
+
+
+
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-credit-card"></i> Payments</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="logout.php"><i class="bi bi-box-arrow-right"></i> Logout</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Navigation -->
+        <div class="top-navbar d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <button class="btn btn-link text-white d-md-none" id="sidebarToggle">
+                    <i class="bi bi-list fs-4"></i>
+                </button>
+                <h2 class="mb-0 text-white fw-bold">WELCOME!</h2>
+            </div>
+
+        </div>
+
+        <!-- Content Area -->
+        <div class="content-area">
+
+
+            <div class="row">
+                <!-- Stats Cards -->
+                <div class="col-lg-8">
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <div class="stats-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="stats-icon me-3">
+                                        <i class="bi bi-people"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-muted">Total Visitors</div>
+                                        <div class="stats-value">20</div>
+
+                                    </div>
+                                </div>
+                                <div class="stats-change positive">
+                                    <i class="bi bi-arrow-up"></i> 2.3% Last Week
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="stats-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="stats-icon me-3">
+                                        <i class="bi bi-person-check"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-muted">Users</div>
+                                        <div class="stats-value">2</div>
+
+                                    </div>
+                                </div>
+                                <div class="stats-change positive">
+                                    <i class="bi bi-arrow-up"></i> 8.1% Last Month
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="stats-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="stats-icon me-3">
+                                        <i class="bi bi-box"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-muted">Products</div>
+                                        <div class="stats-value">1</div>
+
+                                    </div>
+                                </div>
+                                <div class="stats-change negative">
+                                    <i class="bi bi-arrow-down"></i> 0.3% Last Month
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="stats-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="stats-icon me-3">
+                                        <i class="bi bi-clock"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-muted">Time</div>
+                                        <div class="stats-value">9:21</div>
+
+                                    </div>
+                                </div>
+                                <div class="stats-change positive">
+                                    <i class="bi bi-arrow-up"></i> 10.6% Last Month
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart -->
+                <div class="col-lg-4">
+                    <div class="chart-container">
+                        <!--  -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Table -->
+            <div class="product-table mt-4">
+                <div class="d-flex justify-content-between align-items-center p-3 border-bottom"
+                    style="border-color: var(--border-color) !important;">
+                    <h5 class="text-white mb-0">All Product List</h5>
+                    <button class="btn btn-primary-custom" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                        <i class="bi bi-plus"></i>
+                    </button>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-dark mb-0">
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;">
+                                    <input type="checkbox" class="form-check-input">
+                                </th>
+                                <th>& Product</th>
+                                <th>Price</th>
+                                <th>Category</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <?php foreach ($cards as $card): ?>
+
+
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="form-check-input">
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <img src="../dashboard/uploads/<?php echo htmlspecialchars($card['image1']); ?>"
+                                                alt="Property" class="product-image me-3"
+                                                style="width: 50px; height: 50px; object-fit: cover;">
+                                            <div>
+                                                <div class="text-white fw-semibold"> <?= htmlspecialchars($card['title']) ?>
+                                                </div>
+                                                <div class="text-muted small">Location :
+                                                    <?= htmlspecialchars($card['location']) ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-white"><?= nl2br(htmlspecialchars($card['services'])) ?></td>
+                                    <td>
+                                        <?= htmlspecialchars($card['year']) ?>
+                                    </td>
+                                    <td>
+                                        <button class="icon-button">
+                                            <a href="?delete=<?= $card['id'] ?>">
+                                                <i class="ph-caret-right-bold"></i></a>
+
+
+
+                                        </button>
+                                    </td>
+                                </tr>
+
+
+
+
+                            <?php endforeach; ?>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Add Product Modal -->
+            <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content bg-dark text-white">
+                        <div class="modal-header border-bottom">
+                            <h5 class="modal-title" id="addProductModalLabel">Add New Product</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <form action="#" method="POST">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="productName" class="form-label">Product Name</label>
+                                    <input type="text" class="form-control" id="productName" name="product_name"
+                                        required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="productPrice" class="form-label">Price</label>
+                                    <input type="number" class="form-control" id="productPrice" name="product_price"
+                                        required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="productCategory" class="form-label">Category</label>
+                                    <select class="form-select" id="productCategory" name="product_category" required>
+                                        <option value="">Choose...</option>
+                                        <option value="Real Estate">Real Estate</option>
+                                        <option value="Electronics">Electronics</option>
+                                        <option value="Furniture">Furniture</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="productImage" class="form-label">Image URL</label>
+                                    <input type="url" class="form-control" id="productImage" name="product_image">
+                                </div>
+                            </div>
+                            <div class="modal-footer border-top">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save Product</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            © Larkon. Crafted by Ammar
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <style>
+        .stats-change.positive,
+        .stats-change.negative {
+            background: #22282e;
+            padding: 10px;
+            border-radius: 30px;
+        }
+
+        .d-flex.align-items-center.mb-3 {
+            justify-content: space-between;
+            text-align: right;
+        }
+
+        td {
+            background: #282f36 !important;
+        }
+
+        .modal-dialog {
+            height: 100vh;
+            padding: 0;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center !important;
+            width: 100%;
+        }
+    </style>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
+
+<!--  -->
+<!--  -->
+
+
+
 
 
 
@@ -270,7 +880,7 @@ $cards = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
                             <i class="ph-magnifying-glass"></i>
                             <input type="text" placeholder="Account number">
                         </div>
-                     
+
                     </div>
                     <div class="mobile-only">
                         <button class="flat-button">
@@ -282,148 +892,150 @@ $cards = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
 
 
                     <!--  -->
-<!--  -->
+                    <!--  -->
 
-     <div class="tab-content">
+                    <div class="tab-content">
 
-         <?php
-// عداد عدد الكروت
-$card_count = $conn->query("SELECT COUNT(*) as total FROM cards")->fetch_assoc()['total'];
+                        <?php
+                        // عداد عدد الكروت
+                        $card_count = $conn->query("SELECT COUNT(*) as total FROM cards")->fetch_assoc()['total'];
 
-// حساب عدد الزوار
-$count_result = $conn->query("SELECT COUNT(*) as total FROM visitors");
-$count_row = $count_result->fetch_assoc();
-$total_visitors = $count_row['total'];
+                        // حساب عدد الزوار
+                        $count_result = $conn->query("SELECT COUNT(*) as total FROM visitors");
+                        $count_row = $count_result->fetch_assoc();
+                        $total_visitors = $count_row['total'];
 
-// حذف جميع الزوار
-if (isset($_POST['delete_all'])) {
-    $conn->query("DELETE FROM visitors");
-    echo "<script>window.location.href='index.php';</script>";
-}
+                        // حذف جميع الزوار
+                        if (isset($_POST['delete_all'])) {
+                            $conn->query("DELETE FROM visitors");
+                            echo "<script>window.location.href='index.php';</script>";
+                        }
 
-// حذف زائر واحد
-if (isset($_GET['delete_visitor'])) {
-    $delete_id = intval($_GET['delete_visitor']);
-    $conn->query("DELETE FROM visitors WHERE id = $delete_id");
-    echo "<script>window.location.href='index.php';</script>";
-}
-?>
+                        // حذف زائر واحد
+                        if (isset($_GET['delete_visitor'])) {
+                            $delete_id = intval($_GET['delete_visitor']);
+                            $conn->query("DELETE FROM visitors WHERE id = $delete_id");
+                            echo "<script>window.location.href='index.php';</script>";
+                        }
+                        ?>
 
 
 
-                    <div class="tiles">
-                        <article class="tile">
-                            <div class="tile-header">
-                                <i class="ph-lightning-light"></i>
-                                <h3>
-                                    <span>Electricity</span>
-                                    <span>UrkEnergo -- <?= $card_count ?></span>
-                                </h3>
-                            </div>
-                            <a href="#">
-                                <span>Go to service</span>
-                                <span class="icon-button">
-                                    <i class="ph-caret-right-bold"></i>
-                                </span>
-                            </a>
-                        </article>
-                        <article class="tile">
-                            <div class="tile-header">
-                                <i class="ph-fire-simple-light"></i>
-                                <h3>
-                                    <span>Heating Gas</span>
-                                    <span>Gazprom UA -- <?= $total_visitors ?></span>
-                                </h3>
-                            </div>
-                            <a href="#">
-                                <span>Go to service</span>
+                        <div class="tiles">
+                            <article class="tile">
+                                <div class="tile-header">
+                                    <i class="ph-lightning-light"></i>
+                                    <h3>
+                                        <span>Electricity</span>
+                                        <span>UrkEnergo -- <?= $card_count ?></span>
+                                    </h3>
+                                </div>
+                                <a href="#">
+                                    <span>Go to service</span>
+                                    <span class="icon-button">
+                                        <i class="ph-caret-right-bold"></i>
+                                    </span>
+                                </a>
+                            </article>
+                            <article class="tile">
+                                <div class="tile-header">
+                                    <i class="ph-fire-simple-light"></i>
+                                    <h3>
+                                        <span>Heating Gas</span>
+                                        <span>Gazprom UA -- <?= $total_visitors ?></span>
+                                    </h3>
+                                </div>
+                                <a href="#">
+                                    <span>Go to service</span>
 
-                 
-                                <span class="icon-button">
-                                               <form method="post" onsubmit="return confirm('هل أنت متأكد من حذف جميع الزوار؟');">
-                    <button  class="icon-button" type="submit" name="delete_all" class="btn btn-sm btn-danger mt-2">
-                       <i class="ph-caret-right-bold"></i>
-                    </button>
-                </form>
-                                </span>
-                            </a>
-                        </article>
-                        <article class="tile">
-                            <div class="tile-header">
-                                <i class="ph-file-light"></i>
-                                <h3>
-                                    <span>Tax online</span>
-                                    <span>Kharkov 62 str.</span>
-                                </h3>
-                            </div>
-                            <a href="#">
-                                <span>Go to service</span>
-                                <span class="icon-button">
-                                    <i class="ph-caret-right-bold"></i>
-                                </span>
-                            </a>
-                        </article>
+
+                                    <span class="icon-button">
+                                        <form method="post"
+                                            onsubmit="return confirm('هل أنت متأكد من حذف جميع الزوار؟');">
+                                            <button class="icon-button" type="submit" name="delete_all"
+                                                class="btn btn-sm btn-danger mt-2">
+                                                <i class="ph-caret-right-bold"></i>
+                                            </button>
+                                        </form>
+                                    </span>
+                                </a>
+                            </article>
+                            <article class="tile">
+                                <div class="tile-header">
+                                    <i class="ph-file-light"></i>
+                                    <h3>
+                                        <span>Tax online</span>
+                                        <span>Kharkov 62 str.</span>
+                                    </h3>
+                                </div>
+                                <a href="#">
+                                    <span>Go to service</span>
+                                    <span class="icon-button">
+                                        <i class="ph-caret-right-bold"></i>
+                                    </span>
+                                </a>
+                            </article>
+                        </div>
+
+
+
+
+                        <div class="row">
+
+
+                            <h5 class="card-title text-uppercase text-muted mb-0">Session Time</h5>
+                            <span id="session-timer" class="h2 font-weight-bold mb-0">00:00:00 AM</span>
+
+
+
+                            <h5 class="card-title text-uppercase text-muted mb-0">Today</h5>
+                            <span id="current-date" class="h2 font-weight-bold mb-0">--</span>
+
+                        </div>
+
+                        <!-- JavaScript للمؤقت والتاريخ -->
+                        <script>
+                            // المؤقت
+                            function formatTime(hours24, minutes, seconds) {
+                                const ampm = hours24 >= 12 ? 'PM' : 'AM';
+                                let hours12 = hours24 % 12;
+                                const displayHours = hours12 === 0 ? '00' : (hours12 < 10 ? '0' + hours12 : hours12);
+                                const m = minutes < 10 ? '0' + minutes : minutes;
+                                const s = seconds < 10 ? '0' + seconds : seconds;
+                                return `${displayHours}:${m}:${s} ${ampm}`;
+                            }
+
+                            let elapsedSeconds = parseInt(localStorage.getItem('elapsedSeconds')) || 0;
+                            function updateSessionTimer() {
+                                elapsedSeconds++;
+                                const hours24 = Math.floor(elapsedSeconds / 3600);
+                                const minutes = Math.floor((elapsedSeconds % 3600) / 60);
+                                const seconds = elapsedSeconds % 60;
+                                document.getElementById('session-timer').textContent = formatTime(hours24, minutes, seconds);
+                                localStorage.setItem('elapsedSeconds', elapsedSeconds);
+                            }
+                            setInterval(updateSessionTimer, 1000);
+                            updateSessionTimer();
+
+                            // التاريخ
+                            document.addEventListener('DOMContentLoaded', () => {
+                                const dateSpan = document.getElementById('current-date');
+                                const today = new Date();
+                                const year = today.getFullYear();
+                                const month = String(today.getMonth() + 1).padStart(2, '0');
+                                const day = String(today.getDate()).padStart(2, '0');
+                                dateSpan.textContent = `${year}-${month}-${day}`;
+                            });
+                        </script>
+
                     </div>
 
 
 
 
-<div class="row">
-
-
-                <h5 class="card-title text-uppercase text-muted mb-0">Session Time</h5>
-                        <span id="session-timer" class="h2 font-weight-bold mb-0">00:00:00 AM</span>
-
-
-
-       <h5 class="card-title text-uppercase text-muted mb-0">Today</h5>
-                        <span id="current-date" class="h2 font-weight-bold mb-0">--</span>
-    
-</div>
-
-<!-- JavaScript للمؤقت والتاريخ -->
-<script>
-    // المؤقت
-    function formatTime(hours24, minutes, seconds) {
-        const ampm = hours24 >= 12 ? 'PM' : 'AM';
-        let hours12 = hours24 % 12;
-        const displayHours = hours12 === 0 ? '00' : (hours12 < 10 ? '0' + hours12 : hours12);
-        const m = minutes < 10 ? '0' + minutes : minutes;
-        const s = seconds < 10 ? '0' + seconds : seconds;
-        return `${displayHours}:${m}:${s} ${ampm}`;
-    }
-
-    let elapsedSeconds = parseInt(localStorage.getItem('elapsedSeconds')) || 0;
-    function updateSessionTimer() {
-        elapsedSeconds++;
-        const hours24 = Math.floor(elapsedSeconds / 3600);
-        const minutes = Math.floor((elapsedSeconds % 3600) / 60);
-        const seconds = elapsedSeconds % 60;
-        document.getElementById('session-timer').textContent = formatTime(hours24, minutes, seconds);
-        localStorage.setItem('elapsedSeconds', elapsedSeconds);
-    }
-    setInterval(updateSessionTimer, 1000);
-    updateSessionTimer();
-
-    // التاريخ
-    document.addEventListener('DOMContentLoaded', () => {
-        const dateSpan = document.getElementById('current-date');
-        const today = new Date();
-        const year = today.getFullYear();
-        const month = String(today.getMonth() + 1).padStart(2, '0');
-        const day = String(today.getDate()).padStart(2, '0');
-        dateSpan.textContent = `${year}-${month}-${day}`;
-    });
-</script>
-
-            </div>
-
-
-            
-
                     <!--  -->
 
-                
+
                 </section>
                 <section class="transfer-section">
                     <div class="transfer-section-header">
@@ -440,68 +1052,68 @@ if (isset($_GET['delete_visitor'])) {
                     </div>
 
 
-<?php
-$res = $conn->query("SELECT * FROM visitors ORDER BY id DESC");
-if ($res && $res->num_rows > 0) {
-    while ($row = $res->fetch_assoc()) {
-        $datetime_str = $row['visit_time'] ?? '';
-        if ($datetime_str) {
-            $datetime = strtotime($datetime_str);
-            $date = date('Y-m-d', $datetime);
-            $time = date('H:i:s', $datetime);
-        } else {
-            $date = 'غير معروف';
-            $time = 'غير معروف';
-        }
-?>
-<div class="transfers">
-    <div class="transfer">
-        <div class="transfer-logo">
-            <img src="https://assets.codepen.io/285131/apple.svg" />
-            <?= htmlspecialchars($row['id']) ?>
-        </div>
-        <dl class="transfer-details">
-            <div>
-                <dd>ID</dd>
-                <?= htmlspecialchars($row['ip_address'] ?? 'غير معروف') ?>
-            </div>
-            <div>
-                <dd>City</dd>
-                <?= htmlspecialchars($row['country'] ?? 'غير معروف') ?>
-            </div>
-            <div>
-                <dd>Date</dd>
-                <?= htmlspecialchars($date) ?>
-            </div>
-            <div>
-                <dd>Time</dd>
-                <?= htmlspecialchars($time) ?>
-            </div>
-        </dl>
-        <div class="transfer-number">
-            <a href="?delete_visitor=<?= urlencode($row['id']) ?>"
-               onclick="return confirm('هل أنت متأكد من حذف هذا الزائر؟')"
-               style="color:red; text-decoration:none; font-size:18px;">
-                <button class="icon-button">
-                    <i class="ph-plus"></i>
-                </button>
-            </a>
-        </div>
-    </div>
-</div>
-<?php
-    }
-} else {
-?>
-    <li class="mt-5 mb-5">No visitors yet</li>
-<?php
-}
-?>
+                    <?php
+                    $res = $conn->query("SELECT * FROM visitors ORDER BY id DESC");
+                    if ($res && $res->num_rows > 0) {
+                        while ($row = $res->fetch_assoc()) {
+                            $datetime_str = $row['visit_time'] ?? '';
+                            if ($datetime_str) {
+                                $datetime = strtotime($datetime_str);
+                                $date = date('Y-m-d', $datetime);
+                                $time = date('H:i:s', $datetime);
+                            } else {
+                                $date = 'غير معروف';
+                                $time = 'غير معروف';
+                            }
+                            ?>
+                            <div class="transfers">
+                                <div class="transfer">
+                                    <div class="transfer-logo">
+                                        <img src="https://assets.codepen.io/285131/apple.svg" />
+                                        <?= htmlspecialchars($row['id']) ?>
+                                    </div>
+                                    <dl class="transfer-details">
+                                        <div>
+                                            <dd>ID</dd>
+                                            <?= htmlspecialchars($row['ip_address'] ?? 'غير معروف') ?>
+                                        </div>
+                                        <div>
+                                            <dd>City</dd>
+                                            <?= htmlspecialchars($row['country'] ?? 'غير معروف') ?>
+                                        </div>
+                                        <div>
+                                            <dd>Date</dd>
+                                            <?= htmlspecialchars($date) ?>
+                                        </div>
+                                        <div>
+                                            <dd>Time</dd>
+                                            <?= htmlspecialchars($time) ?>
+                                        </div>
+                                    </dl>
+                                    <div class="transfer-number">
+                                        <a href="?delete_visitor=<?= urlencode($row['id']) ?>"
+                                            onclick="return confirm('هل أنت متأكد من حذف هذا الزائر؟')"
+                                            style="color:red; text-decoration:none; font-size:18px;">
+                                            <button class="icon-button">
+                                                <i class="ph-plus"></i>
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    } else {
+                        ?>
+                        <li class="mt-5 mb-5">No visitors yet</li>
+                        <?php
+                    }
+                    ?>
 
 
 
 
-           
+
                 </section>
             </div>
             <div class="app-body-sidebar">
@@ -544,245 +1156,183 @@ if ($res && $res->num_rows > 0) {
 
 
 
-                    <div class="payments">
-                        
-
-                    <?php foreach ($cards as $card): ?>
-
-
-
-                              <div class="payment">
-                            <div class="card green" style="background-image: url(../dashboard/uploads/<?php echo htmlspecialchars($card['image1']); ?>);">
-                                <span><?= htmlspecialchars($card['created_at']) ?></span>
-                                <span>
-                                    •••• <?= htmlspecialchars($card['year']) ?>
-                                </span>
-                            </div>
-                            <div class="payment-details">
-                                <h3><?= htmlspecialchars($card['title']) ?></h3>
-                                <div>
-                                    <span>$ 2,110</span>
-                                    <button class="icon-button">
-                                                    <a href="?delete=<?= $card['id'] ?>" onclick="return confirm('هل أنت متأكد من حذف هذا الكارت؟')"> <i class="ph-caret-right-bold"></i></a>
-
-
-                                       
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-               
-
-
-
-    <!-- <tr>
-    
-        <td><?= nl2br(htmlspecialchars($card['description'])) ?></td>
-    
-        <td>
-    <img src="../dashboard/uploads/<?php echo htmlspecialchars($card['image2']); ?>" alt="Image 2" width="60">
-    <img src="../dashboard/uploads/<?php echo htmlspecialchars($card['image3']); ?>" alt="Image 3" width="60">
-    <img src="../dashboard/uploads/<?php echo htmlspecialchars($card['image4']); ?>" alt="Image 4" width="60">
-    <img src="../dashboard/uploads/<?php echo htmlspecialchars($card['image5']); ?>" alt="Image 5" width="60">
-    <img src="../dashboard/uploads/<?php echo htmlspecialchars($card['image6']); ?>" alt="Image 6" width="60">
-</td>
-
-        
-        <td><?= htmlspecialchars($card['role']) ?></td>
-        <td><?= nl2br(htmlspecialchars($card['services'])) ?></td>
-        <td><?= nl2br(htmlspecialchars($card['credits'])) ?></td>
-        <td><?= htmlspecialchars($card['location']) ?></td>
-
-        <td > <?= nl2br(htmlspecialchars($card['extra_text'])) ?>  </td> -->
-
-        <!-- <td>
-            <a href="edit.php?id=<?= $card['id'] ?>">تعديل</a>
-        </td> -->
- 
-    </tr>
-<?php endforeach; ?>
-
-
-                  
-                        
-                    </div>
-
 
 
 
                     <style>
-    .file-upload {
-        position: relative;
-        overflow: hidden;
-        display: inline-block;
-    }
+                        .file-upload {
+                            position: relative;
+                            overflow: hidden;
+                            display: inline-block;
+                        }
 
-    .file-upload input[type="file"] {
-        position: absolute;
-        font-size: 100px;
-        opacity: 0;
-        right: 0;
-        top: 0;
-    }
+                        .file-upload input[type="file"] {
+                            position: absolute;
+                            font-size: 100px;
+                            opacity: 0;
+                            right: 0;
+                            top: 0;
+                        }
 
-    .file-upload-label {
-        display: inline-block;
-        padding: 8px 16px;
-        background-color: #007bff;
-        color: white;
-        border-radius: 4px;
-        cursor: pointer;
-        margin-bottom: 8px;
-    }
-    .file-upload {
-    background: none !important;
-}
+                        .file-upload-label {
+                            display: inline-block;
+                            padding: 8px 16px;
+                            background-color: #007bff;
+                            color: white;
+                            border-radius: 4px;
+                            cursor: pointer;
+                            margin-bottom: 8px;
+                        }
 
-label.file-upload-label {
-    background: none;
-    border: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-}
-</style>
+                        .file-upload {
+                            background: none !important;
+                        }
 
-
-
-<div class="faq">
-    <p>Most Frequently Asked Questions</p>
-
-    <form method="POST" enctype="multipart/form-data">
-
-        <!-- عناصر ظاهرة دائمًا -->
-        <div>
-            <label>Title</label>
-            <input type="text" name="title" placeholder="Title" required>
-        </div>
-
-        <div>
-            <label>Description</label>
-            <input type="text" name="description" placeholder="Description" required>
-        </div>
-
-        <div>
-            <label>Link</label>
-            <input type="text" name="link" placeholder="Link" required>
-        </div>
-
-        <!-- عناصر مخفية وتظهر عند الضغط -->
-        <div id="more-settings" style="display: none;">
-            <div>
-                <label>Location</label>
-                <input type="text" name="location" placeholder="Location" required>
-            </div>
-
-            <div>
-                <label>Year</label>
-                <input type="number" name="year" placeholder="Year" required>
-            </div>
-
-            <div>
-                <label>Services</label>
-                <input type="text" name="services" placeholder="Services" required>
-            </div>
-
-            <!-- ملفات الصور -->
-            <div>
-                <label>Cover</label>
-                <div class="file-upload">
-                    <label class="file-upload-label">Image
-                        <input type="file" name="image1">
-                    </label>
-                </div>
-            </div>
-
-            <div>
-                <label>Image</label>
-                <div class="file-upload">
-                    <label class="file-upload-label">Image
-                        <input type="file" name="image2">
-                    </label>
-                </div>
-            </div>
-
-            <div>
-                <label>Image</label>
-                <div class="file-upload">
-                    <label class="file-upload-label">Image
-                        <input type="file" name="image3">
-                    </label>
-                </div>
-            </div>
-
-            <div>
-                <label>Image</label>
-                <div class="file-upload">
-                    <label class="file-upload-label">Image
-                        <input type="file" name="image4">
-                    </label>
-                </div>
-            </div>
-
-            <div>
-                <label>Image</label>
-                <div class="file-upload">
-                    <label class="file-upload-label">Image
-                        <input type="file" name="image5">
-                    </label>
-                </div>
-            </div>
-
-            <div>
-                <label>Image</label>
-                <div class="file-upload">
-                    <label class="file-upload-label">Image
-                        <input type="file" name="image6">
-                    </label>
-                </div>
-            </div>
-
-            <div>
-                <label>Date</label>
-                <input type="date" name="date" required>
-            </div>
-
-            <div>
-                <label>Extra Text</label>
-                <input type="text" name="extra_text" placeholder="Extra Text">
-            </div>
-        </div>
-
-        <!-- أزرار -->
-        <div class="payment-section-footer">
-            <button class="save-button" type="submit" name="add">Save</button>
-            <button class="settings-button" type="button" onclick="toggleSettings()">
-                <i class="ph-gear"></i>
-                <span>More Settings</span>
-            </button>
-        </div>
-    </form>
-</div>
-
-<!-- JavaScript لإظهار/إخفاء الإعدادات -->
-<script>
-    function toggleSettings() {
-        var moreSettings = document.getElementById("more-settings");
-        if (moreSettings.style.display === "none") {
-            moreSettings.style.display = "block";
-        } else {
-            moreSettings.style.display = "none";
-        }
-    }
-</script>
+                        label.file-upload-label {
+                            background: none;
+                            border: none !important;
+                            padding: 0 !important;
+                            margin: 0 !important;
+                        }
+                    </style>
 
 
 
-                    
-    <!-- <input type="text" name="role" placeholder="الدور"> -->
-    <!-- <textarea name="credits" placeholder="الاعتمادات"></textarea> -->
+                    <div class="faq">
+                        <p>Most Frequently Asked Questions</p>
 
-                   
-                    
+                        <form method="POST" enctype="multipart/form-data">
+
+                            <!-- عناصر ظاهرة دائمًا -->
+                            <div>
+                                <label>Title</label>
+                                <input type="text" name="title" placeholder="Title" required>
+                            </div>
+
+                            <div>
+                                <label>Description</label>
+                                <input type="text" name="description" placeholder="Description" required>
+                            </div>
+
+                            <div>
+                                <label>Link</label>
+                                <input type="text" name="link" placeholder="Link" required>
+                            </div>
+
+                            <!-- عناصر مخفية وتظهر عند الضغط -->
+                            <div id="more-settings" style="display: none;">
+                                <div>
+                                    <label>Location</label>
+                                    <input type="text" name="location" placeholder="Location" required>
+                                </div>
+
+                                <div>
+                                    <label>Year</label>
+                                    <input type="number" name="year" placeholder="Year" required>
+                                </div>
+
+                                <div>
+                                    <label>Services</label>
+                                    <input type="text" name="services" placeholder="Services" required>
+                                </div>
+
+                                <!-- ملفات الصور -->
+                                <div>
+                                    <label>Cover</label>
+                                    <div class="file-upload">
+                                        <label class="file-upload-label">Image
+                                            <input type="file" name="image1">
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label>Image</label>
+                                    <div class="file-upload">
+                                        <label class="file-upload-label">Image
+                                            <input type="file" name="image2">
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label>Image</label>
+                                    <div class="file-upload">
+                                        <label class="file-upload-label">Image
+                                            <input type="file" name="image3">
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label>Image</label>
+                                    <div class="file-upload">
+                                        <label class="file-upload-label">Image
+                                            <input type="file" name="image4">
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label>Image</label>
+                                    <div class="file-upload">
+                                        <label class="file-upload-label">Image
+                                            <input type="file" name="image5">
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label>Image</label>
+                                    <div class="file-upload">
+                                        <label class="file-upload-label">Image
+                                            <input type="file" name="image6">
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label>Date</label>
+                                    <input type="date" name="date" required>
+                                </div>
+
+                                <div>
+                                    <label>Extra Text</label>
+                                    <input type="text" name="extra_text" placeholder="Extra Text">
+                                </div>
+                            </div>
+
+                            <!-- أزرار -->
+                            <div class="payment-section-footer">
+                                <button class="save-button" type="submit" name="add">Save</button>
+                                <button class="settings-button" type="button" onclick="toggleSettings()">
+                                    <i class="ph-gear"></i>
+                                    <span>More Settings</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- JavaScript لإظهار/إخفاء الإعدادات -->
+                    <script>
+                        function toggleSettings() {
+                            var moreSettings = document.getElementById("more-settings");
+                            if (moreSettings.style.display === "none") {
+                                moreSettings.style.display = "block";
+                            } else {
+                                moreSettings.style.display = "none";
+                            }
+                        }
+                    </script>
+
+
+
+
+                    <!-- <input type="text" name="role" placeholder="الدور"> -->
+                    <!-- <textarea name="credits" placeholder="الاعتمادات"></textarea> -->
+
+
+
                 </section>
             </div>
         </div>
