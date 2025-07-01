@@ -4,8 +4,8 @@ ini_set('display_errors', 1);
 
 $skillsData = [
     "Front End Developer" => [
-        ["title" => "Skill", "value" => "HTML", "info" => "Used in structure", "year" => 2021],
-        ["title" => "Skill", "value" => "CSS", "info" => "Styling pages", "year" => 2021],
+        ["title" => "Skill", "value" => "HTML", "info" => "Used in structure", "year" => 2022],
+        ["title" => "Skill", "value" => "CSS", "info" => "Styling pages", "year" => 2022],
         ["title" => "Skill", "value" => "SASS", "info" => "Advanced CSS", "year" => 2022],
         ["title" => "Skill", "value" => "JavaScript", "info" => "Dynamic content", "year" => 2022],
         ["title" => "Skill", "value" => "Jquery", "info" => "DOM manipulation", "year" => 2022],
@@ -13,12 +13,12 @@ $skillsData = [
         ["title" => "Skill", "value" => "API", "info" => "External data handling", "year" => 2023],
     ],
     "Basics in Programming" => [
-        ["title" => "Language", "value" => "C++", "info" => "OOP basics", "year" => 2020],
-        ["title" => "Language", "value" => "C", "info" => "Low-level programming", "year" => 2020],
-        ["title" => "Language", "value" => "Python", "info" => "General purpose", "year" => 2021],
+        ["title" => "Language", "value" => "C++", "info" => "OOP basics", "year" => 2023],
+        ["title" => "Language", "value" => "C", "info" => "Low-level programming", "year" => 2023],
+        ["title" => "Language", "value" => "Python", "info" => "General purpose", "year" => 2022],
         ["title" => "Language", "value" => "PHP", "info" => "Server-side scripting", "year" => 2022],
-        ["title" => "Language", "value" => "SQL", "info" => "Databases queries", "year" => 2021],
-        ["title" => "Language", "value" => "CS", "info" => "General computer science", "year" => 2020],
+        ["title" => "Language", "value" => "SQL", "info" => "Databases queries", "year" => 2022],
+        ["title" => "Language", "value" => "CS", "info" => "General computer science", "year" => 2023],
         ["title" => "Framework", "value" => "Vue.js", "info" => "Frontend framework", "year" => 2023],
         ["title" => "Technology", "value" => "AI", "info" => "Artificial Intelligence basics", "year" => 2024],
     ],
@@ -30,12 +30,12 @@ $skillsData = [
         ["title" => "Library", "value" => "Animation", "info" => "CSS/JS effects", "year" => 2023],
     ],
     "System Tools" => [
-        ["title" => "Tool", "value" => "Git", "info" => "Version control", "year" => 2021],
-        ["title" => "Tool", "value" => "GitHub", "info" => "Code hosting platform", "year" => 2021],
+        ["title" => "Tool", "value" => "Git", "info" => "Version control", "year" => 2022],
+        ["title" => "Tool", "value" => "GitHub", "info" => "Code hosting platform", "year" => 2022],
         ["title" => "Tool", "value" => "Vercel", "info" => "Frontend deployment", "year" => 2023],
         ["title" => "Tool", "value" => "Cmdr", "info" => "Terminal emulator", "year" => 2022],
         ["title" => "Tool", "value" => "Command Line", "info" => "Shell interface", "year" => 2022],
-        ["title" => "Tool", "value" => "VS Code", "info" => "Source-code editor", "year" => 2021],
+        ["title" => "Tool", "value" => "VS Code", "info" => "Source-code editor", "year" => 2022],
         ["title" => "Tool", "value" => "ChatGPT", "info" => "AI coding assistant", "year" => 2024],
     ],
     "Other Tools" => [
@@ -44,7 +44,7 @@ $skillsData = [
         ["title" => "Tool", "value" => "Google Fonts", "info" => "Web typography", "year" => 2022],
         ["title" => "Tool", "value" => "Search", "info" => "Search functionality", "year" => 2023],
         ["title" => "Tool", "value" => "Figma", "info" => "UI/UX design tool", "year" => 2023],
-        ["title" => "Tool", "value" => "Photoshop", "info" => "Design editing", "year" => 2021],
+        ["title" => "Tool", "value" => "Photoshop", "info" => "Design editing", "year" => 2022],
     ]
 ];
 $totalSkills = array_sum(array_map('count', $skillsData));
