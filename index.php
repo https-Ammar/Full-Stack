@@ -181,7 +181,7 @@ if ($id > 0) {
                                     place in the web design world.</p>
                             </div>
                             <div class="btn btn-round" data-scroll data-scroll-speed="2">
-                                <a href="https://dennissnellenberg.com/about" class="btn-click magnetic">
+                                <a href="./assets/page/About.php" class="btn-click magnetic">
                                     <div class="btn-fill"></div>
                                     <span class="btn-text-inner">About me</span>
                                 </a>

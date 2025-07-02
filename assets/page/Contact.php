@@ -170,51 +170,55 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <span class="btn-text"><span class="btn-text-inner">+201065424756</span></span>
                                     </a>
                                 </li>
+
+                                <li class="btn btn-link btn-link-external">
+                                    <a href="tel:+201070479599" class="btn-click magnetic" data-strength="20"
+                                        data-strength-text="10">
+                                        <span class="btn-text"><span class="btn-text-inner">+201070479599</span></span>
+                                    </a>
+                                </li>
                             </ul>
 
                             <h5>Business Details</h5>
                             <ul class="links-wrap">
                                 <li>
-                                    <p>Dennis Snellenberg B.V.</p>
+                                    <p>Ammar Ahmed</p>
                                 </li>
+
                                 <li>
-                                    <p>CoC: 92411711</p>
-                                </li>
-                                <li>
-                                    <p>VAT: NL866034080B01</p>
-                                </li>
-                                <li>
-                                    <p>Location: The Netherlands</p>
+                                    <p>Location : Egypt</p>
                                 </li>
                             </ul>
 
                             <h5>Socials</h5>
+
                             <ul class="links-wrap">
                                 <li class="btn btn-link btn-link-external">
-                                    <a href="https://www.awwwards.com/dennissnellenberg/" target="_blank"
+                                    <a href="https://www.facebook.com/eng.amaar.ah.med/" target="_blank"
                                         class="btn-click magnetic" data-strength="20" data-strength-text="10">
-                                        <span class="btn-text"><span class="btn-text-inner">Awwwards</span></span>
+                                        <span class="btn-text"><span class="btn-text-inner">Facebook</span></span>
                                     </a>
                                 </li>
                                 <li class="btn btn-link btn-link-external">
-                                    <a href="https://www.instagram.com/codebydennis/" target="_blank"
+                                    <a href="https://www.instagram.com/3mmarx3/" target="_blank"
                                         class="btn-click magnetic" data-strength="20" data-strength-text="10">
                                         <span class="btn-text"><span class="btn-text-inner">Instagram</span></span>
                                     </a>
                                 </li>
                                 <li class="btn btn-link btn-link-external">
-                                    <a href="https://twitter.com/codebydennis" target="_blank"
-                                        class="btn-click magnetic" data-strength="20" data-strength-text="10">
-                                        <span class="btn-text"><span class="btn-text-inner">Twitter</span></span>
+                                    <a href="https://wa.me/+201065424756" target="_blank" class="btn-click magnetic"
+                                        data-strength="20" data-strength-text="10">
+                                        <span class="btn-text"><span class="btn-text-inner">Whatsapp</span></span>
                                     </a>
                                 </li>
                                 <li class="btn btn-link btn-link-external">
-                                    <a href="https://www.linkedin.com/in/dennissnellenberg/" target="_blank"
+                                    <a href="https://www.linkedin.com/in/ammar-ahmed-543a58253/" target="_blank"
                                         class="btn-click magnetic" data-strength="20" data-strength-text="10">
                                         <span class="btn-text"><span class="btn-text-inner">LinkedIn</span></span>
                                     </a>
                                 </li>
                             </ul>
+
                         </div>
                     </div>
                 </div>

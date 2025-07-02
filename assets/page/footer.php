@@ -108,16 +108,16 @@ displayFixedTimeCairo();
                                         <h5>Socials</h5>
                                         <ul>
                                             <li class="btn btn-link btn-link-external">
-                                                <a href="https://www.awwwards.com/dennissnellenberg/" target="_blank"
+                                                <a href="https://www.facebook.com/eng.amaar.ah.med/" target="_blank"
                                                     class="btn-click magnetic" data-strength="20"
                                                     data-strength-text="10">
                                                     <span class="btn-text">
-                                                        <span class="btn-text-inner">Awwwards</span>
+                                                        <span class="btn-text-inner">Facebook</span>
                                                     </span>
                                                 </a>
                                             </li>
                                             <li class="btn btn-link btn-link-external">
-                                                <a href="https://www.instagram.com/codebydennis/" target="_blank"
+                                                <a href="https://www.instagram.com/3mmarx3/" target="_blank"
                                                     class="btn-click magnetic" data-strength="20"
                                                     data-strength-text="10">
                                                     <span class="btn-text">
@@ -126,16 +126,16 @@ displayFixedTimeCairo();
                                                 </a>
                                             </li>
                                             <li class="btn btn-link btn-link-external">
-                                                <a href="https://twitter.com/codebydennis" target="_blank"
+                                                <a href="https://wa.me/+201065424756" target="_blank"
                                                     class="btn-click magnetic" data-strength="20"
                                                     data-strength-text="10">
                                                     <span class="btn-text">
-                                                        <span class="btn-text-inner">Twitter</span>
+                                                        <span class="btn-text-inner">whatsapp</span>
                                                     </span>
                                                 </a>
                                             </li>
                                             <li class="btn btn-link btn-link-external">
-                                                <a href="https://www.linkedin.com/in/dennissnellenberg/" target="_blank"
+                                                <a href="https://www.linkedin.com/in/ammar-ahmed-543a58253/" target="_blank"
                                                     class="btn-click magnetic" data-strength="20"
                                                     data-strength-text="10">
                                                     <span class="btn-text">
