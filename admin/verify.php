@@ -105,8 +105,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
                 <form method="post">
-                    <button type="submit" name="visitor_login" class="submit-button none"> <a href="#">Get
-                            started</a></button>
+                    <button type="submit" name="visitor_login" class="submit-button none">
+                        Get started
+                    </button>
                 </form>
 
             </div>
