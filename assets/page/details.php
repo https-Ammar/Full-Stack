@@ -4,7 +4,6 @@ include 'db.php';
 $cards = [];
 $sql = "SELECT * FROM cards ORDER BY id DESC";
 $result = $conn->query($sql);
-
 if ($result) {
     while ($row = $result->fetch_assoc()) {
         $cards[] = $row;
@@ -15,20 +14,23 @@ $card = null;
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 if ($id > 0) {
+    $update = $conn->prepare("UPDATE cards SET views = views + 1 WHERE id = ?");
+    $update->bind_param("i", $id);
+    $update->execute();
+    $update->close();
+
     $stmt = $conn->prepare("SELECT * FROM cards WHERE id = ?");
-    if ($stmt) {
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        if ($result && $result->num_rows > 0) {
-            $card = $result->fetch_assoc();
-        } else {
-            exit("Card not found.");
-        }
-        $stmt->close();
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result && $result->num_rows > 0) {
+        $card = $result->fetch_assoc();
     } else {
-        exit("Database error: " . $conn->error);
+        exit("Card not found.");
     }
+    $stmt->close();
+} else {
+    exit("Invalid ID.");
 }
 
 $current_page = isset($card['title']) ? htmlspecialchars($card['title']) : 'Work';
@@ -106,7 +108,7 @@ $current_page = isset($card['title']) ? htmlspecialchars($card['title']) : 'Work
 
 
                                 <div class="single-image"
-                                    style="background: url(../dashboard/uploads/<?php echo htmlspecialchars($card['image2'] ?? ''); ?>);">
+                                    style="background: url(../uploads/<?php echo htmlspecialchars($card['image2'] ?? ''); ?>);">
                                     <div class="overlay overlay-image playpauze">
                                         <video muted playsinline></video>
                                     </div>
@@ -127,19 +129,19 @@ $current_page = isset($card['title']) ? htmlspecialchars($card['title']) : 'Work
                     <div class="row device-iphone13nonotch">
                         <div class="flex-col block-padding-bottom">
                             <div class="device" data-scroll data-scroll-target=".block_1" data-scroll-speed="-1">
-                                <img src="../dashboard/uploads/<?php echo htmlspecialchars($card['image3'] ?? ''); ?>"
+                                <img src="../uploads/<?php echo htmlspecialchars($card['image3'] ?? ''); ?>"
                                     alt="glamora">
                             </div>
                         </div>
                         <div class="flex-col block-padding-bottom">
                             <div class="device">
-                                <img src="../dashboard/uploads/<?php echo htmlspecialchars($card['image4'] ?? ''); ?>"
+                                <img src="../uploads/<?php echo htmlspecialchars($card['image4'] ?? ''); ?>"
                                     alt="glamora">
                             </div>
                         </div>
                         <div class="flex-col block-padding-bottom">
                             <div class="device" data-scroll data-scroll-target=".block_1" data-scroll-speed="1">
-                                <img src="../dashboard/uploads/<?php echo htmlspecialchars($card['image5'] ?? ''); ?>"
+                                <img src="../uploads/<?php echo htmlspecialchars($card['image5'] ?? ''); ?>"
                                     alt="glamora">
                             </div>
                         </div>
@@ -158,7 +160,7 @@ $current_page = isset($card['title']) ? htmlspecialchars($card['title']) : 'Work
                                         <video class="overlay" loop muted playsinline>
                                             <style>
                                                 video.overlay {
-                                                    background: url(../dashboard/uploads/<?php echo htmlspecialchars($card['image6'] ?? ''); ?>);
+                                                    background: url(../uploads/<?php echo htmlspecialchars($card['image6'] ?? ''); ?>);
                                                     background-size: cover;
                                                     background-position: center center;
                                                     background-repeat: no-repeat;

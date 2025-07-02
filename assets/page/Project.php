@@ -221,7 +221,7 @@ if ($id > 0) {
                                                     <div class="overlay overlay-color" style="background-color: #D8D3CD;">
                                                     </div>
                                                     <div class="overlay overlay-image lazy">
-                                                        <img src="../dashboard/uploads/<?php echo htmlspecialchars($card['image1']); ?>"
+                                                        <img src="../uploads/<?php echo htmlspecialchars($card['image1']); ?>"
                                                             alt="" style=" width: 210px;">
                                                     </div>
                                                 </div>
