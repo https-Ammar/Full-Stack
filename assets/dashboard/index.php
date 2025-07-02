@@ -4,8 +4,9 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 session_start();
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+
+if (!isset($_SESSION['verified_email'])) {
+    header("Location: verify.php");
     exit();
 }
 
@@ -361,8 +362,8 @@ $cards = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
                     </svg>
                 </button>
                 <button class="profile-btn">
-                    <img src="https://assets.codepen.io/3306515/IMG_2025.jpg" />
-                    <span>Aybüke C.</span>
+                    <img src="/assets/img/me.png" />
+                    <span>Ammar Ahmed</span>
                 </button>
             </div>
             <button class="messages-btn">
