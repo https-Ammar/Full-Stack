@@ -17,7 +17,7 @@
 
 
     <ul class="links-wrap">
-        <li class="btn btn-link active">
+        <li class="btn btn-link ">
             <a href="/index.php" class="btn-click magnetic" data-strength="20" data-strength-text="10">
                 <span class="btn-text">
                     <span class="btn-text-inner">Home</span>
@@ -31,6 +31,19 @@
                 </span>
             </a>
         </li>
+
+        <li class="btn btn-link">
+            <a href="./Reviews.php" class="btn-click magnetic" data-strength="20" data-strength-text="10">
+                <span class="btn-text">
+                    <span class="btn-text-inner">Reviews</span>
+                </span>
+            </a>
+        </li>
+
+
+
+
+
         <li class="btn btn-link">
             <a href="./Project.php" class="btn-click magnetic" data-strength="20" data-strength-text="10">
                 <span class="btn-text">

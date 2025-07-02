@@ -5494,3 +5494,106 @@ main.touch .case-intro-image .btn-wrap {
 .flex-col a h1 {
   color: black;
 }
+
+/*  */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sidebar-icon {
+  width: 60px;
+  height: 60px;
+  background-color: #1a1a1d;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-icon i {
+  color: #d1d1e0;
+  font-size: 22px;
+}
+
+.cards {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card {
+  background-color: #1a1a1d;
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: #aaa;
+}
+
+.play-button {
+  width: 60px;
+  height: 60px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+}
+
+.play-button svg {
+  width: 20px;
+  height: 20px;
+  fill: black;
+}
+
+audio {
+  display: none;
+}
+
+.container.flex {
+  display: flex;
+  /* align-items: center; */
+  gap: 3vh;
+}
+.digital-ball {
+  width: 120px;
+  height: 120px;
+}
+
+@media screen and (max-width: 992px) {
+  .container.flex {
+    display: block;
+  }
+
+  .sidebar {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin: 5vh 0;
+  }
+
+  section.section.about-services.bg-with {
+    background: white;
+  }
+  /* section.section.about-services.bg-with {
+    margin: 0 !important;
+    padding: 0;
+  } */
+}
+.bg-with {
+  background: white !important;
+  border: none !important;
+}
+
+#archive,
+.archive-header,
+.archive-work-grid,
+.archive-work-grid + .footer-rounded-div .rounded-div {
+  background: white !important;
+}

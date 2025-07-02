@@ -77,7 +77,7 @@
                                 <div class="flex-col">
 <div class="credits">
     <h5>Version</h5>
-    <p>2022 © Edition</p>
+    <p>2025 © Edition</p>
 </div>
 <div class="time">
     <h5>Local time (Cairo)</h5>

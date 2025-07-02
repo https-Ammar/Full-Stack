@@ -56,18 +56,10 @@ $totalSkills = array_sum(array_map('count', $skillsData));
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Skills Page</title>
+    <title>Skills</title>
 
     <link rel="stylesheet" href="../css/main.css ">
 
-    <style>
-        #archive,
-        .archive-header,
-        .archive-work-grid,
-        .archive-work-grid+.footer-rounded-div .rounded-div {
-            background: white !important;
-        }
-    </style>
 </head>
 
 <body data-barba="wrapper">

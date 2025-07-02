@@ -1,149 +1,237 @@
+<?php
+$audioList = [
+    [
+        "title" => "Ehsan Ali",
+        "country" => "Palestine",
+        "sources" => [
+            ["src" => "../audio/Ihsan.mp3", "type" => "audio/mpeg"],
+            ["src" => "../audio/Ihsan.ogg", "type" => "audio/ogg"],
+            ["src" => "../audio/Ihsan.m4a", "type" => "audio/mp4"]
+        ]
+    ],
+    [
+        "title" => "Noor Qnebi",
+        "country" => "Palestine",
+        "sources" => [
+            ["src" => "../audio/Noor.mp3", "type" => "audio/mpeg"],
+            ["src" => "../audio/Noor.ogg", "type" => "audio/ogg"],
+            ["src" => "../audio/Noor.m4a", "type" => "audio/mp4"]
+        ]
+    ],
+    [
+        "title" => "Mira Abdallah",
+        "country" => "Palestine",
+        "sources" => [
+            ["src" => "../audio/Mera.mp3", "type" => "audio/mpeg"],
+            ["src" => "../audio/Mera.ogg", "type" => "audio/ogg"],
+            ["src" => "../audio/Mera.m4a", "type" => "audio/mp4"]
+        ]
+    ],
+    [
+        "title" => "Muhammad Naser",
+        "country" => "Palestine",
+        "sources" => [
+            ["src" => "../audio/Naser.mp3", "type" => "audio/mpeg"],
+            ["src" => "../audio/Naser.ogg", "type" => "audio/ogg"],
+            ["src" => "../audio/Naser.m4a", "type" => "audio/mp4"]
+        ]
+    ],
+    [
+        "title" => "Ahmed Othman",
+        "country" => "Palestine",
+        "sources" => [
+            ["src" => "../audio/Othman.mp3", "type" => "audio/mpeg"],
+            ["src" => "../audio/Othman.ogg", "type" => "audio/ogg"],
+            ["src" => "../audio/Othman.m4a", "type" => "audio/mp4"]
+        ]
+    ],
+    [
+        "title" => "Saja Fawaz",
+        "country" => "Palestine",
+        "sources" => [
+            ["src" => "../audio/Saja.mp3", "type" => "audio/mpeg"],
+            ["src" => "../audio/Saja.ogg", "type" => "audio/ogg"],
+            ["src" => "../audio/Saja.m4a", "type" => "audio/mp4"]
+        ]
+    ],
+    [
+        "title" => "Muhamed Samy",
+        "country" => "Palestine",
+        "sources" => [
+            ["src" => "../audio/Sami.mp3", "type" => "audio/mpeg"],
+            ["src" => "../audio/Sami.ogg", "type" => "audio/ogg"],
+            ["src" => "../audio/Sami.m4a", "type" => "audio/mp4"]
+        ]
+    ],
+    [
+        "title" => "Ahmed Al-Hamaida",
+        "country" => "Palestine",
+        "sources" => [
+            ["src" => "../audio/Hamaida.mp3", "type" => "audio/mpeg"],
+            ["src" => "../audio/Hamaida.ogg", "type" => "audio/ogg"],
+            ["src" => "../audio/Hamaida.m4a", "type" => "audio/mp4"]
+        ]
+    ],
+    [
+        "title" => "Ahmed Essam",
+        "country" => "Palestine",
+        "sources" => [
+            ["src" => "../audio/Essam.mp3", "type" => "audio/mpeg"],
+            ["src" => "../audio/Essam.ogg", "type" => "audio/ogg"],
+            ["src" => "../audio/Essam.m4a", "type" => "audio/mp4"]
+        ]
+    ],
+    [
+        "title" => "Heba Gamal",
+        "country" => "Palestine",
+        "sources" => [
+            ["src" => "../audio/Heba.mp3", "type" => "audio/mpeg"],
+            ["src" => "../audio/Heba.ogg", "type" => "audio/ogg"],
+            ["src" => "../audio/Heba.m4a", "type" => "audio/mp4"]
+        ]
+    ]
+];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Отзывы</title>
-    <link rel="stylesheet" href="../css/audio.css">
-    <style>
-        .reviews {
-            display: flex;
-            justify-content: space-between;
-            padding: 2rem;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-        .block-tour {
-            margin: 0.5rem 0;
-        }
-
-        .stars {
-            color: gold;
-        }
-
-        .pagination {
-            margin-top: 1rem;
-        }
-
-        .bullet {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: #ccc;
-            margin: 0 5px;
-        }
-
-        .bullet.active {
-            background-color: #000;
-        }
-
-        .reviews-right__nav button {
-            margin: 10px;
-            padding: 5px 15px;
-            font-size: 18px;
-            cursor: pointer;
-        }
-    </style>
 </head>
 
-<body>
-    <?php
-    $reviews = [
-        [
-            'title' => 'Ehsan Ali',
-            'country' => 'Palestine',
-            'audio' => '../audio/Ihsan.mp3',
-            'review' => 'مراجعة رائعة من إحسان عن الخدمة والتجربة.',
-            'image' => '../images/ihsan.jpg'
-        ],
-        [
-            'title' => 'Noor Qnebi',
-            'country' => 'Palestine',
-            'audio' => '../audio/Noor.mp3',
-            'review' => 'نور تشكر الفريق وتوصي بالتجربة.',
-            'image' => '../images/noor.jpg'
-        ],
-        [
-            'title' => 'Mira Abdallah',
-            'country' => 'Palestine',
-            'audio' => '../audio/Mera.mp3',
-            'review' => 'تجربة ميرا كانت مليئة بالحماس والسعادة.',
-            'image' => '../images/mira.jpg'
-        ],
-        [
-            'title' => 'Muhammad Naser',
-            'country' => 'Palestine',
-            'audio' => '../audio/Naser.mp3',
-            'review' => 'محمد ناصر تحدث عن تفاصيل رائعة للرحلة.',
-            'image' => '../images/naser.jpg'
-        ]
-    ];
+<body data-barba="wrapper">
+    <?php $current_page = 'Reviews'; ?>
+    <?php include './loading.php'; ?>
+    <main class="main" id="about" data-barba="container" data-barba-namespace="about">
+        <div class="main-wrap" data-scroll-container>
 
-    $current = isset($_GET['review']) ? intval($_GET['review']) : 0;
-    if ($current < 0 || $current >= count($reviews)) {
-        $current = 0;
-    }
-    $review = $reviews[$current];
-    ?>
+            <?php include './header.php'; ?>
 
-    <div class="reviews">
-        <div class="reviews-left">
-            <h2>Отзывы</h2>
-            <p>
-                Мы всегда стараемся предоставлять лучший сервис для наших клиентов.
-                Мы были бы очень признательны, если вы оставите отзыв на нашей странице,
-                чтобы другие клиенты могли узнать о нашей работе.
-            </p>
-            <button class="add-reviews" onclick="toggleAudio()">تشغيل / إيقاف الصوت</button>
-            <audio id="reviewAudio">
-                <source src="<?= htmlspecialchars($review['audio']) ?>" type="audio/mpeg">
-            </audio>
-        </div>
 
-        <div class="reviews-right">
-            <div class="reviews-right__avatar">
-                <div class="img" style="background-image: url('<?= htmlspecialchars($review['image']) ?>');"></div>
-            </div>
 
-            <div class="reviews-right__item">
-                <h3><?= htmlspecialchars($review['title']) ?></h3>
-                <div class="block-tour">
-                    <span>Тур: <a href="#">Калининград</a></span>
-                    <span class="stars">Оценка ★★★★★</span>
+            <header class="section default-header about-header bg-with" data-scroll-section>
+                <?php include './nav.php'; ?>
+                <div class="container medium once-in">
+                    <div class="row">
+                        <div class="flex-col">
+
+
+                            <h1><span> Customer </span><span> evaluation of the work</span></h1>
+                        </div>
+                    </div>
                 </div>
-                <p><?= htmlspecialchars($review['review']) ?></p>
+            </header>
 
-                <div class="reviews-right__nav">
-                    <div class="pagination">
-                        <?php foreach ($reviews as $index => $r): ?>
-                            <a href="?review=<?= $index ?>">
-                                <span class="bullet <?= $index === $current ? 'active' : '' ?>"></span>
-                            </a>
-                        <?php endforeach; ?>
+            <section class="section no-padding line-globe once-in" data-scroll-section>
+                <div class="container medium">
+                    <div class="row">
+                        <div class="flex-col">
+                            <div class="stripe"></div>
+                            <div class="digital-ball">
+                                <div class="overlay"></div>
+                                <div class="globe">
+                                    <div class="globe-wrap">
+                                        <div class="circle"></div>
+                                        <div class="circle"></div>
+                                        <div class="circle"></div>
+                                        <div class="circle-hor"></div>
+                                        <div class="circle-hor-middle"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="section about-services bg-with" data-scroll-section>
+                <div class="container flex">
+                    <div class="sidebar">
+                        <div class="sidebar-icon"><i class="fas fa-home"></i></div>
+                        <div class="sidebar-icon"><i class="fas fa-heartbeat"></i></div>
+                        <div class="sidebar-icon"><i class="fas fa-plus"></i></div>
+                        <div class="sidebar-icon"><i class="fas fa-id-card"></i></div>
+                        <div class="sidebar-icon"><i class="fas fa-user"></i></div>
                     </div>
 
-                    <?php if ($current > 0): ?>
-                        <a href="?review=<?= $current - 1 ?>"><button>⟨</button></a>
-                    <?php endif; ?>
-                    <?php if ($current < count($reviews) - 1): ?>
-                        <a href="?review=<?= $current + 1 ?>"><button>⟩</button></a>
-                    <?php endif; ?>
-                </div>
-            </div>
-        </div>
-    </div>
+                    <div class="cards">
+                        <?php foreach ($audioList as $index => $track): ?>
+                            <div class="card">
+                                <button class="play-button"
+                                    onclick='playAudio(<?php echo json_encode($track["sources"]); ?>, this)'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path d="M8 5v14l11-7z" />
+                                    </svg>
+                                </button>
+                                <div>
+                                    <div class="name"><?php echo htmlspecialchars($track['title']); ?></div>
+                                    <div class="players"><?php echo ($index + 1) . " / " . count($audioList); ?> Players •
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                        <p>Copyright @ Ammar_Ahmed 2025 •</p>
 
-    <script>
-        function toggleAudio() {
-            const audio = document.getElementById('reviewAudio');
-            if (audio.paused) {
-                audio.play();
-            } else {
-                audio.pause();
-            }
-        }
-    </script>
+                    </div>
+                </div>
+
+                <audio id="audio-player"></audio>
+
+                <script>
+                    const player = document.getElementById("audio-player");
+                    let currentButton = null;
+
+                    const icons = {
+                        play: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`,
+                        pause: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`
+                    };
+
+                    function playAudio(sources, btn) {
+                        if (btn === currentButton && !player.paused) {
+                            player.pause();
+                            btn.innerHTML = icons.play;
+                            return;
+                        }
+
+                        if (btn !== currentButton) {
+                            player.innerHTML = sources.map(s => `<source src="${s.src}" type="${s.type}">`).join('');
+                            player.load();
+                            if (currentButton) currentButton.innerHTML = icons.play;
+                            currentButton = btn;
+                        }
+
+                        player.play();
+                        btn.innerHTML = icons.pause;
+                    }
+
+                    ["pause", "ended"].forEach(e =>
+                        player.addEventListener(e, () => {
+                            if (currentButton) currentButton.innerHTML = icons.play;
+                        })
+                    );
+                </script>
+
+            </section>
+
+
+            <?php include './footer.php'; ?>
+        </div>
+    </main>
+    <script src="../js/audio-script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.0/js.cookie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@barba/core@2.10.3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.6.1/dist/lazyload.min.js"></script>
+    <script src="https://dennissnellenberg.com/assets/js/locomotive-scroll.min.js"></script>
+    <script defer src="https://dennissnellenberg.com/assets/js/index-new.js"></script>
 </body>
 
 </html>

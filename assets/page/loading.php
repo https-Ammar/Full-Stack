@@ -14,6 +14,7 @@ $loading_labels = [
     'One:Nil',
     'Andy Hardy',
     'About',
+    'Reviews',
     'Contact',
     'Success',
     'Archive',
