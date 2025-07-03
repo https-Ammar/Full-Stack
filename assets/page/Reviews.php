@@ -209,14 +209,18 @@ $audioList = [
                                     src.type = source.type;
                                     player.appendChild(src);
                                 });
-                                player.load();
+
                                 if (currentButton) currentButton.innerHTML = icons.play;
                                 currentButton = btn;
                             }
 
                             player.load();
-                            player.play().catch(() => { });
-                            btn.innerHTML = icons.pause;
+
+                            player.addEventListener('canplaythrough', function onReady() {
+                                player.removeEventListener('canplaythrough', onReady);
+                                player.play().catch(() => { });
+                                btn.innerHTML = icons.pause;
+                            });
                         };
 
                         ["pause", "ended"].forEach(e =>
@@ -236,6 +240,7 @@ $audioList = [
                         });
                     }
                 </script>
+
 
 
 
