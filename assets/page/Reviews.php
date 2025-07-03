@@ -184,38 +184,60 @@ $audioList = [
                 <audio id="audio-player"></audio>
 
                 <script>
-                    const player = document.getElementById("audio-player");
-                    let currentButton = null;
+                    function initializeAudioPlayer() {
+                        const player = document.getElementById("audio-player");
+                        let currentButton = null;
 
-                    const icons = {
-                        play: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`,
-                        pause: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`
-                    };
+                        const icons = {
+                            play: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`,
+                            pause: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`
+                        };
 
-                    function playAudio(sources, btn) {
-                        if (btn === currentButton && !player.paused) {
-                            player.pause();
-                            btn.innerHTML = icons.play;
-                            return;
-                        }
+                        window.playAudio = function (sources, btn) {
+                            if (btn === currentButton && !player.paused) {
+                                player.pause();
+                                btn.innerHTML = icons.play;
+                                return;
+                            }
 
-                        if (btn !== currentButton) {
-                            player.innerHTML = sources.map(s => `<source src="${s.src}" type="${s.type}">`).join('');
+                            if (btn !== currentButton) {
+                                player.pause();
+                                player.innerHTML = '';
+                                sources.forEach(source => {
+                                    const src = document.createElement('source');
+                                    src.src = source.src;
+                                    src.type = source.type;
+                                    player.appendChild(src);
+                                });
+                                player.load();
+                                if (currentButton) currentButton.innerHTML = icons.play;
+                                currentButton = btn;
+                            }
+
                             player.load();
-                            if (currentButton) currentButton.innerHTML = icons.play;
-                            currentButton = btn;
-                        }
+                            player.play().catch(() => { });
+                            btn.innerHTML = icons.pause;
+                        };
 
-                        player.play();
-                        btn.innerHTML = icons.pause;
+                        ["pause", "ended"].forEach(e =>
+                            player.addEventListener(e, () => {
+                                if (currentButton) currentButton.innerHTML = icons.play;
+                            })
+                        );
                     }
 
-                    ["pause", "ended"].forEach(e =>
-                        player.addEventListener(e, () => {
-                            if (currentButton) currentButton.innerHTML = icons.play;
-                        })
-                    );
+                    document.addEventListener("DOMContentLoaded", () => {
+                        initializeAudioPlayer();
+                    });
+
+                    if (window.barba) {
+                        barba.hooks.after(() => {
+                            initializeAudioPlayer();
+                        });
+                    }
                 </script>
+
+
 
             </section>
 
@@ -223,7 +245,6 @@ $audioList = [
             <?php include './footer.php'; ?>
         </div>
     </main>
-    <script src="../js/audio-script.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.0/js.cookie.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>

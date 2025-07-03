@@ -125,7 +125,7 @@ $totalSkills = array_sum(array_map('count', $skillsData));
                                     <li>
                                         <div class="stripe animate"></div>
                                         <a href="#" class="row">
-                                            <div class="flex-col">
+                                            <div class="flex-col phone_none">
                                                 <p><?= htmlspecialchars($skill['title']) ?></p>
                                             </div>
                                             <div class="flex-col animate">

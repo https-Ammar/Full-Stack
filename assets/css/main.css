@@ -5602,3 +5602,9 @@ audio {
 .archive-work-grid + .footer-rounded-div .rounded-div {
   background: white !important;
 }
+
+@media screen and (max-width: 992px) {
+  .flex-col.phone_none {
+    display: none;
+  }
+}

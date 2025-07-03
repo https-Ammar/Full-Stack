@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])) {
         if (!empty($_FILES[$field]['name'])) {
             $ext = pathinfo($_FILES[$field]['name'], PATHINFO_EXTENSION);
             $newName = uniqid("img_") . ".$ext";
-            move_uploaded_file($_FILES[$field]['tmp_name'], "../uploads/$newName");
+            move_uploaded_file($_FILES[$field]['tmp_name'], "../assets/uploads/$newName");
             $images["image$i"] = $newName;
         } else {
             $images["image$i"] = '';
@@ -80,7 +80,7 @@ if (isset($_GET['delete'])) {
         $imgs = $result->fetch_assoc();
         foreach ($imgs as $img) {
             if (!empty($img)) {
-                @unlink("../uploads/$img");
+                @unlink("../assets/uploads/$img");
             }
         }
     }
@@ -123,11 +123,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
         $field = "image$i";
         if (!empty($_FILES[$field]['name'])) {
             if (!empty($oldImages["image$i"])) {
-                @unlink("../uploads/" . $oldImages["image$i"]);
+                @unlink("../assets/uploads/" . $oldImages["image$i"]);
             }
             $ext = pathinfo($_FILES[$field]['name'], PATHINFO_EXTENSION);
             $newName = uniqid("img_") . ".$ext";
-            move_uploaded_file($_FILES[$field]['tmp_name'], "../uploads/$newName");
+            move_uploaded_file($_FILES[$field]['tmp_name'], "../assets/uploads/$newName");
             $images["image$i"] = $newName;
         } else {
             $images["image$i"] = $oldImages["image$i"];
@@ -492,7 +492,7 @@ $cards = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
 
                                 <?php if (!empty($card["image1"])): ?>
                                     <div class="project-box-header"
-                                        style="background: url(../uploads/<?= htmlspecialchars($card["image1"]) ?>);">
+                                        style="background: url(../assets/uploads/<?= htmlspecialchars($card["image1"]) ?>);">
                                     </div>
                                 <?php endif; ?>
 
