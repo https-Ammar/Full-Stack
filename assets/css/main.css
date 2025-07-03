@@ -1650,7 +1650,7 @@ input[type="radio"] {
   position: relative;
   display: inline-flex;
   border-radius: 50%;
-  background: url("../img/me.png") center center no-repeat;
+  background: url("../img/ammar.JPEG") TOP center no-repeat;
   background-size: cover;
   width: clamp(4.5em, 6.5vw, 8em);
   height: clamp(4.5em, 6.5vw, 8em);

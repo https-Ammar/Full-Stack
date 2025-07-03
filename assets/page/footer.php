@@ -39,7 +39,7 @@
                                     <div class="btn btn-round" data-scroll data-scroll-speed="-1"
                                         data-scroll-direction="horizontal" data-scroll-position="bottom"
                                         data-scroll-offset="-50%, 0">
-                                        <a href="https://dennissnellenberg.com/contact" class="btn-click magnetic "
+                                        <a href="./Contact.php" class="btn-click magnetic "
                                             data-strength="100" data-strength-text="50">
                                             <div class="btn-fill"></div>
                                             <span class="btn-text">
