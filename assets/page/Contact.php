@@ -98,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     <div class="row once-in">
                         <div class="flex-col">
-                            <form class="form" method="post" action="contact.php" enctype="multipart/form-data"
+                            <form class="form" method="post" action="./Contact.php" enctype="multipart/form-data"
                                 novalidate>
                                 <div class="website-field">
                                     <label class="label" for="tel">What's your phone number?</label>
