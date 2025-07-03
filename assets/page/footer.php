@@ -92,12 +92,11 @@ function displayFixedTimeCairo() {
         minute: '2-digit',
         second: '2-digit',
         hour12: true,
-        timeZone: 'Africa/Cairo',  // بتأكد إن التوقيت بتاع القاهرة صح مع التوقيت الصيفي لو موجود
+        timeZone: 'Africa/Cairo', 
     };
     const cairoTime = now.toLocaleTimeString('en-US', options);
     document.getElementById('timeSpan').textContent = cairoTime;
 }
-
 displayFixedTimeCairo();
 </script>
 
