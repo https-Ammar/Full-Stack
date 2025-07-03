@@ -31,27 +31,18 @@ $loading_labels = [
             <div class="rounded-div"></div>
         </div>
         <div class="loading-words">
-            <h2 class="home-active home-active-first">Hello<div class="dot"></div>
-            </h2>
-            <h2 class="home-active">Bonjour<div class="dot"></div>
-            </h2>
-            <h2 class="home-active">स्वागत हे<div class="dot"></div>
-            </h2>
-            <h2 class="home-active">Ciao<div class="dot"></div>
-            </h2>
-            <h2 class="home-active">Olá<div class="dot"></div>
-            </h2>
-            <h2 class="home-active jap">おい<div class="dot"></div>
-            </h2>
-            <h2 class="home-active">Hallå<div class="dot"></div>
-            </h2>
-            <h2 class="home-active">Guten tag<div class="dot"></div>
-            </h2>
-            <h2 class="home-active-last">Hallo<div class="dot"></div>
-            </h2>
+            <h2 class="home-active home-active-first">Hello<div class="dot"></div></h2>
+            <h2 class="home-active">Bonjour<div class="dot"></div></h2>
+            <h2 class="home-active">स्वागत हे<div class="dot"></div></h2>
+            <h2 class="home-active">Ciao<div class="dot"></div></h2>
+            <h2 class="home-active">Olá<div class="dot"></div></h2>
+            <h2 class="home-active jap">おい<div class="dot"></div></h2>
+            <h2 class="home-active">Hallå<div class="dot"></div></h2>
+            <h2 class="home-active">Guten tag<div class="dot"></div></h2>
+            <h2 class="home-active-last">Hallo<div class="dot"></div></h2>
 
             <?php foreach ($loading_labels as $label): ?>
-                <h2 class="<?= ($current_page == $label) ? 'active' : '' ?>">
+                <h2 class="<?php if (isset($current_page) && $current_page == $label) echo 'active'; ?>">
                     <?= htmlspecialchars($label) ?>
                     <div class="dot"></div>
                 </h2>

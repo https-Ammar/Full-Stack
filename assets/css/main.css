@@ -253,54 +253,6 @@ html.has-scroll-dragging {
 
 /* ------------------------- Fonts -------------------------------------------------- */
 
-@font-face {
-  font-family: "Dennis Sans";
-  src: url("../fonts/NeueMontreal-Light.otf") format("opentype");
-  font-weight: 300;
-  font-style: normal;
-  font-display: auto;
-}
-
-@font-face {
-  font-family: "Dennis Sans";
-  src: url("../fonts/NeueMontreal-LightItalic.otf") format("opentype");
-  font-weight: 300;
-  font-style: italic;
-  font-display: auto;
-}
-
-@font-face {
-  font-family: "Dennis Sans";
-  src: url("../fonts/NeueMontreal-Regular.otf") format("opentype");
-  font-weight: 450;
-  font-style: normal;
-  font-display: auto;
-}
-
-@font-face {
-  font-family: "Dennis Sans";
-  src: url("../fonts/NeueMontreal-Italic.otf") format("opentype");
-  font-weight: 450;
-  font-style: italic;
-  font-display: auto;
-}
-
-@font-face {
-  font-family: "Dennis Sans";
-  src: url("../fonts/NeueMontreal-Bold.otf") format("opentype");
-  font-weight: 800;
-  font-style: normal;
-  font-display: auto;
-}
-
-@font-face {
-  font-family: "Dennis Sans";
-  src: url("../fonts/NeueMontreal-BoldItalic.otf") format("opentype");
-  font-weight: 800;
-  font-style: italic;
-  font-display: auto;
-}
-
 /* ------------------------- Colors -------------------------------------------------- */
 
 :root {
@@ -3927,8 +3879,7 @@ main.touch .main-wrap {
 }
 
 .single-about-image .overlay:nth-child(1) {
-  background: url("https://portfolio-sigma-lemon-83.vercel.app/img/IMG_8661.PNG")
-    center center no-repeat;
+  background: url("../img/ammar-ahmed.PNG") center center no-repeat;
   background-size: cover;
   top: -20vh;
   height: 105%;
@@ -4202,26 +4153,12 @@ main.touch .main-wrap {
 }
 
 .about-awwwards .single-image .overlay:nth-child(1) {
-  /* background: url("../img/DSC07292.jpg") center center no-repeat;
-   background-size: cover;
-   height: 130%;
-   top: -25%;
-   width: 105%;
-   left: -5%; */
 
-  background: url("../img/DSC07079.jpg") center center no-repeat;
-  background-size: cover;
-  top: -3%;
-  height: 106%;
-  width: 140%;
-  left: -40%;
+  background: url("../img/ammar.JPEG") center center no-repeat;
 
-  /* background: url("../img/Kien_Team-16.jpg") center center no-repeat;
-   background-size: cover;
-   top: -3%;
-   height: 106%;
-   width: 140%;
-   left: -14%; */
+background-size: cover;
+
+
 }
 
 .about-awwwards .single-image .overlay:nth-child(2) {

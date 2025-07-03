@@ -73,9 +73,28 @@ if ($id > 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ammar Ahmed</title>
+    <title>Ammar Ahmed – Web Developer & Designer</title>
+    <meta name="description"
+        content="Ammar Ahmed is a Full Stack Web Developer with experience in PHP, HTML, CSS, JavaScript, SQL, Python, and modern web technologies. Explore his professional portfolio, skills, and projects covering frontend, backend, UI/UX design, and deployment tools.">
+    <meta name="keywords"
+        content="Ammar Ahmed, Full Stack Developer, Web Developer, Web Designer, Portfolio, PHP, HTML, CSS, JavaScript, SQL, Python, C++, C, Vue.js, Bootstrap, jQuery, SASS, API, Frontend Developer, Backend Developer, Git, GitHub, Vercel, VS Code, Terminal, Command Line, Owl Carousel, AOS, Swiper.js, Get Waves, Font Awesome, SVG, Google Fonts, Figma, Photoshop, AI Developer, ChatGPT, Artificial Intelligence, Animation, Web Projects, Web Development, Cairo Developer, Ammarx3, ammarx3@gmail.com, Web Skills, Modern Web Design, Website Builder, Responsive Design, Creative Developer, UX UI, Frontend Frameworks, Web Hosting, Software Engineer, Dynamic Websites, Freelance Developer">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://eng-ammar.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Ammar Ahmed – Web Developer & Designer">
+    <meta property="og:description"
+        content="Visit Ammar Ahmed's portfolio to explore modern web design and development projects.">
+    <meta property="og:image" content="https://eng-ammar.com/assets/img/web-developer-ammar-ahmed.jpg">
+    <meta property="og:url" content="https://eng-ammar.com/">
+    <meta property="og:site_name" content="Ammar Ahmed Portfolio">
+    <meta property="article:author" content="https://www.linkedin.com/in/ammar-ahmed-543a58253/">
+    <meta name="facebook-profile" content="https://www.facebook.com/eng.amaar.ah.med/">
+    <meta name="instagram-profile" content="https://www.instagram.com/3mmarx3/">
     <link rel="stylesheet" href="./assets/css/main.css">
 </head>
+
+
+
 
 <body data-barba="wrapper">
     <?php include './assets/page/loading.php'; ?>
@@ -99,7 +118,7 @@ if ($id > 0) {
 
                 <div class="overlay personal-image no-select once-in" data-scroll data-scroll-speed="-3"
                     data-scroll-position="top">
-                    <img src="https://portfolio-sigma-lemon-83.vercel.app/img/IMG_8661.PNG" />
+                    <img src="./assets/img/ammar-ahmed.PNG" />
                 </div>
 
                 <div class="overlay get-height once-in once-in-secondary">
@@ -227,7 +246,7 @@ if ($id > 0) {
                                                 <div class="overlay overlay-color" style="background-color: #D8D3CD;">
                                                 </div>
                                                 <div class="overlay overlay-image lazy">
-                                                    <img src="./assets/img/anc.png" alt="anc-compan"
+                                                    <img src="./assets/img/anc.png" alt="ammar-ahmed"
                                                         style="width: 210px;">
                                                 </div>
                                             </div>
@@ -253,7 +272,7 @@ if ($id > 0) {
                                                 <div class="overlay overlay-color" style="background-color: #D8D3CD;">
                                                 </div>
                                                 <div class="overlay overlay-image lazy">
-                                                    <img src="./assets/img/glamora.png" alt="glamora"
+                                                    <img src="./assets/img/glamora.png" alt="ammar-ahmed"
                                                         style="width: 210px;">
                                                 </div>
                                             </div>
