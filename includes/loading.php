@@ -20,7 +20,8 @@ $loading_labels = [
     'Archive',
     'Error',
     'Styleguide',
-    'Skills'
+    'Skills',
+    'anc-compan'    
 ];
 ?>
 

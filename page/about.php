@@ -5,21 +5,34 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>About</title>
-   <link rel="stylesheet" href="../css/main.css">
+   <link rel="stylesheet" href="../assets/css/main.css">
+   <title>About - Eng Ammar | Front-End Developer & UI/UX Specialist</title>
+   <meta name="description"
+      content="Learn more about Eng Ammar, a front-end developer helping global brands with high-quality, scalable digital solutions.">
+   <link rel="canonical" href="https://eng-ammar.com/assets/page/about.php">
+   <meta property="og:title" content="About - Eng Ammar Ahmed">
+   <meta property="og:description"
+      content="Discover how Eng Ammar Ahmed helps brands thrive with tailor-made digital solutions.">
+   <meta property="og:type" content="website">
+   <meta property="og:url" content="https://eng-ammar.com/assets/page/about.php">
+   <meta property="og:image" content="https://eng-ammar.com/assets/img/ammar-ahmed.png">
+   <meta name="twitter:card" content="summary_large_image">
+   <meta name="twitter:title" content="About - Eng Ammar Ahmed">
+   <meta name="twitter:description"
+      content="Discover how Eng Ammar helps brands thrive with tailor-made digital solutions.">
+   <meta name="twitter:image" content="https://eng-ammar.com/assets/img/ammar-ahmed.png">
+   <meta name="robots" content="index, follow">
+
 </head>
 
 <body data-barba="wrapper">
    <?php $current_page = 'About'; ?>
-   <?php include './loading.php'; ?>
+   <?php include '../includes/loading.php'; ?>
    <main class="main" id="about" data-barba="container" data-barba-namespace="about">
       <div class="main-wrap" data-scroll-container>
-
-         <?php include './header.php'; ?>
-
-
-
+         <?php include '../includes/header.php'; ?>
          <header class="section default-header about-header" data-scroll-section>
-            <?php include './nav.php'; ?>
+            <?php include '../includes/nav.php'; ?>
             <div class="container medium once-in">
                <div class="row">
                   <div class="flex-col">
@@ -127,32 +140,7 @@
             </div>
          </section>
 
-         <section class="section about-awwwards" data-scroll-section>
-            <div class="container">
-               <div class="row">
-                  <div class="flex-col">
-                     <div class="single-image">
-                        <div class="overlay" data-scroll data-scroll-speed="-1"></div>
-                        <div class="overlay"></div>
-                     </div>
-                  </div>
-                  <div class="flex-col">
-                     <h2>Eng - Ammar Ahmed</h2>
-                     <p>
-                        I’m a 21-year-old Egyptian Full-Stack Web Developer, currently pursuing my degree at the Faculty
-                        of Computers and Artificial Intelligence. I specialize in both front-end and back-end
-                        development, with a strong passion for building modern, responsive, and user-friendly web
-                        applications. I'm constantly learning and staying updated with the latest technologies to
-                        deliver high-quality digital solutions.
-                     </p>
-                     <div class="news-widget-categories">
-                        <ul id="audio-list" class="list-unstyled"></ul>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </section>
-         <?php include './footer.php'; ?>
+         <?php include '../includes/footer.php'; ?>
       </div>
    </main>
    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -164,5 +152,4 @@
    <script src="https://dennissnellenberg.com/assets/js/locomotive-scroll.min.js"></script>
    <script defer src="https://dennissnellenberg.com/assets/js/index-new.js"></script>
 </body>
-
 </html>

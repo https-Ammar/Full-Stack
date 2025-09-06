@@ -21,14 +21,16 @@
             <div class="stripe"></div>
             <ul class="links-wrap">
                 <li class="btn btn-link ">
-                    <a href="/index.php" class="btn-click magnetic" data-strength="24" data-strength-text="12">
+                    <a href="http://localhost:8888/ammar/" class="btn-click magnetic" data-strength="24"
+                        data-strength-text="12">
                         <span class="btn-text">
                             <span class="btn-text-inner">Home</span>
                         </span>
                     </a>
                 </li>
                 <li class="btn btn-link">
-                    <a href="./About.php" class="btn-click magnetic" data-strength="24" data-strength-text="12">
+                    <a href="http://localhost:8888/ammar/assets/page/about.php" class="btn-click magnetic"
+                        data-strength="24" data-strength-text="12">
                         <span class="btn-text">
                             <span class="btn-text-inner">About</span>
                         </span>
@@ -36,7 +38,8 @@
                 </li>
 
                 <li class="btn btn-link">
-                    <a href="./Reviews.php" class="btn-click magnetic" data-strength="24" data-strength-text="12">
+                    <a href="http://localhost:8888/ammar/assets/page/reviews.php" class="btn-click magnetic"
+                        data-strength="24" data-strength-text="12">
                         <span class="btn-text">
                             <span class="btn-text-inner">Reviews</span>
                         </span>
@@ -44,21 +47,24 @@
                 </li>
 
                 <li class="btn btn-link">
-                    <a href="./Project.php" class="btn-click magnetic" data-strength="24" data-strength-text="12">
+                    <a href="http://localhost:8888/ammar/assets/page/project.php" class="btn-click magnetic"
+                        data-strength="24" data-strength-text="12">
                         <span class="btn-text">
                             <span class="btn-text-inner">work</span>
                         </span>
                     </a>
                 </li>
                 <li class="btn btn-link">
-                    <a href="./Skills.php" class="btn-click magnetic" data-strength="24" data-strength-text="12">
+                    <a href="http://localhost:8888/ammar/assets/page/skills.php" class="btn-click magnetic"
+                        data-strength="24" data-strength-text="12">
                         <span class="btn-text">
                             <span class="btn-text-inner">Skills</span>
                         </span>
                     </a>
                 </li>
                 <li class="btn btn-link">
-                    <a href="./Contact.php" class="btn-click magnetic" data-strength="24" data-strength-text="12">
+                    <a href="http://localhost:8888/ammar/assets/page/contact.php" class="btn-click magnetic"
+                        data-strength="24" data-strength-text="12">
                         <span class="btn-text">
                             <span class="btn-text-inner">Contact</span>
                         </span>

@@ -1,7 +1,8 @@
--- قاعدة البيانات: portfolio_dashboard
+CREATE DATABASE IF NOT EXISTS profile CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
--- جدول المشاريع
-CREATE TABLE cards (
+USE profile;
+
+CREATE TABLE IF NOT EXISTS cards (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     description TEXT,
@@ -23,16 +24,14 @@ CREATE TABLE cards (
     updated_at TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 );
 
--- جدول الزائرين
-CREATE TABLE visitors (
+CREATE TABLE IF NOT EXISTS visitors (
     id INT AUTO_INCREMENT PRIMARY KEY,
     ip_address VARCHAR(50) NOT NULL,
     country VARCHAR(100),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- جدول المستخدمين
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,

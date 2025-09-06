@@ -2,23 +2,16 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
-include 'db.php';
-
+include './config/db.php';
 $ip = $_SERVER['REMOTE_ADDR'];
-if ($ip === '127.0.0.1' || $ip === '::1') {
+if (in_array($ip, ['127.0.0.1', '::1'])) {
     $ip = '8.8.8.8';
 }
-
 $country = 'Unknown';
+$response = @file_get_contents("http://ip-api.com/json/{$ip}?fields=country", false, stream_context_create([
+    'http' => ['timeout' => 2]
+]));
 
-$ctx = stream_context_create([
-    'http' => [
-        'timeout' => 2
-    ]
-]);
-
-$response = @file_get_contents("http://ip-api.com/json/{$ip}?fields=country", false, $ctx);
 if ($response !== false) {
     $data = json_decode($response, true);
     if (!empty($data['country'])) {
@@ -64,63 +57,78 @@ if ($id > 0) {
     $stmt->close();
 }
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ammar Ahmed – Web Developer & Designer</title>
+    <title>Ammar Ahmed Mostafa – Full Stack Web Developer & Designer</title>
     <meta name="description"
-        content="Ammar Ahmed is a Full Stack Web Developer with experience in PHP, HTML, CSS, JavaScript, SQL, Python, and modern web technologies. Explore his professional portfolio, skills, and projects covering frontend, backend, UI/UX design, and deployment tools.">
+        content="Ammar Ahmed Mostafa is a Full Stack Web Developer & SEO Specialist with experience in PHP, HTML, CSS, JavaScript, Python, and modern technologies. Explore his professional portfolio, skills, and web projects.">
     <meta name="keywords"
-        content="Ammar Ahmed, Full Stack Developer, Web Developer, Web Designer, Portfolio, PHP, HTML, CSS, JavaScript, SQL, Python, C++, C, Vue.js, Bootstrap, jQuery, SASS, API, Frontend Developer, Backend Developer, Git, GitHub, Vercel, VS Code, Terminal, Command Line, Owl Carousel, AOS, Swiper.js, Get Waves, Font Awesome, SVG, Google Fonts, Figma, Photoshop, AI Developer, ChatGPT, Artificial Intelligence, Animation, Web Projects, Web Development, Cairo Developer, Ammarx3, ammarx3@gmail.com, Web Skills, Modern Web Design, Website Builder, Responsive Design, Creative Developer, UX UI, Frontend Frameworks, Web Hosting, Software Engineer, Dynamic Websites, Freelance Developer">
+        content="Ammar Ahmed Mostafa, Ammar Ahmed, Full Stack Developer, Web Developer Egypt, Portfolio, PHP, HTML, CSS, JavaScript, SQL, Python, AI Developer, ChatGPT, Frontend Developer, Backend Developer, UX UI, Web Design, Responsive Design, SEO Specialist, Web Projects, Cairo Developer, Freelancer Developer, Modern Websites, Dynamic Web Design, Bootstrap, GitHub, Ammarx3, ammar132004@gmail.com">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://eng-ammar.com/">
+    <link rel="canonical" href="http://localhost:8888/ammar/">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Ammar Ahmed – Web Developer & Designer">
+    <meta property="og:title" content="Ammar Ahmed Mostafa – Full Stack Developer & Designer">
     <meta property="og:description"
-        content="Visit Ammar Ahmed's portfolio to explore modern web design and development projects.">
-    <meta property="og:image" content="https://eng-ammar.com/assets/img/web-developer-ammar-ahmed.jpg">
-    <meta property="og:url" content="https://eng-ammar.com/">
+        content="Visit Ammar Ahmed Mostafa's portfolio to explore modern web design and development projects using cutting-edge technologies.">
+    <meta property="og:image" content="http://localhost:8888/ammar/assets/img/web-developer-ammar-ahmed.jpg">
+    <meta property="og:url" content="http://localhost:8888/ammar/">
     <meta property="og:site_name" content="Ammar Ahmed Portfolio">
-    <meta property="article:author" content="https://www.linkedin.com/in/ammar-ahmed-543a58253/">
+    <meta property="article:author" content="https://www.linkedin.com/in/ammar-mostafa/">
     <meta name="facebook-profile" content="https://www.facebook.com/eng.amaar.ah.med/">
     <meta name="instagram-profile" content="https://www.instagram.com/3mmarx3/">
     <link rel="stylesheet" href="./assets/css/main.css">
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ammar Ahmed Mostafa",
+    "url": "https://eng-ammar.com",
+    "image": "http://localhost:8888/ammar/assets/img/ammar-ahmed.webp",
+    "sameAs": [
+      "https://github.com/https-Ammar",
+      "https://linkedin.com/in/ammar-mostafa",
+      "https://www.facebook.com/eng.amaar.ah.med/",
+      "https://www.instagram.com/3mmarx3/"
+    ],
+    "jobTitle": "Full Stack Developer & SEO Specialist",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Freelancer"
+    },
+    "email": "mailto:ammar132004@gmail.com",
+    "nationality": "Egyptian",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "EG"
+    },
+    "description": "Ammar Ahmed Mostafa is a detail-oriented Full Stack Developer with expertise in building high-performance, SEO-optimized web applications with modern design and scalability in mind."
+  }
+  </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NB128WD6QV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-NB128WD6QV');
+    </script>
 </head>
 
-
-
-
 <body data-barba="wrapper">
-    <?php include './assets/page/loading.php'; ?>
-
-
-
+    <?php include './includes/loading.php'; ?>
     <main class="main" id="home" data-barba="container" data-barba-namespace="home">
-
-        <div class="mouse-pos-list-btn no-select"></div>
-        <div class="mouse-pos-list-span no-select">
-            <p>View</p>
-        </div>
-
-        <?php include './assets/page/header.php'; ?>
-
+        <?php include './includes/header.php'; ?>
         <div class="main-wrap" data-scroll-container>
-
-
             <header class="section home-header theme-dark" data-scroll-section>
-                <?php include './assets/page/nav.php'; ?>
-
+                <?php include './includes/nav.php'; ?>
                 <div class="overlay personal-image no-select once-in" data-scroll data-scroll-speed="-3"
                     data-scroll-position="top">
-                    <img src="./assets/img/ammar-ahmed.PNG" />
+                    <img src="./assets/img/eng-ammar.webp" alt="Ammar Ahmed - Front-End Developer and UI/UX Specialist"
+                        title="Ammar Ahmed - Front-End Developer and UI/UX Specialist" loading="lazy" decoding="async">
                 </div>
-
                 <div class="overlay get-height once-in once-in-secondary">
                     <div class="hanger">
                         <p><span>Lives in Egypt</span></p>
@@ -130,7 +138,6 @@ if ($id > 0) {
                                     d="M239.633657,0 C272.770742,1.0182436e-15 299.633657,26.862915 299.633657,60 C299.633657,93.137085 272.770742,120 239.633657,120 L0,120 L0,0 L239.633657,0 Z M239.633657,18.7755102 C216.866,18.7755102 198.409167,37.232343 198.409167,60 C198.409167,82.767657 216.866,101.22449 239.633657,101.22449 C262.401314,101.22449 280.858147,82.767657 280.858147,60 C280.858147,37.232343 262.401314,18.7755102 239.633657,18.7755102 Z" />
                             </g>
                         </svg>
-
                         <div class="digital-ball">
                             <div class="overlay"></div>
                             <div class="globe">
@@ -145,8 +152,6 @@ if ($id > 0) {
                         </div>
                     </div>
                 </div>
-
-
                 <div class="container once-in once-in-secondary">
                     <div class="row">
                         <div class="flex-col">
@@ -173,7 +178,6 @@ if ($id > 0) {
                         </div>
                     </div>
                 </div>
-
                 <div class="big-name">
                     <div class="name-h1" data-scroll data-scroll-direction="horizontal" data-scroll-speed="4"
                         data-scroll-position="top">
@@ -183,10 +187,8 @@ if ($id > 0) {
                         </div>
                     </div>
                 </div>
-
                 <div class="white-block"></div>
             </header>
-
             <section class="section home-intro" data-scroll-section>
                 <div class="container medium">
                     <div class="row">
@@ -209,7 +211,6 @@ if ($id > 0) {
                     </div>
                 </div>
             </section>
-
             <section class="section work-grid large-work-grid" data-scroll-section>
                 <div class="container">
                     <div class="grid-sub-title">
@@ -234,7 +235,6 @@ if ($id > 0) {
                         <div class="stripe last animate"></div>
                     </ul>
                 </div>
-
                 <section class="section work-tiles grid-fade grid-columns-part visible">
                     <div class="container">
                         <ul>
@@ -246,8 +246,11 @@ if ($id > 0) {
                                                 <div class="overlay overlay-color" style="background-color: #D8D3CD;">
                                                 </div>
                                                 <div class="overlay overlay-image lazy">
-                                                    <img src="./assets/img/anc.png" alt="ammar-ahmed"
-                                                        style="width: 210px;">
+                                                    <img src="./assets/img/anc.webp"
+                                                        alt="Ammar Ahmed - Animated Network Card Illustration"
+                                                        title="Ammar Ahmed - Network Card Design" width="210"
+                                                        height="auto" loading="lazy" decoding="async"
+                                                        style="width: 210px; height: auto; display: block;">
                                                 </div>
                                             </div>
                                         </div>
@@ -272,8 +275,11 @@ if ($id > 0) {
                                                 <div class="overlay overlay-color" style="background-color: #D8D3CD;">
                                                 </div>
                                                 <div class="overlay overlay-image lazy">
-                                                    <img src="./assets/img/glamora.png" alt="ammar-ahmed"
-                                                        style="width: 210px;">
+                                                    <img src="./assets/img/glamora.webp"
+                                                        alt="Ammar Ahmed - Glamora Project UI Design"
+                                                        title="Glamora Project by Ammar Ahmed - UI/UX Design Showcase"
+                                                        width="210" height="auto" loading="lazy" decoding="async"
+                                                        style="width: 210px; height: auto; display: block;">
                                                 </div>
                                             </div>
                                         </div>
@@ -294,59 +300,16 @@ if ($id > 0) {
                     </div>
                 </section>
             </section>
-
-            <?php include './assets/page/footer.php'; ?>
-
+            <?php include './includes/footer.php'; ?>
         </div>
     </main>
-
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.0/js.cookie.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@barba/core@2.10.3"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.6.1/dist/lazyload.min.js"></script>
-    <script src="./assets/js/locomotive-scroll.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
     <script defer src="./assets/js/index-new.js"></script>
-
-
-
-    <script>
-        const newPaths = {
-            "Home": "/home.php",
-            "About": "./assets/page/About.php",
-            "Work": "./assets/page/Project.php",
-            "Skills": "./assets/page/Skills.php",
-            "Contact": "./assets/page/Contact.php"
-        };
-
-        document.querySelectorAll('.links-wrap a').forEach(link => {
-            const innerText = link.innerText.trim().toLowerCase();
-
-            for (let key in newPaths) {
-                if (innerText === key.toLowerCase()) {
-                    link.setAttribute('href', newPaths[key]);
-                }
-            }
-        });
-
-        const newSocials = {
-            "Awwwards": "https://example.com/awwwards",
-            "Instagram": "https://example.com/insta",
-            "Twitter": "https://example.com/twitter",
-            "LinkedIn": "https://example.com/linkedin"
-        };
-
-        document.querySelectorAll('.socials a').forEach(link => {
-            const text = link.innerText.trim();
-            if (newSocials[text]) {
-                link.setAttribute('href', newSocials[text]);
-            }
-        });
-
-    </script>
-
-
 </body>
-
 </html>

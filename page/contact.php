@@ -17,25 +17,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     try {
         $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
+        $mail->Host = 'smtp.hostinger.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'ammar132004@gmail.com';
-        $mail->Password = 'absbxvzfkklexzha';
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = 587;
+        $mail->Username = 'ammar@eng-ammar.com';
+        $mail->Password = '@Ammar132004';
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->Port = 465;
 
-        $mail->setFrom($email, $name);
-        $mail->addAddress('ammar132004@gmail.com', 'Ammar');
+        $mail->setFrom('ammar@eng-ammar.com', 'Website Contact');
+        $mail->addReplyTo($email, $name);
+        $mail->addAddress('ammar@eng-ammar.com', 'Ammar');
 
         $mail->isHTML(false);
         $mail->Subject = "New Project Request from $name";
         $mail->Body =
-            " New Contact Form Submission\n\n" .
-            " Name: $name\n" .
-            " Email: $email\n" .
-            " Phone: $phone\n" .
-            " Service Requested: $service\n" .
-            " Message:\n$message\n\n" .
+            "New Contact Form Submission\n\n" .
+            "Name: $name\n" .
+            "Email: $email\n" .
+            "Phone: $phone\n" .
+            "Service Requested: $service\n" .
+            "Message:\n$message\n\n" .
             "This message was sent from your website contact form.";
 
         $mail->send();
@@ -47,6 +48,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,19 +57,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact</title>
-    <link rel="stylesheet" href="../css/main.css">
+    <meta name="description" content="Get in touch with Eng Ammar for web development, UI/UX, and digital solutions.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="http://localhost:8888/ammar/assets/page/contact.php">
+
+    <link rel="stylesheet" href="../assets/css/main.css">
 </head>
 
 <body data-barba="wrapper">
     <?php $current_page = 'Contact'; ?>
-    <?php include './loading.php'; ?>
+    <?php include '../includes/loading.php'; ?>
 
     <main class="main" id="contact" data-barba="container" data-barba-namespace="contact">
         <div class="main-wrap" data-scroll-container>
-            <?php include './header.php'; ?>
+            <?php include '../includes/header.php'; ?>
 
             <header class="section default-header contact-header theme-dark" data-scroll-section>
-                <?php include './nav.php'; ?>
+                <?php include '../includes/nav.php'; ?>
 
                 <div class="container medium">
                     <div class="row once-in">
@@ -98,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     <div class="row once-in">
                         <div class="flex-col">
-                            <form class="form" method="post" action="./Contact.php" enctype="multipart/form-data"
+                            <form class="form" method="post" action="./contact.php" enctype="multipart/form-data"
                                 novalidate>
                                 <div class="website-field">
                                     <label class="label" for="tel">What's your phone number?</label>
@@ -158,10 +165,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <h5>Contact Details</h5>
                             <ul class="links-wrap">
                                 <li class="btn btn-link btn-link-external">
-                                    <a href="mailto:ammar132004@gmail.com" class="btn-click magnetic" data-strength="20"
+                                    <a href="mailto:ammar@eng-ammar.com" class="btn-click magnetic" data-strength="20"
                                         data-strength-text="10">
                                         <span class="btn-text"><span
-                                                class="btn-text-inner">ammar132004@gmail.com</span></span>
+                                                class="btn-text-inner">ammar@eng-ammar.com</span></span>
                                     </a>
                                 </li>
                                 <li class="btn btn-link btn-link-external">
@@ -225,17 +232,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </header>
         </div>
     </main>
-
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.0/js.cookie.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@barba/core@2.10.3"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.6.1/dist/lazyload.min.js"></script>
-    <script src="../js/locomotive-scroll.min.js"></script>
-    <script defer src="../js/index-new.js"></script>
-
-
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+    <script defer src="../assets/js/index-new.js"></script>
 </body>
-
 </html>
