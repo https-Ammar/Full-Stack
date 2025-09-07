@@ -41,21 +41,76 @@ if ($viewsRes && $vrow = $viewsRes->fetch_assoc()) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" :class="{'dark': darkMode}">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin Dashboard</title>
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
-<body>
+<body x-data="{ 
+        page: 'ecommerce', 
+        loaded: true, 
+        darkMode: JSON.parse(localStorage.getItem('darkMode') || 'false'), 
+        stickyMenu: false, 
+        sidebarToggle: false, 
+        scrollTop: false,
+        menuToggle: false
+    }" x-init="$watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
+    :class="{'dark bg-gray-900': darkMode === true}">
+
+    <header
+        class="sticky top-0 z-99999 flex w-full border-gray-200 bg-white xl:border-b dark:border-gray-800 dark:bg-gray-900">
+        <div class="flex grow flex-col items-center justify-between xl:flex-row xl:px-6">
+            <div
+                class="flex w-full items-center justify-between gap-2 border-b border-gray-200 px-3 py-3 sm:gap-4 lg:py-4 xl:justify-normal xl:border-b-0 xl:px-0 dark:border-gray-800">
+                <button
+                    :class="sidebarToggle ? 'xl:bg-transparent dark:xl:bg-transparent bg-gray-100 dark:bg-gray-800' : ''"
+                    class="z-99999 flex h-10 w-10 items-center justify-center rounded-lg border-gray-200 text-gray-500 xl:h-11 xl:w-11 xl:border dark:border-gray-800 dark:text-gray-400"
+                    @click.stop="sidebarToggle = !sidebarToggle">
+                    <i class="bi bi-list xl:block hidden" style="font-size:16px;"></i>
+                    <i :class="sidebarToggle ? 'hidden' : 'block xl:hidden'" class="bi bi-list block xl:hidden"
+                        style="font-size:24px;"></i>
+                    <i :class="sidebarToggle ? 'block xl:hidden' : 'hidden'" class="bi bi-x hidden"
+                        style="font-size:24px;"></i>
+                </button>
+
+                <button
+                    class="z-99999 flex h-10 w-10 items-center justify-center rounded-lg text-gray-700 hover:bg-gray-100 xl:hidden dark:text-gray-400 dark:hover:bg-gray-800"
+                    :class="menuToggle ? 'bg-gray-100 dark:bg-gray-800' : ''" @click.stop="menuToggle = !menuToggle">
+                    <i class="bi bi-three-dots-vertical" style="font-size:24px;"></i>
+                </button>
+            </div>
+
+            <div :class="menuToggle ? 'flex' : 'hidden xl:flex'"
+                class="shadow-theme-md w-full items-center justify-between gap-4 px-5 py-4 xl:flex xl:justify-end xl:px-0 xl:shadow-none">
+                <div class="2xsm:gap-3 flex items-center gap-2">
+                    <button
+                        class="hover:text-dark-900 relative flex h-11 w-11 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">
+                        <a href="./auth/logout.php" class="flex items-center gap-3">
+                            <i class="bi bi-box-arrow-right fill-gray-500 group-hover:fill-gray-700 dark:group-hover:fill-gray-300"
+                                style="font-size:24px;"></i>
+                        </a>
+                    </button>
+
+                    <button
+                        class="hover:text-dark-900 relative flex h-11 w-11 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"
+                        @click.prevent="darkMode = !darkMode">
+                        <i x-show="darkMode" class="bi bi-sun-fill" style="font-size:20px;"></i>
+                        <i x-show="!darkMode" class="bi bi-moon-fill" style="font-size:20px;"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
 
     <main>
-
         <div class="mx-auto max-w-7xl p-4 md:p-6">
-            <div x-data="{ pageName: `Profile`}">
+            <div x-data="{ pageName: 'Profile' }">
                 <div class="flex flex-wrap items-center justify-between gap-3 pb-6">
                     <h2 class="text-xl font-semibold text-gray-800 dark:text-white/90" x-text="pageName">Profile</h2>
                     <nav>
@@ -89,23 +144,25 @@ if ($viewsRes && $vrow = $viewsRes->fetch_assoc()) {
                             class="inline-flex w-full items-center gap-0.5 rounded-lg bg-gray-100 p-0.5 dark:bg-gray-900">
                             <button @click="selected = 'weekly'"
                                 :class="selected === 'weekly' ? 'shadow-theme-xs text-gray-900 dark:text-white bg-white dark:bg-gray-800' : 'text-gray-500 dark:text-gray-400'"
-                                class="text-theme-sm w-full rounded-md px-3 py-2 font-medium hover:text-gray-900 dark:hover:text-white shadow-theme-xs text-gray-900 dark:text-white bg-white dark:bg-gray-800">
-                                Weekly
+                                class="text-theme-sm w-full rounded-md px-3 py-2 font-medium hover:text-gray-900 dark:hover:text-white">
+                                <a href="./pages/Products.php">Products</a>
                             </button>
                             <button @click="selected = 'monthly'"
                                 :class="selected === 'monthly' ? 'shadow-theme-xs text-gray-900 dark:text-white bg-white dark:bg-gray-800' : 'text-gray-500 dark:text-gray-400'"
-                                class="text-theme-sm w-full rounded-md px-3 py-2 font-medium hover:text-gray-900 dark:hover:text-white text-gray-500 dark:text-gray-400">
+                                class="text-theme-sm w-full rounded-md px-3 py-2 font-medium hover:text-gray-900 dark:hover:text-white">
                                 Monthly
                             </button>
-                            <button @click="selected = 'yearly'"
-                                :class="selected === 'yearly' ? 'shadow-theme-xs text-gray-900 dark:text-white bg-white dark:bg-gray-800' : 'text-gray-500 dark:text-gray-400'"
-                                class="text-theme-sm w-full rounded-md px-3 py-2 font-medium hover:text-gray-900 dark:hover:text-white text-gray-500 dark:text-gray-400">
-                                Yearly
+
+                            <button @click="selected = 'log out'"
+                                :class="selected === 'log out' ? 'shadow-theme-xs text-gray-900 dark:text-white bg-white dark:bg-gray-800' : 'text-gray-500 dark:text-gray-400'"
+                                class="text-theme-sm w-full rounded-md px-3 py-2 font-medium hover:text-gray-900 dark:hover:text-white">
+                                <a href="./auth/logout.php">
+                                    log out
+                                </a>
                             </button>
                         </div>
                         <div>
-
-                            <a href="./pages/Products.php">
+                            <a href="./pages/add_product.php">
                                 <button
                                     class="text-theme-sm shadow-theme-xs inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2.5 font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200">
                                     <svg class="fill-white stroke-current dark:fill-gray-800" width="20" height="20"
@@ -121,7 +178,7 @@ if ($viewsRes && $vrow = $viewsRes->fetch_assoc()) {
                                             d="M7.91745 11.525C6.49762 11.525 5.34662 12.676 5.34662 14.0959C5.34661 15.5157 6.49762 16.6667 7.91745 16.6667C9.33728 16.6667 10.4883 15.5157 10.4883 14.0959C10.4883 12.676 9.33728 11.525 7.91745 11.525Z"
                                             fill="" stroke="" stroke-width="1.5"></path>
                                     </svg>
-                                    <span class="hidden sm:block">Products</span>
+                                    <span class="hidden sm:block">Add </span>
                                 </button>
                             </a>
                         </div>
@@ -182,8 +239,6 @@ if ($viewsRes && $vrow = $viewsRes->fetch_assoc()) {
                                 <?php
                                 echo date('j');
                                 ?>
-
-
                             </h4>
                             <div>
                                 <span
@@ -197,6 +252,7 @@ if ($viewsRes && $vrow = $viewsRes->fetch_assoc()) {
                     </div>
                 </div>
             </div>
+
             <div class="col-span-12">
                 <div
                     class="overflow-hidden rounded-2xl border border-gray-200 bg-white pt-4 dark:border-gray-800 dark:bg-white/[0.03]">
@@ -208,13 +264,7 @@ if ($viewsRes && $vrow = $viewsRes->fetch_assoc()) {
                         </div>
 
                         <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
-                            <form>
-                                <div class="relative">
 
-                                    <input type="text" placeholder="Search..."
-                                        class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-10 w-full rounded-lg border border-gray-300 bg-transparent py-2.5 pr-4 pl-[42px] text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden xl:w-[300px] dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30">
-                                </div>
-                            </form>
                             <div>
                                 <button
                                     class="text-theme-sm shadow-theme-xs inline-flex h-10 items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2.5 font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200">
@@ -231,7 +281,6 @@ if ($viewsRes && $vrow = $viewsRes->fetch_assoc()) {
                                             d="M7.91745 11.525C6.49762 11.525 5.34662 12.676 5.34662 14.0959C5.34661 15.5157 6.49762 16.6667 7.91745 16.6667C9.33728 16.6667 10.4883 15.5157 10.4883 14.0959C10.4883 12.676 9.33728 11.525 7.91745 11.525Z"
                                             fill="" stroke="" stroke-width="1.5"></path>
                                     </svg>
-
                                     Filter
                                 </button>
                             </div>
@@ -250,7 +299,7 @@ if ($viewsRes && $vrow = $viewsRes->fetch_assoc()) {
                                                     :class="checked ? 'border-brand-500 dark:border-brand-500 bg-brand-500' : 'bg-white dark:bg-white/0 border-gray-300 dark:border-gray-700' ">
                                                     <svg :class="checked ? 'block' : 'hidden'" width="14" height="14"
                                                         viewBox="0 0 14 14" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg" class="hidden">
+                                                        xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M11.6668 3.5L5.25016 9.91667L2.3335 7" stroke="white"
                                                             stroke-width="1.94437" stroke-linecap="round"
                                                             stroke-linejoin="round"></path>
@@ -334,7 +383,7 @@ if ($viewsRes && $vrow = $viewsRes->fetch_assoc()) {
                                                             :class="checked ? 'border-brand-500 dark:border-brand-500 bg-brand-500' : 'bg-white dark:bg-white/0 border-gray-300 dark:border-gray-700' ">
                                                             <svg :class="checked ? 'block' : 'hidden'" width="14" height="14"
                                                                 viewBox="0 0 14 14" fill="none"
-                                                                xmlns="http://www.w3.org/2000/svg" class="hidden">
+                                                                xmlns="http://www.w3.org/2000/svg">
                                                                 <path d="M11.6668 3.5L5.25016 9.91667L2.3335 7" stroke="white"
                                                                     stroke-width="1.94437" stroke-linecap="round"
                                                                     stroke-linejoin="round"></path>
@@ -389,7 +438,6 @@ if ($viewsRes && $vrow = $viewsRes->fetch_assoc()) {
                                                         $time = date("h:i A");
                                                         ?>
                                                         <?= htmlspecialchars($time) ?>
-
                                                     </p>
                                                 </div>
                                             </td>
