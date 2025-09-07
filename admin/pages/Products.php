@@ -64,7 +64,7 @@ $cards = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
                             <ol class="flex items-center gap-1.5">
                                 <li>
                                     <a class="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400"
-                                        href="index.html">
+                                        href="../index.php">
                                         Home
                                         <svg class="stroke-current" width="17" height="16" viewBox="0 0 17 16"
                                             fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -325,4 +325,5 @@ $cards = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
         </div>
     </main>
 </body>
+
 </html>
