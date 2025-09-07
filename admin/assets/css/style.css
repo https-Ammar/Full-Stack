@@ -10813,7 +10813,6 @@ label {
   display: block;
   margin-bottom: 8px;
   font-weight: 500;
-  color: #374151;
 }
 
 input[type="text"],
@@ -10822,11 +10821,9 @@ textarea,
 select {
   width: 100%;
   padding: 10px 12px;
-  border: 1px solid #d1d5db;
+
   border-radius: 6px;
   font-size: 14px;
-  color: #374151;
-  background-color: white;
 }
 
 input:focus,
