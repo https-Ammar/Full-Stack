@@ -6,7 +6,7 @@ if (!isset($_SESSION['verified_email'])) {
     exit();
 }
 
-include '../config/db.php';
+include '../../config/db.php';
 
 $message = '';
 $message_type = '';
@@ -29,6 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])) {
     if ($year < 1901 || $year > 2155) {
         $_SESSION['message'] = "Error: Invalid year entered.";
         $_SESSION['message_type'] = "error";
+        header("Location: add-product.php");
+        exit();
     } else {
         $images = [];
         $upload_dir = __DIR__ . '/../uploads/';
@@ -74,14 +76,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])) {
         if ($stmt->execute()) {
             $_SESSION['message'] = "Project added successfully!";
             $_SESSION['message_type'] = "success";
+            header("Location: Products.php");
+            exit();
         } else {
             $_SESSION['message'] = "Error adding project: " . $stmt->error;
             $_SESSION['message_type'] = "error";
+            header("Location: add-product.php");
+            exit();
         }
         $stmt->close();
     }
-    header("Location: add-product.php");
-    exit();
 }
 
 if (isset($_SESSION['message'])) {
@@ -99,129 +103,17 @@ if (isset($_SESSION['message'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Project</title>
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <style>
-        .message {
-            padding: 12px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            font-weight: 500;
-        }
+    <title>Add Product</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
 
-        .success {
-            background-color: #d1fae5;
-            color: #065f46;
-            border: 1px solid #a7f3d0;
-        }
-
-        .error {
-            background-color: #fee2e2;
-            color: #b91c1c;
-            border: 1px solid #fecaca;
-        }
-
-        .flex-row {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .flex-row .form-group {
-            flex: 1;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #374151;
-        }
-
-        input[type="text"],
-        input[type="number"],
-        textarea,
-        select {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 14px;
-            color: #374151;
-            background-color: white;
-        }
-
-        input:focus,
-        textarea:focus,
-        select:focus {
-            outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
-
-        .submit-btn {
-            background-color: #3b82f6;
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 6px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .submit-btn:hover {
-            background-color: #2563eb;
-        }
-
-        .gallery-preview {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 12px;
-            margin-top: 16px;
-        }
-
-        .gallery-item {
-            position: relative;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100px;
-            object-fit: cover;
-        }
-
-        .remove-image {
-            position: absolute;
-            top: 4px;
-            right: 4px;
-            background: rgba(239, 68, 68, 0.8);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 12px;
-        }
-    </style>
 </head>
 
 <body>
     <main>
         <div class="mx-auto max-w-(--breakpoint-2xl) p-4 md:p-6">
-            <div x-data="{ pageName: 'Add Project' }">
+            <div x-data="{ pageName: 'Add Product' }">
                 <div class="flex flex-wrap items-center justify-between gap-3 pb-6">
-                    <h2 class="text-xl font-semibold text-gray-800 dark:text-white/90" x-text="pageName">Add Project
+                    <h2 class="text-xl font-semibold text-gray-800 dark:text-white/90" x-text="pageName">Add Product
                     </h2>
                     <nav>
                         <ol class="flex items-center gap-1.5">
@@ -236,7 +128,7 @@ if (isset($_SESSION['message'])) {
                                     </svg>
                                 </a>
                             </li>
-                            <li class="text-sm text-gray-800 dark:text-white/90" x-text="pageName">Add Project</li>
+                            <li class="text-sm text-gray-800 dark:text-white/90" x-text="pageName">Add Product</li>
                         </ol>
                     </nav>
                 </div>
@@ -464,7 +356,7 @@ if (isset($_SESSION['message'])) {
 
                                 <button type="submit" name="add"
                                     class="bg-brand-500 shadow-theme-xs hover:bg-brand-600 inline-flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-medium text-white transition">
-                                    Add Project
+                                    Add Product
                                 </button>
                             </div>
                         </div>
@@ -506,8 +398,6 @@ if (isset($_SESSION['message'])) {
                     localStorage.setItem('optionalFieldsState', 'hidden');
                 }
             });
-
-            // Auto-hide success/error message
             const alertMessage = document.getElementById('alertMessage');
             if (alertMessage) {
                 setTimeout(() => {
@@ -516,7 +406,6 @@ if (isset($_SESSION['message'])) {
             }
         });
     </script>
-
 </body>
 
 </html>

@@ -1,21 +1,61 @@
+<?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+session_start();
+
+if (!isset($_SESSION['verified_email'])) {
+    header("Location: ./auth/verify.php");
+    exit();
+}
+
+include '../../config/db.php';
+
+if (isset($_GET['delete'])) {
+    $id = intval($_GET['delete']);
+
+    $res = $conn->prepare("SELECT image1, image2, image3, image4, image5, image6 FROM cards WHERE id = ?");
+    $res->bind_param("i", $id);
+    $res->execute();
+    $result = $res->get_result();
+
+    if ($result->num_rows) {
+        $imgs = $result->fetch_assoc();
+        foreach ($imgs as $img) {
+            if (!empty($img)) {
+                @unlink("../assets/uploads/$img");
+            }
+        }
+    }
+    $res->close();
+
+    $del = $conn->prepare("DELETE FROM cards WHERE id = ?");
+    $del->bind_param("i", $id);
+    $del->execute();
+    $del->close();
+
+    header("Location: index.php");
+    exit();
+}
+
+$result = $conn->query("SELECT *, DATE(created_at) AS created_date FROM cards ORDER BY id DESC");
+$cards = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products</title>
-    <link rel="stylesheet" href="../admin/assets/css/style.css">
+    <title>Products List</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 
 <body>
-
     <main>
-
-
-
         <div class="mx-auto max-w-(--breakpoint-2xl) px-5 py-4 md:p-6">
-
             <div>
                 <div>
                     <div class="flex flex-wrap items-center justify-between gap-3 pb-6">
@@ -39,7 +79,6 @@
                         </nav>
                     </div>
                 </div>
-
                 <div>
                     <div
                         class="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
@@ -54,7 +93,7 @@
                                 </p>
                             </div>
                             <div class="flex gap-3">
-                                <a href="./add_product.php">
+                                <a href="./add_Product.php">
                                     <button
                                         class="shadow-theme-xs inline-flex items-center justify-center gap-2 rounded-lg bg-white px-4 py-3 text-sm font-medium text-gray-700 ring-1 ring-gray-300 transition hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-400 dark:ring-gray-700 dark:hover:bg-white/[0.03]">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -118,7 +157,7 @@
                                             class="cursor-pointer px-5 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400">
                                             <div class="flex items-center gap-3">
                                                 <p class="text-theme-xs font-medium text-gray-500 dark:text-gray-400">
-                                                    Category
+                                                    location
                                                 </p>
                                             </div>
                                         </th>
@@ -126,110 +165,105 @@
                                             class="cursor-pointer px-5 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400">
                                             <div class="flex items-center gap-3">
                                                 <p class="text-theme-xs font-medium text-gray-500 dark:text-gray-400">
-                                                    Count
+                                                    views
                                                 </p>
                                             </div>
                                         </th>
+
                                         <th
-                                            class="cursor-pointer px-5 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400">
-                                            <div class="flex items-center gap-3">
-                                                <p class="text-theme-xs font-medium text-gray-500 dark:text-gray-400">
-                                                    discount
-                                                </p>
-                                            </div>
-                                        </th>
-                                        <th
-                                            class="cursor-pointer px-5 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400">
-                                            <div class="flex items-center gap-3">
-                                                <p class="text-theme-xs font-medium text-gray-500 dark:text-gray-400">
-                                                    Price
-                                                </p>
-                                            </div>
+                                            class="px-5 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400">
+                                            Services
                                         </th>
                                         <th
                                             class="px-5 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400">
-                                            Stock
+                                            year
                                         </th>
                                         <th
                                             class="px-5 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400">
                                             Created At
                                         </th>
+
                                         <th
                                             class="px-5 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400">
-                                            <div class="relative">
-                                                <span class="sr-only">Action</span>
-                                            </div>
+                                            Action
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-x divide-y divide-gray-200 dark:divide-gray-800">
-                                    <tr class="transition hover:bg-gray-50 dark:hover:bg-gray-900">
-                                        <td class="w-14 px-5 py-4 whitespace-nowrap">
-                                            <label
-                                                class="cursor-pointer text-sm font-medium text-gray-700 select-none dark:text-gray-400">
-                                                <input type="checkbox" class="sr-only">
-                                                <span
-                                                    class="flex h-4 w-4 items-center justify-center rounded-sm border-[1.25px] bg-transparent border-gray-300 dark:border-gray-700">
-                                                    <span class="opacity-0">
-                                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M10 3L4.5 8.5L2 6" stroke="white"
-                                                                stroke-width="1.6666" stroke-linecap="round"
-                                                                stroke-linejoin="round"></path>
-                                                        </svg>
+                                    <?php foreach ($cards as $card): ?>
+                                        <tr class="transition hover:bg-gray-50 dark:hover:bg-gray-900">
+                                            <td class="w-14 px-5 py-4 whitespace-nowrap">
+                                                <label
+                                                    class="cursor-pointer text-sm font-medium text-gray-700 select-none dark:text-gray-400">
+                                                    <input type="checkbox" class="sr-only">
+                                                    <span
+                                                        class="flex h-4 w-4 items-center justify-center rounded-sm border-[1.25px] bg-transparent border-gray-300 dark:border-gray-700">
+                                                        <span class="opacity-0">
+                                                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M10 3L4.5 8.5L2 6" stroke="white"
+                                                                    stroke-width="1.6666" stroke-linecap="round"
+                                                                    stroke-linejoin="round"></path>
+                                                            </svg>
+                                                        </span>
                                                     </span>
-                                                </span>
-                                            </label>
-                                        </td>
-                                        <td class="px-5 py-4 whitespace-nowrap">
-                                            <div class="flex items-center gap-3">
-                                                <div class="h-12 w-12">
-                                                    <img src="../uploads/products/products_68b3bb8d0e2c36.99156123.jpg"
-                                                        class="h-12 w-12 rounded-md" alt="">
+                                                </label>
+                                            </td>
+                                            <td class="px-5 py-4 whitespace-nowrap">
+                                                <div class="flex items-center gap-3">
+                                                    <?php if (!empty($card["image1"])): ?>
+                                                        <div class="h-12 w-12">
+                                                            <img src="/uploads/<?= htmlspecialchars($card["image1"]) ?>"
+                                                                class="h-12 w-12 rounded-md" alt="">
+                                                        </div>
+                                                    <?php endif; ?>
+                                                    <span
+                                                        class="text-sm font-medium text-gray-700 dark:text-gray-400"><?= htmlspecialchars($card['title']) ?>
+                                                    </span>
                                                 </div>
-                                                <span
-                                                    class="text-sm font-medium text-gray-700 dark:text-gray-400">Kitchen
-                                                    Ware</span>
-                                            </div>
-                                        </td>
-                                        <td class="px-5 py-4 whitespace-nowrap">
-                                            <p class="text-sm text-gray-500 dark:text-gray-400">
-                                                Kitchen Ware </p>
-                                        </td>
-                                        <td class="px-5 py-4 whitespace-nowrap">
-                                            <p class="text-sm text-gray-500 dark:text-gray-400">
-                                                223 </p>
-                                        </td>
-                                        <td class="px-5 py-4 whitespace-nowrap">
-                                            <p class="text-sm text-gray-700 dark:text-gray-400"> -</p>
-                                        </td>
-                                        <td class="px-5 py-4 whitespace-nowrap">
-                                            <p class="text-sm text-gray-700 dark:text-gray-400">
-                                                $ 516.00</p>
-                                        </td>
-                                        <td class="px-5 py-4 whitespace-nowrap">
-                                            <span class="text-theme-xs rounded-full px-2 py-0.5 font-medium 
-        bg-success-50 text-success-700 dark:bg-success-500/15 dark:text-success-500">
-                                                In Stock </span>
-                                        </td>
-                                        <td class="px-5 py-4 whitespace-nowrap">
-                                            <p class="text-sm text-gray-700 dark:text-gray-400">
-                                                2025-08-31 </p>
-                                        </td>
-                                        <td class="px-5 py-4 whitespace-nowrap">
-                                            <div class="relative flex justify-center">
-                                                <a href="?id=1" class="btn btn-sm btn-outline-danger"
-                                                    onclick="return confirm('Are you sure you want to delete this product?')">
-                                                    <svg class="fill-current" width="24" height="24" viewBox="0 0 24 24"
-                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                                            d="M5.99902 10.245C6.96552 10.245 7.74902 11.0285 7.74902 11.995V12.005C7.74902 12.9715 6.96552 13.755 5.99902 13.755C5.03253 13.755 4.24902 12.9715 4.24902 12.005V11.995C4.24902 11.0285 5.03253 10.245 5.99902 10.245ZM17.999 10.245C18.9655 10.245 19.749 11.0285 19.749 11.995V12.005C19.749 12.9715 18.9655 13.755 17.999 13.755C17.0325 13.755 16.249 12.9715 16.249 12.005V11.995C16.249 11.0285 17.0325 10.245 17.999 10.245ZM13.749 11.995C13.749 11.0285 12.9655 10.245 11.999 10.245C11.0325 10.245 10.249 11.0285 10.249 11.995V12.005C10.249 12.9715 11.0325 13.755 11.999 13.755C12.9655 13.755 13.749 12.9715 13.749 12.005V11.995Z"
-                                                            fill=""></path>
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td class="px-5 py-4 whitespace-nowrap">
+                                                <p class="text-sm text-gray-500 dark:text-gray-400">
+                                                    <?= htmlspecialchars($card['location']) ?>
+                                                </p>
+                                            </td>
+                                            <td class="px-5 py-4 whitespace-nowrap">
+                                                <p class="text-sm text-gray-500 dark:text-gray-400">
+                                                    <?= htmlspecialchars($card['views']) ?>
+                                                </p>
+                                            </td>
+                                            <td class="px-5 py-4 whitespace-nowrap">
+                                                <p class="text-sm text-gray-700 dark:text-gray-400">
+                                                    <?= htmlspecialchars($card['services'] ?? '---') ?>
+                                                </p>
+                                            </td>
+                                            <td class="px-5 py-4 whitespace-nowrap">
+                                                <p class="text-sm text-gray-700 dark:text-gray-400">
+                                                    <?= htmlspecialchars($card['year']) ?>
+                                                </p>
+                                            </td>
+
+                                            <td class="px-5 py-4 whitespace-nowrap">
+                                                <p class="text-sm text-gray-700 dark:text-gray-400">
+                                                    <?= htmlspecialchars($card['created_date'] ?? '---') ?>
+                                                </p>
+                                            </td>
+                                            <td class="px-5 py-4 whitespace-nowrap">
+                                                <div class="relative flex justify-center">
+                                                    <a href="?delete=<?= $card['id'] ?>"
+                                                        class="btn btn-sm btn-outline-danger"
+                                                        onclick="return confirm('Are you sure you want to delete this product?')">
+                                                        <svg class="fill-current" width="24" height="24" viewBox="0 0 24 24"
+                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                d="M5.99902 10.245C6.96552 10.245 7.74902 11.0285 7.74902 11.995V12.005C7.74902 12.9715 6.96552 13.755 5.99902 13.755C5.03253 13.755 4.24902 12.9715 4.24902 12.005V11.995C4.24902 11.0285 5.03253 10.245 5.99902 10.245ZM17.999 10.245C18.9655 10.245 19.749 11.0285 19.749 11.995V12.005C19.749 12.9715 18.9655 13.755 17.999 13.755C17.0325 13.755 16.249 12.9715 16.249 12.005V11.995C16.249 11.0285 17.0325 10.245 17.999 10.245ZM13.749 11.995C13.749 11.0285 12.9655 10.245 11.999 10.245C11.0325 10.245 10.249 11.0285 10.249 11.995V12.005C10.249 12.9715 11.0325 13.755 11.999 13.755C12.9655 13.755 13.749 12.9715 13.749 12.005V11.995Z"
+                                                                fill=""></path>
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -290,39 +324,5 @@
             </div>
         </div>
     </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../assets/js/bundle.js"></script>
-
-    <script>
-        $('#searchBtn').click(function () {
-            searchProducts();
-        });
-
-        $('#searchInput').keypress(function (e) {
-            if (e.which == 13) {
-                searchProducts();
-            }
-        });
-
-        function searchProducts() {
-            const searchTerm = $('#searchInput').val().trim();
-            if (searchTerm.length > 0) {
-                $.ajax({
-                    url: 'search_products.php',
-                    type: 'GET',
-                    data: { q: searchTerm },
-                    success: function (data) {
-                        $('#productTableBody').html(data);
-                    },
-                    error: function (xhr, status, error) {
-                        console.error('Search error:', error);
-                    }
-                });
-            }
-        }
-    </script>
 </body>
-
 </html>
