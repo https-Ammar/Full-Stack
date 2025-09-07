@@ -1,15 +1,16 @@
 <?php
 $audioList = [
-  ["title" => "Ehsan Ali", "country" => "Palestine", "src" => "../audio/Ihsan.mp3"],
+  ["title" => "Ehsan Ali", "country" => "Jordan", "src" => "../audio/Ihsan.mp3"],
   ["title" => "Noor Qnebi", "country" => "Palestine", "src" => "../audio/Noor.mp3"],
-  ["title" => "Mira Abdallah", "country" => "Palestine", "src" => "../audio/Mera.mp3"],
-  ["title" => "Muhammad Naser", "country" => "Palestine", "src" => "../audio/Naser.mp3"],
-  ["title" => "Ahmed Othman", "country" => "Palestine", "src" => "../audio/Othman.mp3"],
-  ["title" => "Saja Fawaz", "country" => "Palestine", "src" => "../audio/Saja.mp3"],
-  ["title" => "Muhamed Samy", "country" => "Palestine", "src" => "../audio/Sami.mp3"],
-  ["title" => "Ahmed Al-Hamaida", "country" => "Palestine", "src" => "../audio/Hamaida.mp3"],
-  ["title" => "Ahmed Essam", "country" => "Palestine", "src" => "../audio/Essam.mp3"],
-  ["title" => "Heba Gamal", "country" => "Palestine", "src" => "../audio/Heba.mp3"]
+  ["title" => "Mira Abdallah", "country" => "Lebanon", "src" => "../audio/Mera.mp3"],
+  ["title" => "Muhammad Naser", "country" => "Egypt", "src" => "../audio/Naser.mp3"],
+  ["title" => "Ahmed Othman", "country" => "Egypt", "src" => "../audio/Othman.mp3"],
+  ["title" => "Saja Fawaz", "country" => "Oman", "src" => "../audio/Saja.mp3"],
+  ["title" => "Muhamed Samy", "country" => "Egypt", "src" => "../audio/Sami.mp3"],
+  ["title" => "Ahmed Al-Hamaida", "country" => "Jordan", "src" => "../audio/Hamaida.mp3"],
+  ["title" => "Ahmed Essam", "country" => "Egypt", "src" => "../audio/Essam.mp3"],
+  ["title" => "Heba Gamal", "country" => "Egypt", "src" => "../audio/Heba.mp3"],
+  ["title" => "Muhammad Gamal", "country" => "Egypt", "src" => "../audio/gamal.mp3"]
 ];
 ?>
 <!DOCTYPE html>
@@ -33,6 +34,7 @@ $audioList = [
 </head>
 <?php $current_page = 'Reviews'; ?>
 <?php include '../includes/loading.php'; ?>
+
 <body data-barba="wrapper">
   <main class="main" id="reviews" data-barba="container" data-barba-namespace="reviews">
     <div class="main-wrap" data-scroll-container>
@@ -47,7 +49,6 @@ $audioList = [
           </div>
         </div>
       </header>
-
       <section class="section no-padding line-globe once-in" data-scroll-section>
         <div class="container medium">
           <div class="row">
@@ -69,7 +70,6 @@ $audioList = [
           </div>
         </div>
       </section>
-
       <section class="section about-services bg-with" data-scroll-section>
         <div class="container flex">
           <div class="sidebar">
@@ -85,7 +85,7 @@ $audioList = [
           <div class="cards">
             <?php foreach ($audioList as $index => $track): ?>
               <div class="card" style="min-height: 100px;">
-                <button class="play-button" onclick="togglePlay('audio<?= $index ?>', this)"
+                <button class="play-button" data-audio-id="audio<?= $index ?>"
                   aria-label="Play audio for <?= htmlspecialchars($track['title']) ?>">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z" />
@@ -104,44 +104,48 @@ $audioList = [
           </div>
         </div>
       </section>
-
       <?php include '../includes/footer.php'; ?>
     </div>
   </main>
-
   <script>
-    let lastAudio = null;
-    let lastButton = null;
-    const playIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
-    const pauseIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
-    const retryAttempts = {};
+    document.addEventListener("DOMContentLoaded", function () {
+      let lastAudio = null;
+      let lastButton = null;
+      const playIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+      const pauseIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
 
-    function togglePlay(id, btn) {
-      const audio = document.getElementById(id);
-      if (audio.paused) {
-        if (lastAudio && lastAudio !== audio) {
-          lastAudio.pause();
-          if (lastButton) {
-            lastButton.innerHTML = playIcon;
+      const playButtons = document.querySelectorAll(".play-button");
+      playButtons.forEach(btn => {
+        const audioId = btn.getAttribute("data-audio-id");
+        const audio = document.getElementById(audioId);
+
+        audio.onended = () => {
+          btn.innerHTML = playIcon;
+        };
+
+        btn.addEventListener("click", () => {
+          if (audio.paused) {
+            if (lastAudio && lastAudio !== audio) {
+              lastAudio.pause();
+              if (lastButton) {
+                lastButton.innerHTML = playIcon;
+              }
+            }
+            audio.play().then(() => {
+              btn.innerHTML = pauseIcon;
+              lastAudio = audio;
+              lastButton = btn;
+            }).catch(err => {
+              console.error("Playback error:", err);
+            });
+          } else {
+            audio.pause();
+            btn.innerHTML = playIcon;
           }
-        }
-        audio.play().then(() => {
-          btn.innerHTML = pauseIcon;
-          lastAudio = audio;
-          lastButton = btn;
-        }).catch(err => {
-          console.error("Playback error:", err);
         });
-      } else {
-        audio.pause();
-        btn.innerHTML = playIcon;
-      }
-      audio.onended = () => {
-        btn.innerHTML = playIcon;
-      };
-    }
+      });
+    });
   </script>
-
   <script defer src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.0/js.cookie.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
