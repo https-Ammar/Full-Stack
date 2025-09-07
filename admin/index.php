@@ -385,7 +385,11 @@ if ($viewsRes && $vrow = $viewsRes->fetch_assoc()) {
                                             <td class="px-6 py-3 whitespace-nowrap">
                                                 <div class="flex items-center">
                                                     <p class="text-gray-700 text-theme-sm dark:text-gray-400">
+                                                        <?php
+                                                        $time = date("h:i A");
+                                                        ?>
                                                         <?= htmlspecialchars($time) ?>
+
                                                     </p>
                                                 </div>
                                             </td>
