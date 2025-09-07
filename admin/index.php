@@ -6,11 +6,11 @@ error_reporting(E_ALL);
 session_start();
 
 if (!isset($_SESSION['verified_email'])) {
-    header("Location: verify.php");
+    header("Location: ./auth/verify.php");
     exit();
 }
 
-include 'db.php';
+include '../config/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])) {
     $title = trim($_POST['title']);
@@ -185,7 +185,7 @@ $cards = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio</title>
-    <link rel="stylesheet" href="./dashboard.css">
+    <link rel="stylesheet" href="/admin/assets/css/dashboard.css">
 </head>
 
 <body>

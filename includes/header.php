@@ -102,7 +102,7 @@
                         </a>
                     </li>
                     <li class="btn btn-link btn-link-external">
-                        <a href="https://www.linkedin.com/in/ammar-ahmed-543a58253/" target="_blank"
+                        <a href="https://www.linkedin.com/in/eng-ammar-ahmed/" target="_blank"
                             class="btn-click magnetic" data-strength="20" data-strength-text="10">
                             <span class="btn-text">
                                 <span class="btn-text-inner">LinkedIn</span>

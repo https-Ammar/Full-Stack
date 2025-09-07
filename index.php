@@ -69,7 +69,7 @@ if ($id > 0) {
     <meta name="keywords"
         content="Ammar Ahmed Mostafa, Ammar Ahmed, Full Stack Developer, Web Developer Egypt, Portfolio, PHP, HTML, CSS, JavaScript, SQL, Python, AI Developer, ChatGPT, Frontend Developer, Backend Developer, UX UI, Web Design, Responsive Design, SEO Specialist, Web Projects, Cairo Developer, Freelancer Developer, Modern Websites, Dynamic Web Design, Bootstrap, GitHub, Ammarx3, ammar132004@gmail.com">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="http://localhost:8888/ammar/">
+    <link rel="canonical" href="./index.php">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Ammar Ahmed Mostafa – Full Stack Developer & Designer">
     <meta property="og:description"
@@ -77,7 +77,7 @@ if ($id > 0) {
     <meta property="og:image" content="http://localhost:8888/ammar/assets/img/web-developer-ammar-ahmed.jpg">
     <meta property="og:url" content="http://localhost:8888/ammar/">
     <meta property="og:site_name" content="Ammar Ahmed Portfolio">
-    <meta property="article:author" content="https://www.linkedin.com/in/ammar-mostafa/">
+    <meta property="article:author" content="https://www.linkedin.com/in/eng-ammar-ahmed/">
     <meta name="facebook-profile" content="https://www.facebook.com/eng.amaar.ah.med/">
     <meta name="instagram-profile" content="https://www.instagram.com/3mmarx3/">
     <link rel="stylesheet" href="./assets/css/main.css">
@@ -202,7 +202,7 @@ if ($id > 0) {
                                     place in the web design world.</p>
                             </div>
                             <div class="btn btn-round" data-scroll data-scroll-speed="2">
-                                <a href="./assets/page/About.php" class="btn-click magnetic">
+                                <a href="./page/about.php" class="btn-click magnetic">
                                     <div class="btn-fill"></div>
                                     <span class="btn-text-inner">About me</span>
                                 </a>
@@ -312,4 +312,5 @@ if ($id > 0) {
     <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
     <script defer src="./assets/js/index-new.js"></script>
 </body>
+
 </html>
