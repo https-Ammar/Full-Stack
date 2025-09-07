@@ -3,8 +3,9 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
+
 if (!isset($_SESSION['verified_email'])) {
-    header("Location: ./auth/verify.php");
+    header("Location: ../auth/verify.php");
     exit();
 }
 include '../../config/db.php';

@@ -10,6 +10,8 @@ if (!isset($_SESSION['verified_email'])) {
     exit();
 }
 
+
+
 include '../config/db.php';
 
 if (isset($_GET['delete_visitor'])) {

@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['verified_email'])) {
-    header("Location: ./auth/verify.php");
+    header("Location: ../auth/verify.php");
     exit();
 }
 
